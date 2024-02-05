@@ -1,0 +1,23 @@
+<h1>Users</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Points</th>
+      <th>Admin</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.points %></td>
+        <td><%= user.is_admin ? "Yes" : "No" %></td>
+        <td><%= user.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

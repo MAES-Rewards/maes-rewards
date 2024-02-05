@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PointsEarnedTest < ActiveSupport::TestCase
+class RewardTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

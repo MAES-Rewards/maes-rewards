@@ -10,8 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_02_152704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "default_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "earn_transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "activity_id"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string "name"
+    t.integer "point_value"
+    t.decimal "dollar_price"
+    t.integer "inventory"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "spend_transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reward_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "points"
+    t.boolean "is_admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
