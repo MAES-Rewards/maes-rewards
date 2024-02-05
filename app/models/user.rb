@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-    has_many :point_spent
-    has_many :points_earned 
+  has_many :earn_transaction
+  has_many :spend_transaction
 end

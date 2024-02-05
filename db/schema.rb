@@ -14,7 +14,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_152704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "merchandises", force: :cascade do |t|
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "default_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "earn_transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "activity_id"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rewards", force: :cascade do |t|
     t.string "name"
     t.integer "point_value"
     t.decimal "dollar_price"
@@ -23,25 +39,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_152704) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "point_sources", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.integer "default_points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "points_earneds", force: :cascade do |t|
+  create_table "spend_transactions", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "pointsource_id"
-    t.integer "points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "points_spents", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "merchandise_id"
+    t.integer "reward_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

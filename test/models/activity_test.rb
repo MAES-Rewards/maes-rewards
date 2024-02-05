@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PointSourceTest < ActiveSupport::TestCase
+class ActivityTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
