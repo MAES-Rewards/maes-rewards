@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_152704) do
   enable_extension "plpgsql"
 
   create_table "merchandises", force: :cascade do |t|
+    t.string "name"
     t.integer "point_value"
     t.decimal "dollar_price"
     t.integer "inventory"
@@ -31,20 +32,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_152704) do
   end
 
   create_table "points_earneds", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pointsource_id"
     t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "points_spents", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "merchandise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "points"
     t.string "name"
     t.string "email"
+    t.integer "points"
     t.boolean "is_admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

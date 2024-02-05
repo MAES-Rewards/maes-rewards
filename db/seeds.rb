@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-user = User.create([
+users = User.create([
   {
     name: "John Smith",
     email: "smithj@mail.example.com",
@@ -20,3 +20,27 @@ user = User.create([
     is_admin: true
   }
 ]);
+
+Merchandise.create({
+  name: "MAES Hoodie",
+  point_value: 100,
+  dollar_price: 19.99,
+  inventory: 20
+})
+
+PointSource.create({
+  name: "Attend MAES Meeting",
+  description: "Attend an MAES meeting and record your attendance.",
+  default_points: 10
+})
+
+PointsEarned.create({
+  user_id: 1,
+  pointsource_id: 1,
+  points: 10
+})
+
+PointsSpent.create({
+  user_id: 1,
+  merchandise_id: 1
+})
