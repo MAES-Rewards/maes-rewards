@@ -1,0 +1,25 @@
+<h1>Rewards</h1>
+<p>All of the rewards that can be purchased with points are shown below.</p>
+  <%= link_to("Add New Reward", new_reward_path, class: 'action new') %>
+
+  <table class="listing" summary="Reward list" style="width: 100%;">
+    <tr class="header">
+      <th>Name</th>
+      <th>Point price</th>
+      <th>Dollar price</th>
+      <th>Current inventory</th>
+    </tr>
+    <% @rewards.each do |reward| %>
+    <tr>
+      <td><%= reward.name %></td>
+      <td><%= reward.point_value %></td>
+      <td><%= reward.dollar_price  %></td>
+      <td><%= reward.inventory %></td>
+      <td class="actions">
+        <%= link_to("See details", reward_path(reward), class: 'action show') %>
+        <%= link_to("Edit", edit_reward_path(reward), class: 'action edit') %>
+        <%= link_to("Delete", delete_reward_path(reward), class: 'action delete') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
