@@ -3,11 +3,11 @@
 
 <div class="rewards purchase">
 
-    <% # url: task_path(@task), method: 'delete' %>
+  <% # url: task_path(@task), method: 'delete' %>
 
-    <p>Are you sure you want to purchase this reward?</p>
-    <p><%= @reward.name %> for <%= @reward.point_value %> point(s).</p>
+  <p>Are you sure you want to purchase this reward?</p>
+  <p><%= @reward.name %> for <%= @reward.point_value %> point(s).</p>
 
-    <%= link_to("Confirm", handle_purchase_path(@reward.id))%>
+  <%= link_to("Confirm", handle_purchase_path(@reward.id))%>
 
 </div>
