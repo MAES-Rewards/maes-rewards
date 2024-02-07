@@ -23,7 +23,7 @@
   </table>
   <br />
   <% flash.each do |type, message| %>
-  <div class="alert alert-<%= type %>">
+  <div class="flash flash-<%= type %>">
     <%= message %>
   </div>
 <% end %>
