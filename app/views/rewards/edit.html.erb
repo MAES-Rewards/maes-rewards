@@ -1,0 +1,17 @@
+<h1>Edit reward: <%= @reward.name %></h1>
+<%= link_to("Back to all Rewards", rewards_path, :class => 'back-link') %>
+
+<div class="rewards edit">
+  <h2>Info:</h2>
+
+  <%= form_for(@reward) do |r| %>
+    <% # url: task_path(@task), method: 'patch' %>
+
+     <%= render(partial: 'form', locals: {r: r})%>
+
+    <div class="form-buttons">
+      <%= r.submit("Save changes") %>
+    </div>
+
+  <% end %>
+</div>
