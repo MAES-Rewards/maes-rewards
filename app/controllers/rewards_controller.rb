@@ -10,13 +10,13 @@ class RewardsController < ApplicationController
     if @reward.inventory > 0
       # Update the inventory and handle the response
       @reward.inventory -= 1
-      flash[:notice] = if @reward.save
-                         'Reward was successfully purchased.'
-                       else
-                         'Reward could not be purchased.'
-                       end
+      if @reward.save
+        flash[:notice] = 'Reward was successfully purchased.'
+      else
+        flash[:alert] = 'Reward could not be purchased.'
+      end
     else
-      flash[:notice] = 'Reward is out of stock.'
+      flash[:alert] = 'Reward is out of stock.'
     end
     redirect_to(members_path_url)
   end
@@ -44,7 +44,7 @@ class RewardsController < ApplicationController
       flash[:notice] = 'Reward was successfully created.'
     else
       puts("Errors: #{@reward.errors.full_messages}")
-      flash[:notice] = 'Reward could not be created.'
+      flash[:alert] = 'Reward could not be created.'
     end
     redirect_to(rewards_path)
   end
@@ -55,7 +55,11 @@ class RewardsController < ApplicationController
 
   def update
     @reward = Reward.find(params[:id])
-    flash[:notice] = 'Reward was successfully updated.' if @reward.update(reward_params)
+    if @reward.update(reward_params)
+      flash[:notice] = 'Reward was successfully updated.'
+    else
+      flash[:alert] = 'Reward could not be updated.'
+    end
     redirect_to(rewards_path)
   end
 
