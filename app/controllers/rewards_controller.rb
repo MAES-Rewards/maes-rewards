@@ -73,7 +73,7 @@ class RewardsController < ApplicationController
     @reward = Reward.find(params[:id])
   end
 
-  def update
+  def update # rubocop:disable Metrics/CyclomaticComplexity
     @reward = Reward.find(params[:id])
     if @reward.point_value.present?
       if @reward.point_value > 2_147_483_647
@@ -100,7 +100,7 @@ class RewardsController < ApplicationController
     else
       flash[:alert] = 'Reward could not be updated.'
     end
-    redirect_to(rewards_path)
+    redirect_to(reward_path(@reward))
   end
 
   def delete
