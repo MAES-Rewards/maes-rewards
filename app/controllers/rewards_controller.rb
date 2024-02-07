@@ -75,13 +75,25 @@ class RewardsController < ApplicationController
 
   def update
     @reward = Reward.find(params[:id])
-    if @reward.point_value > 2_147_483_647
-      flash[:alert] = 'Reward could not be created - out of bounds point value.'
-      redirect_to(rewards_path) and return
+    if @reward.point_value.present?
+      if @reward.point_value > 2_147_483_647
+        flash[:alert] = 'Reward could not be created - out of bounds point value.'
+        redirect_to(rewards_path) and return
+      end
+      if @reward.point_value.negative?
+        flash[:alert] = 'Reward could not be created - out of bounds point value.'
+        redirect_to(rewards_path) and return
+      end
     end
-    if @reward.point_value < 0
-      flash[:alert] = 'Reward could not be created - out of bounds point value.'
-      redirect_to(rewards_path) and return
+    if @reward.dollar_price.present?
+      if @reward.dollar_price > 2_147_483_647
+        flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
+        redirect_to(rewards_path) and return
+      end
+      if @reward.dollar_price.negative?
+        flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
+        redirect_to(rewards_path) and return
+      end
     end
     if @reward.update(reward_params)
       flash[:notice] = 'Reward was successfully updated.'
