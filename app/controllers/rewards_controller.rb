@@ -1,4 +1,30 @@
 class RewardsController < ApplicationController
+  helper_method :confirmpurchase
+
+  def memberindex
+    @rewards = Reward.order(:name)
+  end
+
+  def handle_purchase
+    @reward = Reward.find(params[:id])
+    if @reward.inventory > 0
+      # Update the inventory and handle the response
+      @reward.inventory -= 1
+      flash[:notice] = if @reward.save
+                         'Reward was successfully purchased.'
+                       else
+                         'Reward could not be purchased.'
+                       end
+    else
+      flash[:notice] = 'Reward is out of stock.'
+    end
+    redirect_to(members_path_url)
+  end
+
+  def purchase
+    @reward = Reward.find(params[:id])
+  end
+
   def index
     @rewards = Reward.order(:name)
   end
@@ -17,7 +43,7 @@ class RewardsController < ApplicationController
     if @reward.save
       flash[:notice] = 'Reward was successfully created.'
     else
-      puts("Errors: #{@@reward.errors.full_messages}")
+      puts("Errors: #{@reward.errors.full_messages}")
       flash[:notice] = 'Reward could not be created.'
     end
     redirect_to(rewards_path)
@@ -29,14 +55,8 @@ class RewardsController < ApplicationController
 
   def update
     @reward = Reward.find(params[:id])
-    if @reward.update(reward_params)
-      flash[:notice] = 'Reward was successfully updated.'
-      redirect_to(rewards_path)
-    else
-      # edit action is NOT being called here
-      # assign any instance variables needed
-      render('edit')
-    end
+    flash[:notice] = 'Reward was successfully updated.' if @reward.update(reward_params)
+    redirect_to(rewards_path)
   end
 
   def delete

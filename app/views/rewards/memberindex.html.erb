@@ -1,8 +1,6 @@
-<h1>Rewards (admin view) </h1>
+<h1>Rewards (member view) </h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
-  <%= link_to("Add New Reward", new_reward_path, class: 'action new') %>
-  <%= link_to("Go to member view", members_path_url ) %>
-
+<%= link_to("Go to admin view", rewards_path, class: 'action index') %>
   <table class="listing" summary="Reward list" style="width: 100%;">
     <tr class="header">
       <th>Name</th>
@@ -18,9 +16,14 @@
       <td><%= reward.inventory %></td>
       <td class="actions">
         <%= link_to("See details", reward_path(reward), class: 'action show') %>
-        <%= link_to("Edit", edit_reward_path(reward), class: 'action edit') %>
-        <%= link_to("Delete", delete_reward_path(reward), class: 'action delete') %>
+        <%= link_to("Purchase", purchase_path_url(reward.id), data: { confirm: 'Are you sure you want to purchase this item?' }) %>
       </td>
     </tr>
     <% end %>
   </table>
+  <br />
+  <% flash.each do |type, message| %>
+  <div class="alert alert-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
