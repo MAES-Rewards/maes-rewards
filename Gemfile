@@ -21,6 +21,8 @@ gem "omniauth", "~>1.9.1"
 
 gem "omniauth-google-oauth2"
 
+gem "omniauth-rails_csrf_protection"
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
