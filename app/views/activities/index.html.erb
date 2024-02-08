@@ -1,2 +1,32 @@
-<h1>Activities#index</h1>
-<p>Find me in app/views/activities/index.html.erb</p>
+<div class="activities index">
+  <h1>Activities</h1>
+
+  <%= link_to("Add New Activity", new_activity_path, class: 'action new') %>
+
+  <table class="listing" style="width: 100%;">
+    <tr class="header">
+      <th>Name</th>
+      <th>Description</th>
+      <th>Default Points</th>
+      <th>Actions</th>
+    </tr>
+    <% @activities.each do |activity| %>
+      <tr>
+        <td><%= activity.name %></td>
+        <td><%= activity.description %></td>
+        <td><%= activity.default_points %></td>
+        <td class="actions">
+          <%= link_to('Show', activity_path(activity), class: 'action show') %>
+          <%= link_to('Edit', edit_activity_path(activity), class: 'action edit') %>
+          <%= link_to('Delete', delete_activity_path(activity), class: 'action delete') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>

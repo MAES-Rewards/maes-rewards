@@ -1,2 +1,31 @@
-<h1>Activities#show</h1>
-<p>Find me in app/views/activities/show.html.erb</p>
+<%= link_to('Back to all Activities', activities_path, class: 'back-link') %>
+
+<div class="activities show">
+  <h1>Activity Details</h1>
+
+  <div class="actions">
+    <%= link_to('Edit', edit_activity_path(@activity)) %>
+    <%= link_to('Delete', delete_activity_path(@activity)) %>
+  </div>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <td><%= @activity.name %></td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><%= @activity.description %></td>
+    </tr>
+    <tr>
+      <th>Default Points</th>
+      <td><%= @activity.default_points %></td>
+    </tr>
+  </table>
+</div>
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>

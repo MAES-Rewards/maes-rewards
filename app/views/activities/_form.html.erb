@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <td><%= f.text_field(:name) %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= f.text_field(:description) %></td>
+  </tr>
+  <tr>
+    <th>Default Points</th>
+    <td><%= f.number_field(:default_points, step: 1) %></td>
+  </tr>
+</table>
