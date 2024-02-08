@@ -40,33 +40,14 @@ class RewardsController < ApplicationController
 
   def create
     @reward = Reward.new(reward_params)
-    # if @reward.point_value.present?
-    #   if @reward.point_value > 2_147_483_647
-    #     flash[:alert] = 'Reward could not be created - out of bounds point value.'
-    #     redirect_to(rewards_path) and return
-    #   end
-    #   if @reward.point_value.negative?
-    #     flash[:alert] = 'Reward could not be created - out of bounds point value.'
-    #     redirect_to(rewards_path) and return
-    #   end
-    # end
-    # if @reward.dollar_price.present?
-    #   if @reward.dollar_price > 2_147_483_647
-    #     flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
-    #     redirect_to(rewards_path) and return
-    #   end
-    #   if @reward.dollar_price.negative?
-    #     flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
-    #     redirect_to(rewards_path) and return
-    #   end
-    # end
     if @reward.save
       flash[:notice] = 'Reward was successfully created.'
+      redirect_to(rewards_path)
     else
       puts("Errors: #{@reward.errors.full_messages}") # rubocop:disable Rails/Output
       flash[:alert] = 'Reward could not be created. Attribute(s) are invalid.'
+      render('new', status: :unprocessable_entity)
     end
-    redirect_to(rewards_path)
   end
 
   def edit
@@ -77,10 +58,11 @@ class RewardsController < ApplicationController
     @reward = Reward.find(params[:id])
     if @reward.update(reward_params)
       flash[:notice] = 'Reward was successfully updated.'
+      redirect_to(reward_path(@reward))
     else
       flash[:alert] = 'Reward could not be updated. Attribute(s) are invalid.'
+      render('edit', status: :unprocessable_entity)
     end
-    redirect_to(reward_path(@reward))
   end
 
   def delete
