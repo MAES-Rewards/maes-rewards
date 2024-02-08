@@ -38,33 +38,33 @@ class RewardsController < ApplicationController
     @reward = Reward.new
   end
 
-  def create # rubocop:disable Metrics/CyclomaticComplexity
+  def create
     @reward = Reward.new(reward_params)
-    if @reward.point_value.present?
-      if @reward.point_value > 2_147_483_647
-        flash[:alert] = 'Reward could not be created - out of bounds point value.'
-        redirect_to(rewards_path) and return
-      end
-      if @reward.point_value.negative?
-        flash[:alert] = 'Reward could not be created - out of bounds point value.'
-        redirect_to(rewards_path) and return
-      end
-    end
-    if @reward.dollar_price.present?
-      if @reward.dollar_price > 2_147_483_647
-        flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
-        redirect_to(rewards_path) and return
-      end
-      if @reward.dollar_price.negative?
-        flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
-        redirect_to(rewards_path) and return
-      end
-    end
+    # if @reward.point_value.present?
+    #   if @reward.point_value > 2_147_483_647
+    #     flash[:alert] = 'Reward could not be created - out of bounds point value.'
+    #     redirect_to(rewards_path) and return
+    #   end
+    #   if @reward.point_value.negative?
+    #     flash[:alert] = 'Reward could not be created - out of bounds point value.'
+    #     redirect_to(rewards_path) and return
+    #   end
+    # end
+    # if @reward.dollar_price.present?
+    #   if @reward.dollar_price > 2_147_483_647
+    #     flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
+    #     redirect_to(rewards_path) and return
+    #   end
+    #   if @reward.dollar_price.negative?
+    #     flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
+    #     redirect_to(rewards_path) and return
+    #   end
+    # end
     if @reward.save
       flash[:notice] = 'Reward was successfully created.'
     else
       puts("Errors: #{@reward.errors.full_messages}") # rubocop:disable Rails/Output
-      flash[:alert] = 'Reward could not be created.'
+      flash[:alert] = 'Reward could not be created. Attribute(s) are invalid.'
     end
     redirect_to(rewards_path)
   end
@@ -73,32 +73,12 @@ class RewardsController < ApplicationController
     @reward = Reward.find(params[:id])
   end
 
-  def update # rubocop:disable Metrics/CyclomaticComplexity
+  def update
     @reward = Reward.find(params[:id])
-    if @reward.point_value.present?
-      if @reward.point_value > 2_147_483_647
-        flash[:alert] = 'Reward could not be created - out of bounds point value.'
-        redirect_to(rewards_path) and return
-      end
-      if @reward.point_value.negative?
-        flash[:alert] = 'Reward could not be created - out of bounds point value.'
-        redirect_to(rewards_path) and return
-      end
-    end
-    if @reward.dollar_price.present?
-      if @reward.dollar_price > 2_147_483_647
-        flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
-        redirect_to(rewards_path) and return
-      end
-      if @reward.dollar_price.negative?
-        flash[:alert] = 'Reward could not be created - out of bounds dollar price.'
-        redirect_to(rewards_path) and return
-      end
-    end
     if @reward.update(reward_params)
       flash[:notice] = 'Reward was successfully updated.'
     else
-      flash[:alert] = 'Reward could not be updated.'
+      flash[:alert] = 'Reward could not be updated. Attribute(s) are invalid.'
     end
     redirect_to(reward_path(@reward))
   end
