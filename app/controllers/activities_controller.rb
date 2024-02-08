@@ -30,12 +30,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     if @activity.save
       flash[:notice] = 'Activity was successfully updated.'
-      puts("\x1B[92mHELLO GOOD\x1B[m") # TODO REMOVE
-      puts("\x1B[92m  Name: #{@activity.name}\x1B[m")
       redirect_to activity_path(@activity)
     else
       flash[:alert] = 'Activity could not be updated. Attribute(s) are invalid.'
-      puts("\x1B[91mHELLO BAD\x1B[m") # TODO REMOVE
       render('edit')
     end
   end
