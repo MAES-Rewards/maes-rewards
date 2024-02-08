@@ -18,7 +18,7 @@ class ActivitiesController < ApplicationController
       redirect_to activities_path
     else
       flash[:alert] = 'Activity could not be created. Attribute(s) are invalid.'
-      render('new')
+      render('new', status: 422)
     end
   end
 
@@ -33,7 +33,7 @@ class ActivitiesController < ApplicationController
       redirect_to activity_path(@activity)
     else
       flash[:alert] = 'Activity could not be updated. Attribute(s) are invalid.'
-      render('edit')
+      render('edit', status: 422)
     end
   end
 
