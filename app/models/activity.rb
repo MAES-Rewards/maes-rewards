@@ -1,3 +1,3 @@
 class Activity < ApplicationRecord
-  has_many :earn_transaction
+  belongs_to :earn_transaction
 end
