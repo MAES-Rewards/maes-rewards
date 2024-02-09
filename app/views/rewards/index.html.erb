@@ -1,7 +1,8 @@
 <h1>Rewards (admin view) </h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
+<%= link_to("Go back to landing page", admin_dashboard_url)%>
 <%= link_to("Add New Reward", new_reward_path, class: 'action new') %>
-<%= link_to("Go to member view", members_path_url ) %>
+
 
 <table class="listing" summary="Reward list" style="width: 100%;">
   <tr class="header">
