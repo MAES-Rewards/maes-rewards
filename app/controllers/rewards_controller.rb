@@ -33,6 +33,10 @@ class RewardsController < ApplicationController
     @reward = Reward.find(params[:id])
   end
 
+  def membershow
+    @reward = Reward.find(params[:id])
+  end
+
   def new
     @count = Reward.count
     @reward = Reward.new

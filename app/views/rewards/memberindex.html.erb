@@ -1,6 +1,6 @@
 <h1>Rewards (member view) </h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
-<%= link_to("Go to admin view", rewards_path, class: 'action index') %>
+<%= link_to("Go back to landing page", member_dashboard_url)%>
 
 <table class="listing" summary="Reward list" style="width: 100%;">
   <tr class="header">
@@ -16,7 +16,7 @@
       <td><%= reward.dollar_price  %></td>
       <td><%= reward.inventory %></td>
       <td class="actions">
-        <%= link_to("See details", reward_path(reward), class: 'action show') %>
+        <%= link_to("See details", memshow_path_url(reward.id)) %>
         <%= link_to("Purchase", purchase_path_url(reward.id), data: { confirm: 'Are you sure you want to purchase this item?' }) %>
       </td>
     </tr>
