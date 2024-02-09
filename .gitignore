@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore oauth environment variables
+.env
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -30,4 +33,3 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-/config/master.key
