@@ -15,6 +15,14 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+gem "devise"
+
+gem "omniauth", "~>1.9.1"
+
+gem "omniauth-google-oauth2"
+
+gem "omniauth-rails_csrf_protection"
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
@@ -56,6 +64,7 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -67,6 +76,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem 'brakeman'
 end
 
 group :test do

@@ -1,0 +1,46 @@
+<h1>Detailed view</h1>
+<%= link_to("Back to all Rewards", memrewards_path, class: 'back-link') %>
+
+<div class="rewards show">
+  <h2><%= @reward.name %> details</h2>
+
+  <div class="actions">
+    <%= link_to('Purchase', purchase_path_url(reward.id)) %>
+  </div>
+
+  <table summary="reward detail view">
+    <tr>
+      <th>Name</th>
+      <td><%= @reward.name %></td>
+    </tr>
+    <tr>
+      <th>Dollar price</th>
+      <td><%= @reward.dollar_price %></td>
+    </tr>
+    <tr>
+      <th>Point price</th>
+      <td><%= @reward.point_value %></td>
+    </tr>
+    <tr>
+      <th>Current inventory</th>
+      <td><%= @reward.inventory %></td>
+    </tr>
+    <tr>
+      <th>Created</th>
+      <td><%= @reward.created_at %></td>
+    </tr>
+    <tr>
+      <th>Updated</th>
+      <td><%= @reward.updated_at %></td>
+    </tr>
+  </table>
+
+</div>
+
+<br />
+
+  <% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+    <% end %>
