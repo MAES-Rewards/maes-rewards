@@ -4,7 +4,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if admin.present?
       sign_out_all_scopes
-      flash[:success] = t('devise.omniauth_callbacks.success', kind: 'Google')
+      flash[:notice] = t('devise.omniauth_callbacks.success', kind: 'Google')
 
       user = User.find_by(email: admin.email)
       if user && user.is_admin?
