@@ -1,2 +1,27 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>My Account</h1>
+<%= link_to("Go back to My Account", user_path(@user))%><br>
+<%= link_to("Delete the account", delete_user_path(@user)) %>
+<h2>editting page</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Points</th>
+      <th>Admin</th>
+      <th>Created At</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.points %></td>
+        <td><%= @user.is_admin ? "Yes" : "No" %></td>
+        <td><%= @user.created_at %></td>
+        <td><%= @user.updated_at %></td>
+      </tr>
+  </tbody>
+</table>
+<h1>I am not sure what to edit</h1>

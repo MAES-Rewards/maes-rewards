@@ -1,2 +1,26 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>My Account</h1>
+<%= link_to("Go back to landing page", member_dashboard_url)%>
+<%# <%= link_to("Edit my account", edit_user_path(@user), class: "action edit")%> 
+<%= link_to("Delete the account", delete_user_path(@user)) %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Points</th>
+      <th>Admin</th>
+      <th>Created At</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.points %></td>
+        <td><%= @user.is_admin ? "Yes" : "No" %></td>
+        <td><%= @user.created_at %></td>
+        <td><%= @user.updated_at %></td>
+      </tr>
+  </tbody>
+</table>

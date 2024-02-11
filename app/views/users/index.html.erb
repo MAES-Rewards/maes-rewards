@@ -1,23 +1,17 @@
-<h1>Users</h1>
-<table>
+<h1>Not in use</h1>
+<%= link_to("Go back to landing page", member_dashboard_url)%>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Points</th>
-      <th>Admin</th>
-      <th>Created At</th>
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.points %></td>
-        <td><%= user.is_admin ? "Yes" : "No" %></td>
-        <td><%= user.created_at %></td>
-      </tr>
-    <% end %>
+    <tr>
+      <td><% @user.name %></td>
+      <td><% @user.points %></td>
+    </tr>
   </tbody>
 </table>
+
+<h1>This page is not in use, since we are specifying 1 user</h1>

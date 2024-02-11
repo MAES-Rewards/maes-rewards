@@ -1,2 +1,11 @@
-<h1>Users#delete</h1>
-<p>Find me in app/views/users/delete.html.erb</p>
+<h1>My Account</h1>
+<%= link_to("Go back to My Account", user_path(@user))%>
+<h2>Delete my account</h2>
+
+<%= form_for @user, method: :delete do |f| %>
+  <p>Are you sure you want to permanently delete your account?</p>
+  <p><%= @user.name %></p>
+  <div class="form-buttons">
+    <%= f.submit("Delete account") %>
+  </div>
+<% end %>
