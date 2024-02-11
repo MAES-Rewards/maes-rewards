@@ -5,7 +5,7 @@
   <h2><%= @reward.name %> details</h2>
 
   <div class="actions">
-    <%= link_to('Purchase', purchase_path_url(@reward)) %>
+    <%= link_to('Purchase', purchase_path_url(id: @reward, user_id: @user)) %>
   </div>
 
   <table summary="reward detail view">

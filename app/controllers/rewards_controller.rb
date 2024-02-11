@@ -8,6 +8,7 @@ class RewardsController < ApplicationController
 
   def handle_purchase
     @reward = Reward.find(params[:id])
+    @user = User.find(params[:user_id])
     if @reward.inventory > 0
       # Update the inventory and handle the response
       @reward.inventory -= 1
@@ -19,11 +20,12 @@ class RewardsController < ApplicationController
     else
       flash[:alert] = 'Reward is out of stock.'
     end
-    redirect_to(members_path_url)
+    redirect_to(members_path_url(@user))
   end
 
   def purchase
     @reward = Reward.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def index
@@ -36,7 +38,7 @@ class RewardsController < ApplicationController
 
   def membershow
     @reward = Reward.find(params[:id])
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def new
