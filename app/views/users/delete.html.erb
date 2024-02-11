@@ -1,15 +1,16 @@
-<h1>My Account</h1>
+
 <% if session[:is_admin] %>
+  <h1>Delete member account</h1>
   <%= link_to("Go back to landing page", admin_dashboard_url)%>
 <% else %>
+  <h1>Delete your account</h1>
   <%= link_to("Go back to My Account", user_path(@user))%><br>
 <%end%>
 
-<h2>Delete my account</h2>
 
 <%= form_for @user, method: :delete do |f| %>
-  <p>Are you sure you want to permanently delete your account?</p>
-  <p><%= @user.name %></p>
+  <p>Are you sure you want to permanently delete this account?</p>
+  <p>Name: <%= @user.name %></p>
   <div class="form-buttons">
     <%= f.submit("Delete account") %>
   </div>
