@@ -20,7 +20,7 @@ class RewardsController < ApplicationController
     else
       flash[:alert] = 'Reward is out of stock.'
     end
-    redirect_to(members_path_url(@user))
+    redirect_to(memrewards_path_url(@user))
   end
 
   def purchase
