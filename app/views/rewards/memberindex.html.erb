@@ -16,7 +16,7 @@
       <td><%= reward.dollar_price  %></td>
       <td><%= reward.inventory %></td>
       <td class="actions">
-        <%= link_to("See details", memshow_path_url(reward.id)) %>
+        <%= link_to("See details", memshow_path_url(id: reward.id, user_id: @user)) %>
         <%= link_to("Purchase", purchase_path_url(reward.id), data: { confirm: 'Are you sure you want to purchase this item?' }) %>
       </td>
     </tr>
