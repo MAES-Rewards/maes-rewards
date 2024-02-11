@@ -14,6 +14,56 @@
  *= require_self
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+:root {
+  --font-main: "Roboto", "Arial", sans-serif;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: var(--font-main);
+}
+
+button,
+input[type="text"],
+input[type="number"],
+input[type="submit"] {
+  padding: 5px 10px;
+  font-family: var(--font-main);
+}
+
+.flash {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 400px;
+  max-width: 100%;
+  height: 50px;
+  background: #EEE;
+  border: 1px solid #888;
+  color: #888;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  animation: 5s fadeout 1 forwards;
+  user-select: none;
+}
+
+.flash-notice {
+  background: #CFC;
+  border: 1px solid #080;
+  color: #080;
+}
+
+.flash-alert {
+  background: #FCC;
+  border: 1px solid #800;
+  color: #800;
+}
+
+@keyframes fadeout {
+  0% {opacity: 1;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
 }
