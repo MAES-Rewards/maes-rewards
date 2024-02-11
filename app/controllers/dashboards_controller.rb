@@ -8,6 +8,6 @@ class DashboardsController < ApplicationController
 
   def admin
     # Additional logic here if needed
-    @users = User.all
+    @users = User.where(:is_admin => false)
   end
 end
