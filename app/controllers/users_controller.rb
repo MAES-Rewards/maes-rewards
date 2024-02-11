@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    redirect_to tasks_path
+    @user = params[:id]
+    User.find(params[:id]).destroy
+    redirect_to '/admins/sign_in'
   end
 end

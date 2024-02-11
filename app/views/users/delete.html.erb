@@ -1,17 +1,11 @@
-<%= link_to("Back to My Account", users_path, class: 'back-link') %>
+<h1>My Account</h1>
+<%= link_to("Go back to My Account", user_path(@user))%>
+<h2>Delete my account</h2>
 
-<div class="users delete">
-  <h2>Delete User</h2>
-
-  <%= form_for(@task, method: 'delete') do |f| %>
-    <% # url: task_path(@task), method: 'delete' %>
-
-    <p>Are you sure you want to permanently delete your account?</p>
-    <p><%= @user.name %></p>
-
-    <div class="form-buttons">
-      <%= f.submit("Delete Task") %>
-    </div>
-
-  <% end %>
-</div>
+<%= form_for @user, method: :delete do |f| %>
+  <p>Are you sure you want to permanently delete your account?</p>
+  <p><%= @user.name %></p>
+  <div class="form-buttons">
+    <%= f.submit("Delete account") %>
+  </div>
+<% end %>

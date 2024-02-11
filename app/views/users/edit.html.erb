@@ -1,5 +1,6 @@
 <h1>My Account</h1>
-<%= link_to("Go back to My Account", user_path(@user))%>
+<%= link_to("Go back to My Account", user_path(@user))%><br>
+<%= link_to("Delete the account", delete_user_path(@user)) %>
 <h2>editting page</h2>
 <table>
   <thead>
