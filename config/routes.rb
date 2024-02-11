@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
   end
 
-  get 'dashboards/member', to: 'dashboards#member', as: 'member_dashboard'
+  get 'dashboards/member/:id', to: 'dashboards#member', as: 'member_dashboard'
   get 'dashboards/admin', to: 'dashboards#admin', as: 'admin_dashboard'
   get 'rewards/memberindex', to: 'rewards#memberindex', as: 'memrewards_path'
   get 'rewards/purchase/:id', to: 'rewards#purchase', as: 'purchase_path'

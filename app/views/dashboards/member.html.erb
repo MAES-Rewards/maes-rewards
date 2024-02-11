@@ -2,4 +2,6 @@
 <%= link_to "Sign Out", destroy_admin_session_path %>
 <%= link_to "View Rewards", memrewards_path_url%>
 <%= link_to "My Account", user_path(@user)%>
-<h1>Welcome to MAES: Latinos in Science and Engineering</h1>
+<h1>
+    Welcome, <%= @user.name %>!
+</h1>

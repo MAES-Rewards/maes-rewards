@@ -14,7 +14,8 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         else
           session[:is_admin] = false
           sign_in admin, event: :authentication
-          redirect_to member_dashboard_path
+          user_id = User.find_by_email(admin.email)
+          redirect_to member_dashboard_path(user_id)
         end
       else
         flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."

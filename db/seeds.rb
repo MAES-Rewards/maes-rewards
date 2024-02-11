@@ -18,6 +18,12 @@ User.create([
     email: "admin@mail.example.com",
     points: 0,
     is_admin: true
+  },
+  {
+    name: "Jaejin Cha",
+    email: "jaejin0109@tamu.edu",
+    points: 30,
+    is_admin: false
   }
 ]);
 
