@@ -1,5 +1,10 @@
 <h1>My Account</h1>
-<%= link_to("Go back to My Account", user_path(@user))%>
+<% if session[:is_admin] %>
+  <%= link_to("Go back to landing page", admin_dashboard_url)%>
+<% else %>
+  <%= link_to("Go back to My Account", user_path(@user))%><br>
+<%end%>
+
 <h2>Delete my account</h2>
 
 <%= form_for @user, method: :delete do |f| %>
