@@ -9,10 +9,11 @@ class RewardsController < ApplicationController
   def handle_purchase
     @reward = Reward.find(params[:id])
     @user = User.find(params[:user_id])
-    if @reward.inventory > 0
+    if @reward.inventory.positive? && @user.point_value >= @reward.point_value
       # Update the inventory and handle the response
       @reward.inventory -= 1
-      if @reward.save
+      @user.point_value -= @reward.point_value
+      if @reward.save && @user.save
         flash[:notice] = 'Reward was successfully purchased.'
       else
         flash[:alert] = 'Reward could not be purchased.'
