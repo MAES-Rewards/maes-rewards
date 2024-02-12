@@ -26,10 +26,18 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install postgres client
         run: sudo apt-get install libpq-dev
+      - name: Install Firefox
+        run: sudo apt-get install -y firefox
+
+      - name: Install Geckodriver
+        run: |
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+          tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          export PATH=$PATH:/usr/local/bin
       - name: Install dependencies
         run: |
           gem install bundler
-          sudo apt-get install -y firefox-geckodriver
           bundler install
       - name: Create database
         run: |
@@ -39,7 +47,7 @@ jobs:
         with:
           cmd: install
       - name: Run tests
-        run: bundle exec rspec .
+        run: bundler exec rspec .
       - name: Run brakeman
         run: brakeman -o brakeman.txt
       - name: Run rubocop
