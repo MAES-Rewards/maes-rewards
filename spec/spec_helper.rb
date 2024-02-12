@@ -25,6 +25,8 @@ Capybara.register_driver :rack_test do |app|
   Capybara::RackTest::Driver.new(app, respect_data_method: true, redirect_limit: 20)
 end
 
+Capybara.default_driver = :rack_test
+Capybara.javascript_driver = :rack_test
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
