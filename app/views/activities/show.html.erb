@@ -3,10 +3,12 @@
 <div class="activities show">
   <h1>Activity Details</h1>
 
-  <div class="actions">
-    <%= link_to('Edit', edit_activity_path(@activity)) %>
-    <%= link_to('Delete', delete_activity_path(@activity)) %>
-  </div>
+  <% if session[:is_admin] %>
+    <div class="actions">
+      <%= link_to('Edit', edit_activity_path(@activity)) %>
+      <%= link_to('Delete', delete_activity_path(@activity)) %>
+    </div>
+  <% end %>
 
   <table>
     <tr>

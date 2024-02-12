@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
   end
 
+  get '/set_admin_session', to: 'sessiontest#set_admin_session', as: :set_admin_session
+
   get 'dashboards/member/:id', to: 'dashboards#member', as: 'member_dashboard'
   get 'dashboards/admin', to: 'dashboards#admin', as: 'admin_dashboard'
   get 'rewards/memberindex/:id', to: 'rewards#memberindex', as: 'memrewards_path'

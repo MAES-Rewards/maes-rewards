@@ -8,7 +8,12 @@ class ActivitiesController < ApplicationController
   end
 
   def new
-    @activity = Activity.new
+    if session[:is_admin]
+      @activity = Activity.new
+    else
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to activities_path
+    end
   end
 
   def create
@@ -23,29 +28,49 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
-    @activity = Activity.find(params[:id])
+    if session[:is_admin]
+      @activity = Activity.find(params[:id])
+    else
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to activities_path
+    end
   end
 
   def update
-    @activity = Activity.find(params[:id])
-    if @activity.update(activity_params)
-      flash[:notice] = 'Activity was successfully updated.'
-      redirect_to activity_path(@activity)
+    if session[:is_admin]
+      @activity = Activity.find(params[:id])
+      if @activity.update(activity_params)
+        flash[:notice] = 'Activity was successfully updated.'
+        redirect_to activity_path(@activity)
+      else
+        flash[:alert] = 'Activity could not be updated. Attribute(s) are invalid.'
+        render('edit', status: 422)
+      end
     else
-      flash[:alert] = 'Activity could not be updated. Attribute(s) are invalid.'
-      render('edit', status: 422)
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to activities_path
     end
   end
 
   def delete
-    @activity = Activity.find(params[:id])
+    if session[:is_admin]
+      @activity = Activity.find(params[:id])
+    else
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to activities_path
+    end
   end
 
   def destroy
-    @activity = Activity.find(params[:id])
-    @activity.destroy
-    flash[:notice] = 'Activity was successfully deleted.'
-    redirect_to activities_path
+    if session[:is_admin]
+      @activity = Activity.find(params[:id])
+      @activity.destroy
+      flash[:notice] = 'Activity was successfully deleted.'
+      redirect_to activities_path
+    else
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to activities_path
+    end
   end
 
   private
