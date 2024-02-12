@@ -8,5 +8,11 @@ class DashboardsController < ApplicationController
 
   def admin
     # Additional logic here if needed
+    if session[:is_admin]
+      @users = User.where(is_admin: false)
+    else
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to(destroy_admin_session_path)
+    end
   end
 end

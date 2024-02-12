@@ -18,9 +18,9 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to(member_dashboard_path(user_id))
       else
         session[:is_admin] = false
+        @user = User.create(name: admin.full_name, email: admin.email, points: 0, is_admin: false)
         sign_in(admin, event: :authentication)
-        @user = User.new(name: admin.full_name, email: admin.email, points: 0, is_admin: false)
-        if @user.save
+        if @user.save!
           user_id = User.find_by_email(admin.email) # or user_id = @user.id
           redirect_to(member_dashboard_path(user_id))
         else
