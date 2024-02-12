@@ -27,6 +27,15 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def edit
+    if session[:is_admin]
+      @activity = Activity.find(params[:id])
+    else
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to activities_path
+    end
+  end
+
   def update
     if session[:is_admin]
       @activity = Activity.find(params[:id])
