@@ -17,8 +17,10 @@
         <td><%= activity.default_points %></td>
         <td class="actions">
           <%= link_to('Show', activity_path(activity), class: 'action show') %>
-          <%= link_to('Edit', edit_activity_path(activity), class: 'action edit') %>
-          <%= link_to('Delete', delete_activity_path(activity), class: 'action delete') %>
+          <% if session[:is_admin] %>
+            <%= link_to('Edit', edit_activity_path(activity), class: 'action edit') %>
+            <%= link_to('Delete', delete_activity_path(activity), class: 'action delete') %>
+          <% end %>
         </td>
       </tr>
     <% end %>
