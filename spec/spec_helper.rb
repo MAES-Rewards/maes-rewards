@@ -23,6 +23,7 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new(args: %w[--headless --disable-gpu --no-sandbox])
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
+Capybara::Selenium::Driver::Chrome.driver_path = File.join(Gem.loaded_specs['chromedriver-helper'].full_gem_path, 'chromedriver')
 
 Capybara.javascript_driver = :selenium_chrome_headless
 
