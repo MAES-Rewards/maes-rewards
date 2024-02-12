@@ -32,6 +32,14 @@ end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.before do
+    Capybara.current_driver = if ENV['HEADLESS'] == 'true'
+                                :selenium_chrome_headless
+                              else
+                                :selenium_chrome
+                              end
+  end
+
   config.fixture_path = Rails.root.join('spec/fixtures')
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

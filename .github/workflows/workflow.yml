@@ -33,12 +33,6 @@ jobs:
           sudo apt-get install -y libnss3 libgconf-2-4 libfontconfig1
           sudo apt-get install -y chromium-browser
 
-      - name: Install Chromedriver
-        run: |
-          sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
-
-
       - name: Create database
         run: |
           bundler exec rails db:create RAILS_ENV=test
@@ -47,7 +41,7 @@ jobs:
         with:
           cmd: install
       - name: Run tests
-        run: bundler exec rspec . --require spec_helper
+        run: HEADLESS=true bundler exec rspec . --require spec_helper
       - name: Run brakeman
         run: brakeman -o brakeman.txt
       - name: Run rubocop
