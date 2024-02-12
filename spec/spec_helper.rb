@@ -17,7 +17,13 @@
 require 'simplecov'
 require 'capybara'
 require 'selenium-webdriver'
+require 'rack/test'
+
 SimpleCov.start
+
+Capybara.register_driver :rack_test do |app|
+  Capybara::RackTest::Driver.new(app, respect_data_method: true, redirect_limit: 20)
+end
 
 
 RSpec.configure do |config|

@@ -31,7 +31,6 @@ jobs:
           gem install bundler
           bundler install
           sudo apt-get install -y libnss3 libgconf-2-4 libfontconfig1
-          sudo apt-get install -y chromium-browser
 
       - name: Create database
         run: |
