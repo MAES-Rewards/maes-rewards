@@ -16,6 +16,7 @@
 
 require 'simplecov'
 require 'capybara'
+require 'selenium-webdriver'
 SimpleCov.start
 
 Capybara.register_driver :selenium_headless do |app|

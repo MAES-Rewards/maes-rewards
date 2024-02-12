@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
+          sudo apt-get install -y firefox-geckodriver
           bundler install
       - name: Create database
         run: |
@@ -38,7 +39,7 @@ jobs:
         with:
           cmd: install
       - name: Run tests
-        run: bundler exec rspec .
+        run: bundle exec rspec .
       - name: Run brakeman
         run: brakeman -o brakeman.txt
       - name: Run rubocop
