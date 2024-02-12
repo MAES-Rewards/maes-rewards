@@ -15,6 +15,7 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'simplecov'
+require 'capybara'
 SimpleCov.start
 
 Capybara.register_driver :selenium_headless do |app|
