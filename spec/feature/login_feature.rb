@@ -31,7 +31,7 @@ RSpec.describe('Google OAuth ADMIN login', type: :feature) do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
-      uid: '114332087672869564965',
+      uid: '12345',
       info: {
         email: 'ahartman03@tamu.edu',
         name: 'Anna Hartman'
