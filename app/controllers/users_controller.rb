@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index; end
 
@@ -42,12 +44,11 @@ class UsersController < ApplicationController
 
   def destroy
     if session[:is_admin]
-      User.find(params[:id]).destroy
-      redirect_to(destroy_admin_session_path)
+      User.find(params[:id]).destroy!
     else
       flash[:alert] = 'Access denied. Please log in as an admin.'
-      redirect_to(destroy_admin_session_path)
     end
+    redirect_to(destroy_admin_session_path)
   end
 
   def user_params

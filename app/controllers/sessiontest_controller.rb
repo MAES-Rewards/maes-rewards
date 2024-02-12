@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessiontestController < ApplicationController
   def set_admin_session
     session[:is_admin] = true

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Capybara.register_driver(:selenium_chrome) do |app|
   # Set chrome download dir and auto confirm all "are you sure you want to download" to test downloading docs and pdfs.
   chrome_prefs = {

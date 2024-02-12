@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reward < ApplicationRecord
   has_many :spend_transaction
   validates :name, presence: true

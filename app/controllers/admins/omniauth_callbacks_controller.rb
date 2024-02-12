@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     admin = Admin.from_google(**from_google_params)
@@ -7,21 +9,21 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = t('devise.omniauth_callbacks.success', kind: 'Google')
 
       user = User.find_by(email: admin.email)
-      if user && user.is_admin?
+      if user&.is_admin?
         session[:is_admin] = true
         sign_in(admin, event: :authentication)
         redirect_to(admin_dashboard_path)
       elsif user
         session[:is_admin] = false
         sign_in(admin, event: :authentication)
-        user_id = User.find_by_email(admin.email) # or user_id = @user.id
+        user_id = User.find_by(email: admin.email) # or user_id = @user.id
         redirect_to(member_dashboard_path(user_id))
       else
         session[:is_admin] = false
-        @user = User.create(name: admin.full_name, email: admin.email, points: 0, is_admin: false)
+        @user = User.create!(name: admin.full_name, email: admin.email, points: 0, is_admin: false)
         sign_in(admin, event: :authentication)
         if @user.save!
-          user_id = User.find_by_email(admin.email) # or user_id = @user.id
+          user_id = User.find_by(email: admin.email) # or user_id = @user.id
           redirect_to(member_dashboard_path(user_id))
         else
           redirect_to(new_admin_session_path)
