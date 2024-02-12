@@ -40,7 +40,7 @@ jobs:
         with:
           cmd: install
       - name: Run tests
-        run: HEADLESS=true bundler exec rspec . --require spec_helper
+        run: HEADLESS=true bundle exec rspec .
       - name: Run brakeman
         run: brakeman -o brakeman.txt
       - name: Run rubocop
