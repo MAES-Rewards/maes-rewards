@@ -19,14 +19,11 @@ require 'capybara'
 SimpleCov.start
 
 Capybara.register_driver :selenium_headless do |app|
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :firefox, # or :chrome, depending on your preference
-    options: Selenium::WebDriver::Firefox::Options.new(args: %w[--headless --disable-gpu --no-sandbox])
-  )
+  options = Selenium::WebDriver::Firefox::Options.new(args: %w[--headless --disable-gpu --no-sandbox])
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
 end
 
-# Set the server host and port
+Capybara.javascript_driver = :selenium_headless
 Capybara.server_host = '0.0.0.0'
 Capybara.server_port = 3000
 
