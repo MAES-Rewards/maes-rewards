@@ -1,0 +1,32 @@
+<h1>My Account</h1>
+
+<% if session[:is_admin] %>
+  <%= link_to("Go back to landing page", admin_dashboard_url)%>
+<% else %>
+  <%= link_to("Go back to My Account", user_path(@user))%><br>
+<%end%>
+
+<%= link_to("Delete the account", delete_user_path(@user)) %>
+
+<div class="rewards edit">
+  <h2>Info:</h2>
+
+  <%= form_for(@user) do |u| %>
+    <% # url: task_path(@task), method: 'patch' %>
+
+     <%= render(partial: 'form', locals: {u: u})%>
+
+    <div class="form-buttons">
+      <%= u.submit("Save changes") %>
+    </div>
+
+  <% end %>
+</div>
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
+
+

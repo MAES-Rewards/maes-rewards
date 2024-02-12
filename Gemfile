@@ -15,6 +15,14 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+gem "devise"
+
+gem "omniauth", "~>1.9.1"
+
+gem "omniauth-google-oauth2"
+
+gem "omniauth-rails_csrf_protection"
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
@@ -52,7 +60,13 @@ gem "rexml"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "rspec-rails"
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+  gem 'rspec-rails'
+  gem 'dotenv-rails'
+  gem 'brakeman'
 end
 
 group :development do
@@ -73,6 +87,3 @@ group :test do
   gem "webdrivers"
   gem "simplecov", :require => false
 end
-
-gem "brakeman"
-gem "rubocop"
