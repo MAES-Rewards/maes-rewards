@@ -194,6 +194,7 @@ RSpec.describe('Viewing rewards as admin', type: :feature) do
   it 'user logs in with Google as admin & views rewards' do
     visit new_admin_session_path
     click_on 'Sign in via Google'
+    visit set_admin_session_path
     visit admin_dashboard_path
     click_on 'View Rewards'
 
@@ -222,6 +223,7 @@ RSpec.describe('Creating rewards', type: :feature) do
   it 'user logs in with Google & creates reward' do
     visit new_admin_session_path
     click_on 'Sign in via Google'
+    visit set_admin_session_path
     visit admin_dashboard_path
     click_on 'View Rewards'
     visit new_reward_path
@@ -263,6 +265,7 @@ RSpec.describe('Deleting rewards', type: :feature) do
   it 'admin logs in with Google & creates then deletes reward' do
     visit new_admin_session_path
     click_on 'Sign in via Google'
+    visit set_admin_session_path
     visit admin_dashboard_path
     click_on 'View Rewards'
     visit new_reward_path
@@ -303,6 +306,7 @@ RSpec.describe('Editing rewards', type: :feature) do
   it 'admin logs in with Google & creates then edits reward' do
     visit new_admin_session_path
     click_on 'Sign in via Google'
+    visit set_admin_session_path
     visit admin_dashboard_path
     click_on 'View Rewards'
     visit new_reward_path
@@ -345,6 +349,7 @@ RSpec.describe('Viewing reward detail view', type: :feature) do
   it 'admin logs in with Google & creates then views reward details' do
     visit new_admin_session_path
     click_on 'Sign in via Google'
+    visit set_admin_session_path
     visit admin_dashboard_path
     click_on 'View Rewards'
     visit new_reward_path

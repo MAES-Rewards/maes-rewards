@@ -45,6 +45,7 @@ RSpec.describe('Google OAuth ADMIN login', type: :feature) do
   it 'user logs in with Google into admin page' do
     visit new_admin_session_path
     click_on 'Sign in via Google'
+    visit set_admin_session_path
     visit admin_dashboard_path
     # Assuming there is some delay or asynchronous operation happening
     # If content doesn't appear immediately, wait for it
