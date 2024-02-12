@@ -19,7 +19,7 @@ class RewardsController < ApplicationController
         flash[:alert] = 'Reward could not be purchased.'
       end
     else
-      flash[:alert] = 'Reward is out of stock.'
+      flash[:alert] = 'Reward is out of stock or user does not have sufficient points.'
     end
     redirect_to(memrewards_path_url(@user))
   end
