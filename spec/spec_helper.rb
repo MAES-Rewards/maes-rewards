@@ -17,6 +17,17 @@
 require 'simplecov'
 SimpleCov.start
 
+Capybara.register_driver :selenium_headless do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :firefox, # or :chrome, depending on your preference
+    options: Selenium::WebDriver::Firefox::Options.new(args: %w[--headless --disable-gpu --no-sandbox])
+  )
+end
+
+# Set the server host and port
+Capybara.server_host = '0.0.0.0'
+Capybara.server_port = 3000
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
