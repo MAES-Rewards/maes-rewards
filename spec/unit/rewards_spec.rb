@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # location: spec/unit/unit_spec.rb
 require 'rails_helper'
 
@@ -8,7 +10,7 @@ require 'rails_helper'
 # integer "inventory"
 
 RSpec.describe(Reward, type: :model) do
-  subject do
+  subject(:reward) do
     described_class.new(
       name: 'test reward',
       point_value: 10,
@@ -18,56 +20,56 @@ RSpec.describe(Reward, type: :model) do
   end
 
   it 'is valid with valid attributes' do
-    expect(subject).to(be_valid)
+    expect(reward).to(be_valid)
   end
 
   it 'is not valid without a name' do
-    subject.name = nil
-    expect(subject).not_to(be_valid)
+    reward.name = nil
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid without a point value' do
-    subject.point_value = nil
-    expect(subject).not_to(be_valid)
+    reward.point_value = nil
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid with a negative point value' do
-    subject.point_value = -10
-    expect(subject).not_to(be_valid)
+    reward.point_value = -10
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid with an extremely large point value' do
-    subject.point_value = 10_000_000_000
-    expect(subject).not_to(be_valid)
+    reward.point_value = 10_000_000_000
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid without a dollar price' do
-    subject.dollar_price = nil
-    expect(subject).not_to(be_valid)
+    reward.dollar_price = nil
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid with a negative dollar price' do
-    subject.dollar_price = -1.99
-    expect(subject).not_to(be_valid)
+    reward.dollar_price = -1.99
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid with an extremely large dollar price' do
-    subject.dollar_price = 10_000_000_000
-    expect(subject).not_to(be_valid)
+    reward.dollar_price = 10_000_000_000
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid without an inventory' do
-    subject.inventory = nil
-    expect(subject).not_to(be_valid)
+    reward.inventory = nil
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid with a negative inventory' do
-    subject.inventory = -200
-    expect(subject).not_to(be_valid)
+    reward.inventory = -200
+    expect(reward).not_to(be_valid)
   end
 
   it 'is not valid with an extremely large inventory' do
-    subject.inventory = 10_000_000_000
-    expect(subject).not_to(be_valid)
+    reward.inventory = 10_000_000_000
+    expect(reward).not_to(be_valid)
   end
 end

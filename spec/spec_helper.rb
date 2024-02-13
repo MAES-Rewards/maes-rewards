@@ -15,7 +15,18 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'simplecov'
+require 'capybara'
+require 'selenium-webdriver'
+require 'rack/test'
+
 SimpleCov.start
+
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[--headless --disable-gpu --no-sandbox])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options).tap do |driver|
+    driver.browser.logger.level = :debug
+  end
+end
 
 
 RSpec.configure do |config|
