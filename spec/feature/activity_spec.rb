@@ -12,7 +12,8 @@ RSpec.describe('Activity MEMBER login', type: :feature) do
         email: 'user@tamu.edu',
         name: 'John Doe'
       }
-    })
+    }
+                                                                      )
     Capybara.current_driver = :selenium
     # Adjust the wait time as needed
     Capybara.default_max_wait_time = 10
@@ -36,7 +37,8 @@ RSpec.describe('Activity ADMIN login', type: :feature) do
         email: 'jbeeber@tamu.edu',
         name: 'James Beeber'
       }
-    })
+    }
+                                                                      )
     Capybara.current_driver = :selenium
     # Adjust the wait time as needed
     Capybara.default_max_wait_time = 10
