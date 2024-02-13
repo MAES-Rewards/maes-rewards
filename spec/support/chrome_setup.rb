@@ -8,8 +8,10 @@ Capybara.register_driver(:selenium_chrome) do |app|
       'prompt_for_download' => false
     },
     'profile' => {
-      'default_content_settings' => { 'multiple-automatic-downloads': 1 }, # for chrome version olde ~42
-      'default_content_setting_values' => { automatic_downloads: 1 }, # for chrome newe 46
+      # for chrome version olde ~42
+      'default_content_settings' => { 'multiple-automatic-downloads': 1 },
+      # for chrome newe 46
+      'default_content_setting_values' => { automatic_downloads: 1 },
       'password_manager_enabled' => false
     },
     'safebrowsing' => {
