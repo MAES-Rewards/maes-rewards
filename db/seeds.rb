@@ -26,6 +26,24 @@ User.create([
     email: 'jaejin0109@tamu.edu',
     points: 30,
     is_admin: false
+  },
+  {
+    name: 'Sahithi Ravipati',
+    email: 'sahithi.r@tamu.edu',
+    points: 0,
+    is_admin: true
+  },
+  {
+    name: 'Vishal Vardan Adepu',
+    email: 'vva2@tamu.edu',
+    points: 100,
+    is_admin: false
+  },
+  {
+    name: 'Pauline Wade',
+    email: 'paulinewade@tamu.edu',
+    points: 0,
+    is_admin: true
   }
 ]
            )
