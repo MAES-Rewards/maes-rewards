@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe('Activity MEMBER login', type: :feature) do
@@ -12,7 +14,8 @@ RSpec.describe('Activity MEMBER login', type: :feature) do
       }
     })
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'member user logs in with Google to new activity page' do
@@ -35,13 +38,12 @@ RSpec.describe('Activity ADMIN login', type: :feature) do
       }
     })
     Capybara.current_driver = :selenium
-
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'admin user logs in with Google and creates, edits, and deletes activity' do
     # gets(:omniauth_callbacks, session: { is_admin: true })
-
     visit new_admin_session_path
     click_on 'Sign in via Google'
     visit set_admin_session_path

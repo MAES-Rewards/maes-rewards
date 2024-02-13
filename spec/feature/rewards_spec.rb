@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe('Viewing rewards as member', type: :feature) do
@@ -13,7 +15,8 @@ RSpec.describe('Viewing rewards as member', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'user logs in with Google as member & views rewards' do
@@ -40,7 +43,8 @@ RSpec.describe('Viewing reward detail view as member', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
 
     Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
   end
@@ -76,7 +80,8 @@ RSpec.describe('Purchasing rewards as member', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
 
     User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
     Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
@@ -95,13 +100,14 @@ RSpec.describe('Purchasing rewards as member', type: :feature) do
     click_on 'Confirm'
 
     expect(page).to(have_content('Reward was successfully purchased'))
-    expect(page).to(have_content('9')) # new inventory
+    # new inventory
+    expect(page).to(have_content('9'))
 
     click_on 'Go back to landing page'
 
     click_on 'My Account'
-
-    expect(page).to(have_content('50')) # new points
+    # new points
+    expect(page).to(have_content('50'))
   end
 end
 
@@ -118,7 +124,8 @@ RSpec.describe('Purchasing rewards as member - unsuccessful', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
 
     User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 2, is_admin: false)
     Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
@@ -153,7 +160,8 @@ RSpec.describe('Purchasing rewards as member - unsuccessful #2', type: :feature)
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
 
     User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 2, is_admin: false)
     Reward.create!(name: 'Sample Reward', point_value: 1, inventory: 0, dollar_price: 1.99)
@@ -188,7 +196,8 @@ RSpec.describe('Viewing rewards as admin', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'user logs in with Google as admin & views rewards' do
@@ -217,7 +226,8 @@ RSpec.describe('Creating rewards', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'user logs in with Google & creates reward' do
@@ -259,7 +269,8 @@ RSpec.describe('Deleting rewards', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'admin logs in with Google & creates then deletes reward' do
@@ -300,7 +311,8 @@ RSpec.describe('Editing rewards', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'admin logs in with Google & creates then edits reward' do
@@ -343,7 +355,8 @@ RSpec.describe('Viewing reward detail view', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'admin logs in with Google & creates then views reward details' do
