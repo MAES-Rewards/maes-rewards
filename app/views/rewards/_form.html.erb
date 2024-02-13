@@ -1,0 +1,18 @@
+<table summary="Rewards form fields">
+  <tr>
+    <th>Name</th>
+    <td><%= r.text_field(:name) %></td>
+  </tr>
+  <tr>
+    <th>Point value</th>
+    <td><%= r.number_field(:point_value, step: 1) %></td>
+  </tr>
+  <tr>
+    <th>Dollar price</th>
+    <td><%= r.number_field(:dollar_price, step: 0.01) %></td>
+  </tr>
+  <tr>
+    <th>Current inventory</th>
+    <td><%= r.number_field(:inventory, step: 1) %></td>
+  </tr>
+</table>

@@ -1,0 +1,35 @@
+<% if session[:is_admin] %>
+    <table summary="User form fields">
+    <tr>
+        <th>Name</th>
+        <td><%= u.text_field(:name) %></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><%= u.text_field(:email) %></td>
+    </tr>
+    <tr>
+        <th>Points</th>
+        <td><%= u.number_field(:points, step: 1) %></td>
+    </tr>
+    <tr>
+        <th>Admin</th>
+        <td><%= u.check_box(:is_admin) %></td>
+    </tr>
+    </table>
+<% else %>
+    <table summary="User form fields">
+    <tr>
+        <th>Name</th>
+        <td><%= u.text_field(:name) %></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><%= u.text_field(:email) %></td>
+    </tr>
+    <tr>
+        <th>Points</th>
+        <td><%= u.number_field(:points, step: 1) %></td>
+    </tr>
+    </table>
+<% end %>
