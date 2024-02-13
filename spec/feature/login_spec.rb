@@ -15,7 +15,8 @@ RSpec.describe('Google OAuth MEMBER login', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'user logs in with Google to member page' do
@@ -41,7 +42,8 @@ RSpec.describe('Google OAuth ADMIN login', type: :feature) do
     }
                                                                       )
     Capybara.current_driver = :selenium
-    Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
+    # Adjust the wait time as needed
+    Capybara.default_max_wait_time = 10
   end
 
   it 'user logs in with Google into admin page' do
