@@ -10,8 +10,7 @@ RSpec.describe('Activity MEMBER login', type: :feature) do
         email: 'user@tamu.edu',
         name: 'John Doe'
       }
-    }
-                                                                      )
+    })
     Capybara.current_driver = :selenium
     Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
   end
@@ -34,8 +33,7 @@ RSpec.describe('Activity ADMIN login', type: :feature) do
         email: 'jbeeber@tamu.edu',
         name: 'James Beeber'
       }
-    }
-                                                                      )
+    })
     Capybara.current_driver = :selenium
 
     Capybara.default_max_wait_time = 10 # Adjust the wait time as needed
@@ -52,8 +50,12 @@ RSpec.describe('Activity ADMIN login', type: :feature) do
 
     fill_in 'activity[name]', with: 'Test Activity'
     fill_in 'activity[description]', with: 'Test Description'
+    fill_in 'activity[default_points]', with: -1
+    click_on 'Create Activity'
+    expect(page).to(have_content('Activity could not be created'))
     fill_in 'activity[default_points]', with: 100
     click_on 'Create Activity'
+    expect(page).to(have_content('Test Activity'))
 
     visit activities_path
     expect(page).to(have_content('Test Activity'))
@@ -62,6 +64,14 @@ RSpec.describe('Activity ADMIN login', type: :feature) do
     expect(page).to(have_content('Test Activity'))
     expect(page).to(have_content('Edit'))
     expect(page).to(have_content('Delete'))
+
+    click_on 'Edit'
+    fill_in 'activity[description]', with: ''
+    click_on 'Save Changes'
+    expect(page).to(have_content('Activity could not be updated'))
+    fill_in 'activity[description]', with: 'A New Test Description'
+    click_on 'Save Changes'
+    expect(page).to(have_content('A New Test Description'))
 
     click_on 'Delete'
     expect(page).to(have_content('Are you sure'))
