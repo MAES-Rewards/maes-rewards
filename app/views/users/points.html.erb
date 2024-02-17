@@ -1,9 +1,8 @@
 
 <h1>Assign Points to Members</h1>
+<h3>Member List:</h3>
+<%= form_tag handle_points_path, method: :post do %>
 <table>
-    <tr>
-        <th>Name</th>
-    </tr>
     <% @users.each do |user| %>
         <tr>
             <td><%= user.name %>, (<%=user.points %> points)</td>
@@ -11,11 +10,15 @@
         </tr>
     <% end %>
 </table>
+<hr>
 <%= label_tag "new_points", "Points:" %>
-<%= number_field_tag "new_points", nil, min: 0 %>
+<%= number_field_tag "new_points", nil %>
 <br />
-<%= label_tag "activity", "Activity:" %>
+<br />
+<%= label_tag "activity", "Associated Activity:" %>
 <%= select_tag "activity_id", options_for_select(Activity.order(:name).map { |activity| [activity.name, activity.id] }, include_blank: true), id: "id_of_the_activity_id_select_box" %>
 <br />
+<br />
 
-<%= link_to("Submit", handle_points_path)%>
+<%= submit_tag "Submit" %>
+<% end %>
