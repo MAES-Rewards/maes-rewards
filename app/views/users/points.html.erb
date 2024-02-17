@@ -1,8 +1,10 @@
-
+<! -- Page which allows administrators/officers to assign points to several users with an associated point source -->
 <h1>Assign Points to Members</h1>
 <h3>Member List:</h3>
+
 <%= form_tag handle_points_path, method: :post do %>
 <table>
+    <! -- list of non-admin users with checkbox to select each one -->
     <% @users.each do |user| %>
         <tr>
             <td><%= user.name %>, (<%=user.points %> points)</td>
@@ -10,15 +12,26 @@
         </tr>
     <% end %>
 </table>
+<br />
 <hr>
+<br />
+<! --assigned point amount -->
 <%= label_tag "new_points", "Points:" %>
 <%= number_field_tag "new_points", nil %>
 <br />
 <br />
-<%= label_tag "activity", "Associated Activity:" %>
-<%= select_tag "activity_id", options_for_select(Activity.order(:name).map { |activity| [activity.name, activity.id] }, include_blank: true), id: "id_of_the_activity_id_select_box" %>
-<br />
-<br />
 
+<hr>
+<br />
+<! -- associated activity with the point assignment -->
+<%= label_tag "activity", "Associated Recurring Activity:" %>
+<%= select_tag "recur_activity_id", options_for_select([["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] }), id: "id_of_the_activity_id_select_box" %>
+<p> OR </p>
+<%= label_tag "activity", "Associated One-time Activity:" %>
+<%= text_field_tag "onetime_activity_string" %>
+<br />
+<br />
+<hr>
+<br />
 <%= submit_tag "Submit" %>
 <% end %>

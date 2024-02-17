@@ -16,7 +16,18 @@ class UsersController < ApplicationController
     @users = User.where(is_admin: false).order(:name)
     selected_user_ids = params[:selected_users]
     new_points = params[:new_points]
-    activity_id = params[:activity_id]
+    recur_activity_id = params[:recur_activity_id]
+    onetime_activity_string = params[:onetime_activity_string]
+
+    if recur_activity_id.blank? && onetime_activity_string.blank?
+      flash[:alert] = 'Please select or enter an activity.'
+      redirect_to(admin_dashboard_path) and return
+    end
+
+    if !recur_activity_id.blank? && !onetime_activity_string.blank?
+      flash[:alert] = 'Cannot enter values for both recurring and one time activity.'
+      redirect_to(admin_dashboard_path) and return
+    end
 
     selected_user_ids ||= []
     saved = true
@@ -28,9 +39,9 @@ class UsersController < ApplicationController
       end
     end
     if saved
-      flash[:notice] = 'Users were successfully updated.'
+      flash[:notice] = 'User(s) were successfully updated.'
     else
-      flash[:notice] = 'Users were not updated successfully.'
+      flash[:notice] = 'User(s) were not updated successfully.'
     end
     redirect_to(admin_dashboard_path)
   end
