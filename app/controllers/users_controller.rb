@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def points
+    @users = User.where(is_admin: false).order(:name)
+  end
+
   def new; end
 
   def edit
