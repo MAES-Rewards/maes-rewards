@@ -11,10 +11,11 @@
         </tr>
     <% end %>
 </table>
-<%= label_tag "points", "Points:" %>
-<%= number_field_tag "points", nil, min: 0 %>
+<%= label_tag "new_points", "Points:" %>
+<%= number_field_tag "new_points", nil, min: 0 %>
 <br />
-<%= label_tag "points", "Activity:" %>
+<%= label_tag "activity", "Activity:" %>
 <%= select_tag "activity_id", options_for_select(Activity.order(:name).map { |activity| [activity.name, activity.id] }, include_blank: true), id: "id_of_the_activity_id_select_box" %>
 <br />
-<%= submit_tag "Submit" %>
+
+<%= link_to("Submit", handle_points_path)%>

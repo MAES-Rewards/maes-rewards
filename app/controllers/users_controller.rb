@@ -9,6 +9,30 @@ class UsersController < ApplicationController
 
   def points
     @users = User.where(is_admin: false).order(:name)
+
+  end
+
+  def handle_points
+    @users = User.where(is_admin: false).order(:name)
+    selected_user_ids = params[:selected_users]
+    new_points = params[:new_points]
+    activity_id = params[:activity_id]
+
+    selected_user_ids ||= []
+    saved = true
+    selected_user_ids.each do |user_id|
+      user = User.find(user_id)
+      user.points += new_points.to_i
+      unless user.save!
+        saved = false
+      end
+    end
+    if saved
+      flash[:notice] = 'Users were successfully updated.'
+    else
+      flash[:notice] = 'Users were not updated successfully.'
+    end
+    redirect_to(admin_dashboard_path)
   end
 
   def new; end
