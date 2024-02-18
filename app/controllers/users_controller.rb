@@ -13,13 +13,20 @@ class UsersController < ApplicationController
       @users = User.where(is_admin: false).order(:name)
     else
       redirect_to destroy_admin_session_path
+    end
 
   end
 
   # execute point assignment by using selected user ids, point amount, and associated activity
   def handle_points
-    if session[is_admin]
+    if session[:is_admin]
       @users = User.where(is_admin: false).order(:name)
+
+      @selected_activity = nil
+
+      if params[:recur_activity_id].present?
+        @selected_activity = Activity.find_by(id: params[:recur_activity_id])
+      end
 
       # selected fields
       selected_user_ids = params[:selected_users]
@@ -59,6 +66,7 @@ class UsersController < ApplicationController
       redirect_to(admin_dashboard_path)
     else
       redirect_to destroy_admin_session_path
+    end
   end
 
   def new; end
@@ -99,10 +107,13 @@ class UsersController < ApplicationController
   def destroy
     if session[:is_admin]
       User.find(params[:id]).destroy!
+      redirect_to(admin_dashboard_path)
+      flash[:notice] = 'User successfully deleted.'
     else
       flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to(destroy_admin_session_path)
     end
-    redirect_to(destroy_admin_session_path)
+
   end
 
   def user_params
