@@ -4,8 +4,14 @@
 <%= link_to("Go back to landing page", admin_dashboard_url)%>
 <h3>Member List:</h3>
 
+<!-- search bar -->
+<div>
+  <%= label_tag "search", "Search:" %>
+  <%= text_field_tag "search", nil, id: "search_bar" %>
+</div>
+
 <%= form_tag handle_points_path, method: :post do %>
-<table>
+<table id="member_table">
     <! -- list of non-admin users with checkbox to select each one -->
     <% @users.each do |user| %>
         <tr>
@@ -46,6 +52,8 @@
 <br />
 <%= submit_tag "Submit" %>
 <script>
+
+    // JavaScript for custom activity selection
     const actSelect = document.getElementById("activity_select_box");
     const actCustom = document.getElementById("onetime_activity_section");
     const actCustomInput = document.getElementById("onetime_activity_string");
@@ -59,5 +67,21 @@
             actCustomInput.value = "";
         }
     });
+
+    // JavaScript for filtering members based on the search bar
+    const searchInput = document.getElementById("search_bar");
+    const memberTable = document.getElementById("member_table");
+
+    searchInput.addEventListener("input", () => {
+      const searchQuery = searchInput.value.toLowerCase();
+      const rows = memberTable.querySelectorAll("tr");
+
+      rows.forEach(row => {
+        const userName = row.querySelector("td:first-child").textContent.toLowerCase();
+        const isVisible = userName.includes(searchQuery);
+        row.style.display = isVisible ? "table-row" : "none";
+      });
+    });
+
 </script>
 <% end %>
