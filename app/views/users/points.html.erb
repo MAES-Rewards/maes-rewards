@@ -30,12 +30,12 @@
 <%=
     select_tag "recur_activity_id",
     options_for_select(
-        [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] } + [["Custom One-Time Event\u2026", nil]]
+        [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] } + [["Custom One-Time Activity\u2026", nil]]
     ),
     id: "activity_select_box"
 %>
 <div id="onetime_activity_section" class="hidden" style="margin-top: 1em;">
-    <%= label_tag "activity", "Associated One-time Activity:" %>
+    <%= label_tag "activity", "Associated One-Time Activity:" %>
     <%= text_field_tag "onetime_activity_string" %>
 </div>
 <br />
@@ -49,7 +49,7 @@
     const actCustomInput = document.getElementById("onetime_activity_string");
 
     actSelect.addEventListener("change", event => {
-        if (event.target.selectedOptions[0]?.text == "Custom One-Time Event\u2026") {
+        if (event.target.selectedOptions[0]?.text == "Custom One-Time Activity\u2026") {
             actCustom.classList.remove("hidden");
         }
         else {
