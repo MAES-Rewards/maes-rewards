@@ -28,7 +28,8 @@ body {
 button,
 input[type="text"],
 input[type="number"],
-input[type="submit"] {
+input[type="submit"],
+select {
   padding: 5px 10px;
   font-family: var(--font-main);
 }
