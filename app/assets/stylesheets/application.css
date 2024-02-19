@@ -73,3 +73,7 @@ input[type="submit"] {
   50% {opacity: 1;}
   100% {opacity: 0;}
 }
+
+.hidden {
+  display: none;
+}
