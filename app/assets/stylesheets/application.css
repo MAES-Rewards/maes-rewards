@@ -34,6 +34,11 @@ select {
   font-family: var(--font-main);
 }
 
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
 .flash {
   display: flex;
   flex-direction: column;
