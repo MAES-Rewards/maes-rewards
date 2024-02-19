@@ -4,11 +4,23 @@
 <%= link_to("Go back to landing page", admin_dashboard_url)%>
 <h3>Member List:</h3>
 
-<!-- search bar -->
+<!-- search bar & buttons -->
 <div>
   <%= label_tag "search", "Search:" %>
   <%= text_field_tag "search", nil, id: "search_bar" %>
+  <!-- Filter selected users button -->
+  <button type="button" onclick="filterSelectedUsers()">Show Selected Users</button>
+<!-- Show all users button -->
+  <button type="button" onclick="showAllUsers()">Show All Users</button>
+<!-- Select all users button -->
+  <button type="button" onclick="selectAllUsers()">Select All Users</button>
+<!-- Deselect all users button -->
+  <button type="button" onclick="deselectAllUsers()">Deselect All Users</button>
+
 </div>
+<br />
+
+
 
 <%= form_tag handle_points_path, method: :post do %>
 <table id="member_table">
@@ -20,10 +32,7 @@
         </tr>
     <% end %>
 </table>
-<!-- Filter selected users button -->
-  <button type="button" onclick="filterSelectedUsers()">Show Selected Users</button>
-<!-- Show all users button -->
-  <button type="button" onclick="showAllUsers()">Show All Users</button>
+
 
 <br />
 <hr>
@@ -105,6 +114,22 @@
       const rows = memberTable.querySelectorAll(".member_row");
       rows.forEach(row => {
         row.style.display = "table-row";
+      });
+    }
+
+    // JavaScript for selecting all users
+    function selectAllUsers() {
+      const checkboxes = document.querySelectorAll(".member_row input[type='checkbox']");
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+      });
+    }
+
+    // JavaScript for deselecting all users
+    function deselectAllUsers() {
+      const checkboxes = document.querySelectorAll(".member_row input[type='checkbox']");
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
       });
     }
 
