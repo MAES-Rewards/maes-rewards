@@ -37,33 +37,41 @@ class UsersController < ApplicationController
       # check if for activity associated one-time & recurring, both are blank or both are selected
       if recur_activity_id.blank? && onetime_activity_string.blank?
         flash[:alert] = 'Please select or enter an activity.'
-        redirect_to(admin_dashboard_path) and return
+        redirect_to(member_points_url) and return
       end
 
       if !recur_activity_id.blank? && !onetime_activity_string.blank?
         flash[:alert] = 'Cannot enter values for both recurring and one time activity.'
-        redirect_to(admin_dashboard_path) and return
+        redirect_to(member_points_url) and return
       end
+
+
 
       # iterate through selected users and assign points
       selected_user_ids ||= []
       saved = true
       selected_user_ids.each do |user_id|
         user = User.find(user_id)
-        user.points += new_points.to_i
-        unless user.save!
-          saved = false
+        if (user.points + new_points.to_i < 0 || user.points + new_points.to_i > 2147483647)
+          flash[:alert] = 'Enter a valid point value.'
+          redirect_to(member_points_url) and return
+        else
+          user.points += new_points.to_i
+          unless user.save!
+            saved = false
+          end
         end
       end
 
       # check if saved, create corresponding flash notice
       if saved
         flash[:notice] = 'User(s) were successfully updated.'
+        redirect_to(admin_dashboard_path)
       else
-        flash[:notice] = 'User(s) were not updated successfully.'
+        flash[:alert] = 'User(s) were not updated successfully.'
+        redirect_to member_points_url
       end
       # redirect to landing page
-      redirect_to(admin_dashboard_path)
     else
       redirect_to destroy_admin_session_path
     end

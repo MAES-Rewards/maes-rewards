@@ -65,6 +65,14 @@
 <hr>
 <br />
 <%= submit_tag "Submit" %>
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
+
+
 <script>
 
     // JavaScript for custom activity selection
