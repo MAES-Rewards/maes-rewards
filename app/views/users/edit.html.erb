@@ -1,8 +1,10 @@
-<h1>My Account</h1>
+
 
 <% if session[:is_admin] %>
+  <h1><%=@user.name%>'s Account</h1>
   <%= link_to("Go back to landing page", admin_dashboard_url)%>
 <% else %>
+  <h1>Edit My Account</h1>
   <%= link_to("Go back to My Account", user_path(@user))%><br>
 <%end%>
 
@@ -28,5 +30,3 @@
     <%= message %>
   </div>
 <% end %>
-
-

@@ -28,9 +28,15 @@ body {
 button,
 input[type="text"],
 input[type="number"],
-input[type="submit"] {
+input[type="submit"],
+select {
   padding: 5px 10px;
   font-family: var(--font-main);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
 }
 
 .flash {
@@ -72,4 +78,8 @@ input[type="submit"] {
   0% {opacity: 1;}
   50% {opacity: 1;}
   100% {opacity: 0;}
+}
+
+.hidden {
+  display: none;
 }

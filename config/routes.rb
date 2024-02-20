@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   get 'rewards/membershow/:id/:user_id', to: 'rewards#membershow', as: 'memshow_path'
   get 'rewards/handle_purchase/:id/:user_id', to: 'rewards#handle_purchase', as: 'handle_purchase'
   get 'users/index', to: 'users#index', as: 'users_index'
+  get 'users/points', to: 'users#points', as: 'member_points'
+
+  post 'handle_points', to: 'users#handle_points', as: :handle_points
+
+
+
   # get 'rewards/new', to: 'rewards#new', as: new_reward_path
   # get 'rewards/edit' => 'rewards#edit'
   # get 'rewards/delete' => 'rewards#delete'
