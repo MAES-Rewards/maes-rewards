@@ -1,0 +1,171 @@
+<! -- Page which allows administrators/officers to assign points to several users with an associated point source -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<h1>Assign Points to Members</h1>
+<%= link_to("Go back to landing page", admin_dashboard_url)%>
+<h3>Member List:</h3>
+
+<!-- search bar & buttons -->
+<div>
+  <%= label_tag "search", "Search:" %>
+  <%= text_field_tag "search", nil, id: "search_bar" %>
+  <!-- Show Selected Users button -->
+  <button type="button" id="showSelectedButton" onclick="showSelectedUsers()">Show Selected Users</button>
+  <!-- Show All Users button -->
+  <button type="button" id="showAllButton" onclick="showAllUsers()" style="display: none;">Show All Users</button>
+  <!-- Select All Users button -->
+  <button type="button" id="selectAllButton" onclick="selectAllUsers()">Select All Users</button>
+  <!-- Deselect All Users button -->
+  <button type="button" id="deselectAllButton" onclick="deselectAllUsers()" style="display: none;">Deselect All Users</button>
+
+
+
+</div>
+<br />
+
+
+
+<%= form_tag handle_points_path, method: :post do %>
+<table id="member_table">
+    <! -- list of non-admin users with checkbox to select each one -->
+    <% @users.each do |user| %>
+        <tr class="member_row">
+            <td><%= user.name %> (<%=user.email %>)</td>
+            <td><%= check_box_tag "selected_users[]", user.id %></td>
+        </tr>
+    <% end %>
+</table>
+
+
+<br />
+<hr>
+<br />
+<! --assigned point amount -->
+<div>
+    <%= label_tag "new_points", "Points:" %>
+    <%= number_field_tag "new_points", nil %>
+</div>
+<br />
+
+<hr>
+<br />
+<! -- associated activity with the point assignment -->
+<div>
+    <%= label_tag "activity", "Associated Recurring Activity:" %>
+    <%=
+        select_tag "recur_activity_id",
+        options_for_select(
+            [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] } + [["Custom One-Time Activity\u2026", nil]]
+        ),
+        id: "activity_select_box"
+    %>
+</div>
+<div id="onetime_activity_section" class="hidden" style="margin-top: 1em;">
+    <%= label_tag "activity", "Associated One-Time Activity:" %>
+    <%= text_field_tag "onetime_activity_string" %>
+</div>
+<br />
+<hr>
+<br />
+<%= submit_tag "Submit" %>
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
+
+
+<script>
+
+    // JavaScript for custom activity selection
+    const actSelect = document.getElementById("activity_select_box");
+    const actCustom = document.getElementById("onetime_activity_section");
+    const actCustomInput = document.getElementById("onetime_activity_string");
+
+    actSelect.addEventListener("change", event => {
+        if (event.target.selectedOptions[0]?.text == "Custom One-Time Activity\u2026") {
+            actCustom.classList.remove("hidden");
+        }
+        else {
+            actCustom.classList.add("hidden");
+            actCustomInput.value = "";
+        }
+    });
+
+    // JavaScript for filtering members based on the search bar
+    const searchInput = document.getElementById("search_bar");
+    const memberTable = document.getElementById("member_table");
+
+    searchInput.addEventListener("input", () => {
+      const searchQuery = searchInput.value.toLowerCase();
+      const rows = memberTable.querySelectorAll("tr");
+
+      rows.forEach(row => {
+        const userName = row.querySelector("td:first-child").textContent.toLowerCase();
+        const isVisible = userName.includes(searchQuery);
+        row.style.display = isVisible ? "table-row" : "none";
+      });
+    });
+
+    // JavaScript for showing only selected users
+    function showSelectedUsers() {
+      const selectedButton = document.getElementById("showSelectedButton");
+      const allButton = document.getElementById("showAllButton");
+
+      selectedButton.style.display = "none";
+      allButton.style.display = "inline-block";
+
+      const selectedUserIds = Array.from(document.querySelectorAll(".member_row input:checked")).map(input => input.value);
+      const rows = memberTable.querySelectorAll(".member_row");
+
+      rows.forEach(row => {
+        const userId = row.querySelector("input").value;
+        const isVisible = selectedUserIds.includes(userId);
+        row.style.display = isVisible ? "table-row" : "none";
+      });
+    }
+
+    // JavaScript for showing all users
+    function showAllUsers() {
+      const selectedButton = document.getElementById("showSelectedButton");
+      const allButton = document.getElementById("showAllButton");
+
+      selectedButton.style.display = "inline-block";
+      allButton.style.display = "none";
+
+      const rows = memberTable.querySelectorAll(".member_row");
+      rows.forEach(row => {
+        row.style.display = "table-row";
+      });
+    }
+
+    // JavaScript for selecting all users
+    function selectAllUsers() {
+      const selectButton = document.getElementById("selectAllButton");
+      const deselectButton = document.getElementById("deselectAllButton");
+
+      selectButton.style.display = "none";
+      deselectButton.style.display = "inline-block";
+
+      const checkboxes = document.querySelectorAll(".member_row input[type='checkbox']");
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+      });
+    }
+
+    // JavaScript for deselecting all users
+    function deselectAllUsers() {
+      const selectButton = document.getElementById("selectAllButton");
+      const deselectButton = document.getElementById("deselectAllButton");
+
+      selectButton.style.display = "inline-block";
+      deselectButton.style.display = "none";
+
+      const checkboxes = document.querySelectorAll(".member_row input[type='checkbox']");
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+      });
+    }
+
+</script>
+<% end %>

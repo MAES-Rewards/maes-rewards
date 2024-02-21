@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+:root {
+  --font-main: "Roboto", "Arial", sans-serif;
+  --safe-width: calc(100% - 20px);
+}
+
+body {
+  font-family: var(--font-main);
+}
+
+button,
+input[type="text"],
+input[type="number"],
+input[type="submit"],
+select {
+  padding: 5px 10px;
+  font-family: var(--font-main);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.flash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  min-width: min(400px, var(--safe-width));
+  max-width: var(--safe-width);
+  min-height: 50px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background: #EEE;
+  border: 1px solid #888;
+  color: #888;
+  border-radius: 10px;
+  text-align: center;
+  animation: 5s fadeout 1 forwards;
+  user-select: none;
+}
+
+.flash-notice {
+  background: #CFC;
+  border: 1px solid #080;
+  color: #080;
+}
+
+.flash-alert {
+  background: #FCC;
+  border: 1px solid #800;
+  color: #800;
+}
+
+@keyframes fadeout {
+  0% {opacity: 1;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.hidden {
+  display: none;
+}
