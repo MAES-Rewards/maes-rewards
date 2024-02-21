@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DashboardsController < ApplicationController
-  before_action :authenticate_admin!
+  # before_action :authenticate_admin!
 
   def member
     # @user = User.where(:is_admin => false).where(email: params[:email])

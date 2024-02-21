@@ -3,25 +3,25 @@
 require 'rails_helper'
 
 RSpec.describe('Viewing rewards as member', type: :feature) do
+
   before do
+
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456',
-      info: {
-        email: 'user@tamu.edu',
-        name: 'John Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+      info: { email: 'user@tamu.edu', name: 'John Doe' }
+    })
+
+    User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
+    Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
   end
 
   it 'user logs in with Google as member & views rewards' do
     visit new_admin_session_path
+
     click_on 'Sign in via Google'
+
     click_on 'View Rewards'
 
     # Assuming there is some delay or asynchronous operation happening
@@ -32,26 +32,22 @@ end
 
 RSpec.describe('Viewing reward detail view as member', type: :feature) do
   before do
+
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456',
-      info: {
-        email: 'user@tamu.edu',
-        name: 'John Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+      info: { email: 'user@tamu.edu', name: 'John Doe' }
+    })
 
+    User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
     Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
   end
-
   it 'user logs in with Google as member & views reward details successfully' do
     visit new_admin_session_path
+
     click_on 'Sign in via Google'
+
     click_on 'View Rewards'
 
     # Assuming rewards are listed on the page
@@ -69,19 +65,13 @@ end
 
 RSpec.describe('Purchasing rewards as member', type: :feature) do
   before do
+
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456',
-      info: {
-        email: 'user@tamu.edu',
-        name: 'John Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+      info: { email: 'user@tamu.edu', name: 'John Doe' }
+    })
 
     User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
     Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
@@ -89,9 +79,10 @@ RSpec.describe('Purchasing rewards as member', type: :feature) do
 
   it 'user logs in with Google as member & purchasing reward successfully' do
     visit new_admin_session_path
-    click_on 'Sign in via Google'
-    click_on 'View Rewards'
 
+    click_on 'Sign in via Google'
+
+    click_on 'View Rewards'
     # Assuming rewards are listed on the page
     expect(page).to(have_content('Sample Reward'))
 
@@ -117,15 +108,8 @@ RSpec.describe('Purchasing rewards as member - unsuccessful', type: :feature) do
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456',
-      info: {
-        email: 'user@tamu.edu',
-        name: 'John Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+      info: { email: 'user@tamu.edu', name: 'John Doe' }
+    })
 
     User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 2, is_admin: false)
     Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
@@ -133,9 +117,10 @@ RSpec.describe('Purchasing rewards as member - unsuccessful', type: :feature) do
 
   it 'user logs in with Google as member & attempts purchase with insufficient point earnings' do
     visit new_admin_session_path
-    click_on 'Sign in via Google'
-    click_on 'View Rewards'
 
+    click_on 'Sign in via Google'
+
+    click_on 'View Rewards'
     # Assuming rewards are listed on the page
     expect(page).to(have_content('Sample Reward'))
 
@@ -153,23 +138,20 @@ RSpec.describe('Purchasing rewards as member - unsuccessful #2', type: :feature)
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456',
-      info: {
-        email: 'user@tamu.edu',
-        name: 'John Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+      info: { email: 'user@tamu.edu', name: 'John Doe' }
+    })
 
     User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 2, is_admin: false)
-    Reward.create!(name: 'Sample Reward', point_value: 1, inventory: 0, dollar_price: 1.99)
+    Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
+
   end
 
   it 'user logs in with Google as member & attempts purchase on reward with insufficient inventory' do
+    # Assuming you have a user created with the same email
     visit new_admin_session_path
+
     click_on 'Sign in via Google'
+
     click_on 'View Rewards'
 
     # Assuming rewards are listed on the page
@@ -184,23 +166,9 @@ RSpec.describe('Purchasing rewards as member - unsuccessful #2', type: :feature)
 end
 
 RSpec.describe('Viewing rewards as admin', type: :feature) do
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      provider: 'google_oauth2',
-      uid: '123456',
-      info: {
-        email: 'user@tamu.edu',
-        name: 'John Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
-  end
 
   it 'user logs in with Google as admin & views rewards' do
+
     visit new_admin_session_path
     click_on 'Sign in via Google'
     visit set_admin_session_path
@@ -214,21 +182,6 @@ RSpec.describe('Viewing rewards as admin', type: :feature) do
 end
 
 RSpec.describe('Creating rewards', type: :feature) do
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      provider: 'google_oauth2',
-      uid: '123456',
-      info: {
-        email: 'ahartman03@tamu.edu',
-        name: 'Sally Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
-  end
 
   it 'user logs in with Google & creates reward' do
     visit new_admin_session_path
@@ -257,21 +210,6 @@ RSpec.describe('Creating rewards', type: :feature) do
 end
 
 RSpec.describe('Deleting rewards', type: :feature) do
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      provider: 'google_oauth2',
-      uid: '123456',
-      info: {
-        email: 'ahartman03@tamu.edu',
-        name: 'Sally Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
-  end
 
   it 'admin logs in with Google & creates then deletes reward' do
     visit new_admin_session_path
@@ -299,21 +237,6 @@ RSpec.describe('Deleting rewards', type: :feature) do
 end
 
 RSpec.describe('Editing rewards', type: :feature) do
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      provider: 'google_oauth2',
-      uid: '123456',
-      info: {
-        email: 'ahartman03@tamu.edu',
-        name: 'Sally Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
-  end
 
   it 'admin logs in with Google & creates then edits reward' do
     visit new_admin_session_path
@@ -343,21 +266,6 @@ RSpec.describe('Editing rewards', type: :feature) do
 end
 
 RSpec.describe('Viewing reward detail view', type: :feature) do
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      provider: 'google_oauth2',
-      uid: '123456',
-      info: {
-        email: 'ahartman03@tamu.edu',
-        name: 'Sally Doe'
-      }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
-  end
 
   it 'admin logs in with Google & creates then views reward details' do
     visit new_admin_session_path
