@@ -12,11 +12,8 @@ RSpec.describe('Google OAuth MEMBER login', type: :feature) do
         email: 'user@tamu.edu',
         name: 'John Doe'
       }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+    })
+
   end
 
   it 'user logs in with Google to member page' do
@@ -39,11 +36,8 @@ RSpec.describe('Google OAuth ADMIN login', type: :feature) do
         email: 'ahartman03@tamu.edu',
         name: 'Anna Hartman'
       }
-    }
-                                                                      )
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+    })
+
   end
 
   it 'user logs in with Google into admin page' do

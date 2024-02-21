@@ -13,9 +13,7 @@ RSpec.describe('Activity MEMBER login', type: :feature) do
         name: 'John Doe'
       }
     })
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+
   end
 
   it 'member user logs in with Google to new activity page' do
@@ -37,9 +35,7 @@ RSpec.describe('Activity ADMIN login', type: :feature) do
         name: 'James Beeber'
       }
     })
-    Capybara.current_driver = :selenium
-    # Adjust the wait time as needed
-    Capybara.default_max_wait_time = 10
+
   end
 
   it 'admin user logs in with Google and creates, edits, and deletes activity' do
