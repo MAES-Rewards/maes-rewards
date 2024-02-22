@@ -21,8 +21,6 @@ Rails.application.routes.draw do
 
   post 'handle_points', to: 'users#handle_points', as: :handle_points
 
-
-
   # get 'rewards/new', to: 'rewards#new', as: new_reward_path
   # get 'rewards/edit' => 'rewards#edit'
   # get 'rewards/delete' => 'rewards#delete'

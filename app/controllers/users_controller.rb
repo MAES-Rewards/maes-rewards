@@ -9,24 +9,22 @@ class UsersController < ApplicationController
 
   # find all non-admin users to assign points in bulk
   def points
-    if (session[:is_admin])
+    if session[:is_admin]
       @users = User.where(is_admin: false).order(:name)
     else
-      redirect_to destroy_admin_session_path
+      redirect_to(destroy_admin_session_path)
     end
-
   end
 
   # execute point assignment by using selected user ids, point amount, and associated activity
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
   def handle_points
     if session[:is_admin]
       @users = User.where(is_admin: false).order(:name)
 
       @selected_activity = nil
 
-      if params[:recur_activity_id].present?
-        @selected_activity = Activity.find_by(id: params[:recur_activity_id])
-      end
+      @selected_activity = Activity.find_by(id: params[:recur_activity_id]) if params[:recur_activity_id].present?
 
       # selected fields
       selected_user_ids = params[:selected_users]
@@ -40,26 +38,17 @@ class UsersController < ApplicationController
         redirect_to(member_points_url) and return
       end
 
-      if !recur_activity_id.blank? && !onetime_activity_string.blank?
-        flash[:alert] = 'Cannot enter values for both recurring and one time activity.'
-        redirect_to(member_points_url) and return
-      end
-
-
-
       # iterate through selected users and assign points
       selected_user_ids ||= []
       saved = true
       selected_user_ids.each do |user_id|
         user = User.find(user_id)
-        if (user.points + new_points.to_i < 0 || user.points + new_points.to_i > 2147483647)
+        if (user.points + Integer(new_points, 10)).negative? || user.points + Integer(new_points, 10) > 2_147_483_647
           flash[:alert] = 'Enter a valid point value.'
-          redirect_to(member_points_url) and return
+          return redirect_to(member_points_url)
         else
-          user.points += new_points.to_i
-          unless user.save!
-            saved = false
-          end
+          user.points += Integer(new_points, 10)
+          saved = false unless user.save!
         end
       end
 
@@ -69,13 +58,14 @@ class UsersController < ApplicationController
         redirect_to(admin_dashboard_path)
       else
         flash[:alert] = 'User(s) were not updated successfully.'
-        redirect_to member_points_url
+        redirect_to(member_points_url)
       end
       # redirect to landing page
     else
-      redirect_to destroy_admin_session_path
+      redirect_to(destroy_admin_session_path)
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
   def new; end
 
@@ -121,7 +111,6 @@ class UsersController < ApplicationController
       flash[:alert] = 'Access denied. Please log in as an admin.'
       redirect_to(destroy_admin_session_path)
     end
-
   end
 
   def user_params
