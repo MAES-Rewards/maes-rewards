@@ -67,6 +67,14 @@ class UsersController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
+  def history_sources
+    @user = User.find(params[:id])
+    @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "User doesn't exist."
+    redirect_to(destroy_admin_session_path)
+  end
+
   def new; end
 
   def edit
