@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :delete
+      get :history, to: "users#history"
     end
   end
 
