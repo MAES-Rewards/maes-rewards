@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
+  has_many :earn_transactions
   validates :name, presence: true
   validates :description, presence: true
   validates :default_points, presence: true, numericality: {
