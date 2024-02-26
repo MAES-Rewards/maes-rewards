@@ -33,10 +33,15 @@
 
 }
 
+h2 {
+  /* Webpage titles */
+  color: black;
+  text-align: center;
+}
+
 .main-title {
   text-align: center; 
   color: white;
-
 }
 
 h1 {
