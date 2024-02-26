@@ -17,6 +17,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session[:is_admin] = false
         sign_in(admin, event: :authentication)
         # or user_id = @user.id
+        session[:user_id] = user.id
         user_id = User.find_by(email: admin.email)
         redirect_to(member_dashboard_path(user_id))
       else

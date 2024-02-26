@@ -84,9 +84,14 @@ class UsersController < ApplicationController
       redirect_to(destroy_admin_session_path)
       return
     end
-  
-    @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
 
+    user_id = params[:id].to_i
+    if session[:user_id] != user_id
+      flash[:alert] = "You are not authorized to view this page."
+      redirect_to(member_dashboard_path(session[:user_id]))
+    end
+
+    @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
     if params[:activity_id].present?
       @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id])
     end
