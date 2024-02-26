@@ -77,6 +77,7 @@ class UsersController < ApplicationController
 
   def history
     @user = User.find_by(id: params[:id])
+    @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
     
     if @user.nil?
       flash[:alert] = "User not found."
