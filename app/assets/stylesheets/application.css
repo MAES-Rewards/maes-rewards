@@ -21,8 +21,31 @@
   --safe-width: calc(100% - 20px);
 }
 
+.header-container {
+
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  background-color: maroon;
+  padding: 20px;
+  border-radius: 10px;
+
+}
+
+
+h1 {
+  text-align: center; 
+  color: white;
+}
+
+.logo {
+  display: flex;
+  float: left;
+}
+
 body {
   font-family: var(--font-main);
+  
 }
 
 button,

@@ -1,5 +1,13 @@
+<title> MAES Rewards </title>
+<div class="header-container">
+  <h1>MAES: Latinos in Engineering & Science <br>Rewards System <br> </h1>
+  <%= image_tag("maeslogo.png", size: '150x150', alt: "MAES Logo", class: "logo") %>
+
+</div>
+<body>
 <h2>Log in to MAES App</h2>
 
 <%= button_to admin_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
 <i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Sign in via Google</span>
 <% end %>
+</body>
