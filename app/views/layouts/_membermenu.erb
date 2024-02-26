@@ -1,0 +1,7 @@
+<nav>
+  <ul>
+    <li><%= link_to "Sign Out", destroy_admin_session_path %></li>
+    <li><%= link_to "View Rewards", memrewards_path_url(@user) %></li>
+    <li><%= link_to "My Account", user_path(@user)%></li>
+  </ul>
+</nav>
