@@ -2,6 +2,26 @@
 <p>All of the activites you have participated in are shown below.</p>
 <%= link_to("Go back to landing page", @dashboard_path)%>
 
+<%= form_tag(user_history_path(@user), method: :get) do %>
+  <div style="margin-bottom: 10px; margin-top: 10px;">
+    <%= label_tag(:activity_id, "Activity: ") %>
+    <%= select_tag(:activity_id, options_from_collection_for_select(Activity.all, :id, :name), include_blank: true) %>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <%= label_tag(:start_date, "Start date:") %>
+    <%= date_field_tag(:start_date) %>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <%= label_tag(:end_date, "End date:") %>
+    <%= date_field_tag(:end_date) %>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <%= submit_tag("Filter") %>
+    <%= button_tag("Reset", type: 'button', onclick: "window.location.href='#{user_history_path(@user)}';") %>
+  </div>
+<% end %>
+
+
 <table>
   <tr>
     <th>Activity Name</th>

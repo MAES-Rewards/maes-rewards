@@ -86,6 +86,17 @@ class UsersController < ApplicationController
     end
   
     @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
+
+    if params[:activity_id].present?
+      @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id])
+    end
+    if params[:start_date].present?
+      @earn_transactions = @earn_transactions.where('created_at >= ?', Date.parse(params[:start_date]))
+    end
+    if params[:end_date].present?
+      @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date]))
+    end
+
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "User doesn't exist."
     redirect_to(destroy_admin_session_path)
