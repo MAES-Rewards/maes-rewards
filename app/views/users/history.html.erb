@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Activity Name</th>
+    <th>Points</th>
+    <th>Time</th>
+  </tr>
+  <% @earn_transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.activity.name %></td>
+      <td><%= transaction.points %></td>
+      <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+    </tr>
+  <% end %>
+</table>

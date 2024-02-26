@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'rewards/handle_purchase/:id/:user_id', to: 'rewards#handle_purchase', as: 'handle_purchase'
   get 'users/index', to: 'users#index', as: 'users_index'
   get 'users/points', to: 'users#points', as: 'member_points'
+  get 'users/:id/history', to: 'users#history', as: 'user_history'
 
   post 'handle_points', to: 'users#handle_points', as: :handle_points
 
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :delete
-      get :history, to: "users#history"
     end
   end
 

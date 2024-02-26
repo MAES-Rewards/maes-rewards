@@ -49,6 +49,14 @@ class UsersController < ApplicationController
         else
           user.points += Integer(new_points, 10)
           saved = false unless user.save!
+
+          ActiveRecord::Base.transaction do
+            transaction = user.earn_transactions.build(points: Integer(new_points, 10), activity_id: recur_activity_id)
+            unless transaction.save && user.save
+              saved = false
+              raise ActiveRecord::Rollback, 'Failed to save user or transaction'
+            end
+          end
         end
       end
 
@@ -67,8 +75,15 @@ class UsersController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
-  def history_sources
-    @user = User.find(params[:id])
+  def history
+    @user = User.find_by(id: params[:id])
+    
+    if @user.nil?
+      flash[:alert] = "User not found."
+      redirect_to(destroy_admin_session_path)
+      return
+    end
+  
     @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "User doesn't exist."
