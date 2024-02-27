@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'spend_transactions/show'
+  
   root to: 'dashboards#show'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   devise_scope :admin do
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'users/points', to: 'users#points', as: 'member_points'
 
   post 'handle_points', to: 'users#handle_points', as: :handle_points
+
+  get 'spend_transactions/show'
 
   # get 'rewards/new', to: 'rewards#new', as: new_reward_path
   # get 'rewards/edit' => 'rewards#edit'
