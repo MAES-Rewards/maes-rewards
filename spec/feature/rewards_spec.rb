@@ -41,7 +41,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'See details'
 
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Sample Reward details'))
       expect(page).to(have_content('Sample Reward'))
       expect(page).to(have_content('50'))
       expect(page).to(have_content('1.99'))
@@ -64,8 +64,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       expect(page).to(have_content('Reward was successfully purchased'))
       # new inventory
       expect(page).to(have_content('9'))
-
-      click_on 'Go back to landing page'
 
       click_on 'My Account'
       # new points
