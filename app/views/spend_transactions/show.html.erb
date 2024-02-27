@@ -1,2 +1,22 @@
 <h1>SpendTransactions#show</h1>
 <p>Find me in app/views/spend_transactions/show.html.erb</p>
+<%= link_to "Go back to My Account", user_path(@user)%>
+
+<table class="listing" summary="SpendTransaction list" style="width: 100%;">
+  <tr class="header">
+    <th>User</th>
+    <th>Email</th>
+    <th>Reward</th>
+    <th>Point_value</th>
+    <th>Date</th>
+  </tr>
+  <% @spend_transactions.zip(@rewards).each do |spend_transaction, reward| %>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @user.email %></td>
+      <td><%= reward.name %></td>
+      <td><%= reward.point_value %></td>
+      <td><%= spend_transaction.created_at %></td>
+    </tr>
+  <% end %>
+</table>
