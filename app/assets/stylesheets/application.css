@@ -23,13 +23,12 @@
 
 .header-container {
 
-  display: inline-block;
+  display: flex;
   align-items: center;
   justify-content: center;
   background-color: maroon;
   padding: 20px;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
+  border-radius: 10px 10px 0 0;
 
 }
 
@@ -42,6 +41,7 @@ h2 {
 .main-title {
   text-align: center; 
   color: white;
+  padding-right: 50px;
 }
 
 h1 {
@@ -49,13 +49,30 @@ h1 {
   color: black;
 }
 
-.logo {
-  margin-right: 20px;
-}
 
 .members {
   display: inline-block;
   margin: 20px auto;
+}
+
+.primary_link{
+  display: inline-block; 
+  padding: 10px 20px; 
+  background-color: maroon; /* Button background color */ 
+  text-decoration: none; /* Remove underline from the link */ 
+  border: none; 
+  border-radius: 5px; /* Rounded corners */ 
+  cursor: pointer; 
+  font-weight: bold; 
+  transition: background-color 0.3s ease; 
+  color: white;
+  
+}
+
+/* Styling for links when hovered */
+.primary_link:hover {
+  background-color: black; 
+  text-decoration: underline;
 }
 
 .main-login {
@@ -64,6 +81,35 @@ h1 {
   justify-content: center;
   text-align: center; 
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Style for table headers (column titles) */
+th {
+  background-color: #f2f2f2; /* Background color for headers */
+  padding: 10px;
+  text-align: left; /* Align text to the left within headers */
+}
+
+/* Alternating row colors for better readability */
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Background color for even rows */
+}
+
+/* Style for table cells (contents) */
+td {
+  padding: 10px;
+  text-align: left; /* Align text to the left within cells */
+}
+
+/* Add some hover effect for better user interaction */
+tr:hover {
+  background-color: #e0e0e0; /* Background color on hover */
+}
+
 
 
 body {

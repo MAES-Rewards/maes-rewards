@@ -3,8 +3,8 @@
   <h2>Activities</h2>
 
 
-  <%= link_to("Add New Activity", new_activity_path, class: 'action new') %>
-
+  <%= link_to("Add New Activity", new_activity_path, class: "primary_link") %>
+  <br> <br>
   <table class="listing" style="width: 100%;">
     <tr class="header">
       <th>Name</th>
@@ -18,10 +18,10 @@
         <td><%= activity.description %></td>
         <td><%= activity.default_points %></td>
         <td class="actions">
-          <%= link_to('Show', activity_path(activity), class: 'action show') %>
+          <%= link_to('Show', activity_path(activity), class: "primary_link") %>
           <% if session[:is_admin] %>
-            <%= link_to('Edit', edit_activity_path(activity), class: 'action edit') %>
-            <%= link_to('Delete', delete_activity_path(activity), class: 'action delete') %>
+            <%= link_to('Edit', edit_activity_path(activity), class: "primary_link") %>
+            <%= link_to('Delete', delete_activity_path(activity), class: "primary_link") %>
           <% end %>
         </td>
       </tr>
