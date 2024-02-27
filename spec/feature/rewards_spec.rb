@@ -22,7 +22,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      click_on 'View Rewards'
+      click_on 'Rewards'
 
       # Assuming there is some delay or asynchronous operation happening
       # If content doesn't appear immediately, wait for it
@@ -34,7 +34,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      click_on 'View Rewards'
+      click_on 'Rewards'
 
       # Assuming rewards are listed on the page
       expect(page).to(have_content('Sample Reward'))
@@ -53,7 +53,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      click_on 'View Rewards'
+      click_on 'Rewards'
       # Assuming rewards are listed on the page
       expect(page).to(have_content('Sample Reward'))
 
@@ -82,7 +82,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
         click_on 'Sign in via Google'
 
-        click_on 'View Rewards'
+        click_on 'Rewards'
         # Assuming rewards are listed on the page
         expect(page).to(have_content('Sample Reward'))
 
@@ -106,7 +106,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
         click_on 'Sign in via Google'
 
-        click_on 'View Rewards'
+        click_on 'Rewards'
 
         # Assuming rewards are listed on the page
         expect(page).to(have_content('Sample Reward'))
@@ -126,7 +126,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'Sign in via Google'
       visit set_admin_session_path
       visit admin_dashboard_path
-      click_on 'View Rewards'
+      click_on 'Rewards'
 
       # Assuming there is some delay or asynchronous operation happening
       # If content doesn't appear immediately, wait for it
@@ -138,7 +138,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'Sign in via Google'
       visit set_admin_session_path
       visit admin_dashboard_path
-      click_on 'View Rewards'
+      click_on 'Rewards'
       visit new_reward_path
 
       fill_in 'reward[name]', with: 'Test Reward'
@@ -163,7 +163,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'Sign in via Google'
       visit set_admin_session_path
       visit admin_dashboard_path
-      click_on 'View Rewards'
+      click_on 'Rewards'
       visit new_reward_path
 
       fill_in 'reward[name]', with: 'Test Reward'
@@ -187,7 +187,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'Sign in via Google'
       visit set_admin_session_path
       visit admin_dashboard_path
-      click_on 'View Rewards'
+      click_on 'Rewards'
       visit new_reward_path
 
       fill_in 'reward[name]', with: 'Test Reward'
@@ -213,7 +213,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'Sign in via Google'
       visit set_admin_session_path
       visit admin_dashboard_path
-      click_on 'View Rewards'
+      click_on 'Rewards'
       visit new_reward_path
 
       fill_in 'reward[name]', with: 'Test Reward'
