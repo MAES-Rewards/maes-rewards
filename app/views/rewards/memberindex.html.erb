@@ -1,13 +1,12 @@
 <h1>Rewards (member view) </h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
-<%= link_to("Go back to landing page", member_dashboard_url(@user), class: "primary_link")%>
-
 <table class="listing" summary="Reward list" style="width: 100%;">
   <tr class="header">
     <th>Name</th>
     <th>Point price</th>
     <th>Dollar price</th>
     <th>Current inventory</th>
+    <th>Actions</th>
   </tr>
   <% @rewards.each do |reward| %>
     <tr>

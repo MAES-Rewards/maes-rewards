@@ -1,10 +1,11 @@
 <div class="rewards show">
-  <h2><%= @reward.name %> details</h2>
+  <h1><%= @reward.name %> details</h1>
   <%= link_to("Back to all Rewards", memrewards_path_url(@user), class: "primary_link") %>
-
+  <br> <br>
   <div class="actions">
     <%= link_to('Purchase', purchase_path_url(id: @reward, user_id: @user), class: "primary_link") %>
   </div>
+  <br>
 
   <table summary="reward detail view">
     <tr>
