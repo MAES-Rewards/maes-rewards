@@ -14,7 +14,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
                                                                         )
       User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
       Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
-
     end
 
     it 'user logs in with Google as member & views rewards' do
@@ -30,8 +29,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
     end
 
     it 'user logs in with Google as member & views reward details successfully' do
-
-
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
