@@ -48,7 +48,7 @@ RSpec.describe('Google OAuth login', type: :feature) do
       visit admin_dashboard_path
       # Assuming there is some delay or asynchronous operation happening
       # If content doesn't appear immediately, wait for it
-      expect(page).to(have_content('ADMIN Page'))
+      expect(page).to(have_content('All Members'))
       expect(page).to(have_content('Activities'))
       # Activities is only displayed for Admin.
     end

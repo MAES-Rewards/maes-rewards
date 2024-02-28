@@ -1,13 +1,12 @@
 <h1>Rewards (member view) </h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
-<%= link_to("Go back to landing page", member_dashboard_url(@user))%>
-
 <table class="listing" summary="Reward list" style="width: 100%;">
   <tr class="header">
     <th>Name</th>
     <th>Point price</th>
     <th>Dollar price</th>
     <th>Current inventory</th>
+    <th>Actions</th>
   </tr>
   <% @rewards.each do |reward| %>
     <tr>
@@ -16,8 +15,8 @@
       <td><%= reward.dollar_price  %></td>
       <td><%= reward.inventory %></td>
       <td class="actions">
-        <%= link_to("See details", memshow_path_url(id: reward.id, user_id: @user)) %>
-        <%= link_to("Purchase", purchase_path_url(id: reward.id, user_id: @user), data: { confirm: 'Are you sure you want to purchase this item?' }) %>
+        <%= link_to("See details", memshow_path_url(id: reward.id, user_id: @user), class: "primary_link") %>
+        <%= link_to("Purchase", purchase_path_url(id: reward.id, user_id: @user), data: { confirm: 'Are you sure you want to purchase this item?' }, class: "primary_link") %>
       </td>
     </tr>
   <% end %>

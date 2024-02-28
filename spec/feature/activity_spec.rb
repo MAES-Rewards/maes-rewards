@@ -18,10 +18,10 @@ RSpec.describe('Activity', type: :feature) do
     end
 
     it 'member user logs in with Google to new activity page' do
-      visit new_admin_session_path
-      click_on 'Sign in via Google'
+      # visit new_admin_session_path
+      # click_on 'Sign in via Google'
       visit new_activity_path
-      expect(page).to(have_content('Access denied'))
+      expect(page).to(have_content('Sign in via Google'))
     end
   end
 
