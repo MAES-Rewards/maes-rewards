@@ -4,6 +4,7 @@
       <th>Type</th>
       <th>Activity/Reward</th>
       <th>Point Change</th>
+      <th>Timestamp</th>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +13,7 @@
         <td><%= txn_entry[:type] %></td>
         <td><%= txn_entry[:item] %></td>
         <td><%= txn_entry[:points] %></td>
+        <td><%= txn_entry[:timestamp] %></td>
       </tr>
     <% end %>
   </tbody>

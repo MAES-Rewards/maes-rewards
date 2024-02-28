@@ -138,7 +138,8 @@ class UsersController < ApplicationController
         item: activity.name,
         type_id: 'earn',
         type: 'Earned',
-        points: "+#{earn_txn.points}"
+        points: "+#{earn_txn.points}",
+        timestamp: activity[:created_at]
       }
     end
 
@@ -150,11 +151,12 @@ class UsersController < ApplicationController
         # TODO: Add points here when added to EarnTransaction
         type_id: 'spend',
         type: 'Spent',
-        points: "\u2212#{reward.point_value}"
+        points: "\u2212#{reward.point_value}",
+        timestamp: reward[:created_at]
       }
     end
 
-    txn_hist.sort_by! { |txn| txn[:timestamp] }
+    txn_hist.sort_by! { |txn| txn[:timestamp] }.reverse!
 
     txn_hist
   end
