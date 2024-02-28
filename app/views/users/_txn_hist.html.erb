@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Activity/Reward</th>
+      <th>Point Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% txn_hist.each do |txn_entry| %>
+      <tr class="txn txn-<%= txn_entry[:type_id] %>">
+        <td><%= txn_entry[:type] %></td>
+        <td><%= txn_entry[:item] %></td>
+        <td><%= txn_entry[:points] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
