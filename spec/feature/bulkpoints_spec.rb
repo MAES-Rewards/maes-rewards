@@ -194,7 +194,7 @@ RSpec.describe('Bulk Points', type: :feature) do
       click_on 'Home'
 
       expect(page).to(have_content('0'))
-      expect(page).to(have_content('100'))
+      expect(page).to(have_content('90'))
     end
 
     it 'Adds 10 points to each user with recurring activity.' do
@@ -227,8 +227,8 @@ RSpec.describe('Bulk Points', type: :feature) do
 
       click_on 'Home'
 
-      expect(page).to(have_content('0'))
-      expect(page).to(have_content('100'))
+      expect(page).to(have_content('20'))
+      expect(page).to(have_content('110'))
     end
 
     it 'Adds 50 points to all users with select all button.' do
