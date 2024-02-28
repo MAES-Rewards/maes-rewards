@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  # rubocop:disable Metrics/AbcSize
   def google_oauth2
     admin = Admin.from_google(**from_google_params)
 
@@ -37,6 +38,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to(new_admin_session_path)
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   protected
 

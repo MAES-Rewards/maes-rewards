@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_dashboard_path, only: [:activityhistory]
+  before_action :set_user, only: [:activityhistory]
+  before_action :authorize_user, only: [:activityhistory]
+
   def index; end
 
   def show
@@ -54,7 +58,7 @@ class UsersController < ApplicationController
             transaction = user.earn_transactions.build(points: Integer(new_points, 10), activity_id: recur_activity_id)
             unless transaction.save && user.save
               saved = false
-              raise ActiveRecord::Rollback, 'Failed to save user or transaction'
+              raise(ActiveRecord::Rollback, 'Failed to save user or transaction')
             end
           end
         end
@@ -76,31 +80,30 @@ class UsersController < ApplicationController
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
   def activityhistory
-    @user = User.find_by(id: params[:id])
-    @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
-    
-    if @user.nil?
-      flash[:alert] = "User not found."
-      redirect_to(destroy_admin_session_path)
-      return
-    end
+    @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
+    @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id]) if params[:activity_id].present?
+    @earn_transactions = @earn_transactions.where('created_at >= ?', Date.parse(params[:start_date])) if params[:start_date].present?
+    @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date])) if params[:end_date].present?
+  end
 
-    user_id = params[:id].to_i
+  def set_user
+    @user = User.find_by(id: params[:id])
+    unless @user
+      flash[:alert] = 'User not found.'
+      redirect_to(destroy_admin_session_path)
+    end
+  end
+
+  def authorize_user
+    user_id = Integer(params[:id], 10)
     if session[:user_id] != user_id
-      flash[:alert] = "You are not authorized to view this page."
+      flash[:alert] = 'You are not authorized to view this page.'
       redirect_to(member_dashboard_path(session[:user_id]))
     end
+  end
 
-    @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
-    if params[:activity_id].present?
-      @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id])
-    end
-    if params[:start_date].present?
-      @earn_transactions = @earn_transactions.where('created_at >= ?', Date.parse(params[:start_date]))
-    end
-    if params[:end_date].present?
-      @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date]))
-    end
+  def set_dashboard_path
+    @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
   end
 
   def new; end

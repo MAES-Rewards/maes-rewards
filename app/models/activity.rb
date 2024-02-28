@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
-  has_many :earn_transactions
+  has_many :earn_transactions, dependent: :nullify
   validates :name, presence: true
   validates :description, presence: true
   validates :default_points, presence: true, numericality: {
