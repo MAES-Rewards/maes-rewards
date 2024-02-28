@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
-  def history
+  def activityhistory
     @user = User.find_by(id: params[:id])
     @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
     
@@ -101,10 +101,6 @@ class UsersController < ApplicationController
     if params[:end_date].present?
       @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date]))
     end
-
-  rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "User doesn't exist."
-    redirect_to(destroy_admin_session_path)
   end
 
   def new; end

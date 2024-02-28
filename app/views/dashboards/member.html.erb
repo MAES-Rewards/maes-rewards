@@ -2,7 +2,7 @@
 <%= link_to "Sign Out", destroy_admin_session_path %>
 <%= link_to "View Rewards", memrewards_path_url(@user) %>
 <%= link_to "My Account", user_path(@user)%>
-<%= link_to 'View My History', user_history_path(@user) %>
+<%= link_to 'View My History', user_history_activity_path(@user) %>
 <h1>
     Welcome, <%= @user.name %>!
 </h1>
