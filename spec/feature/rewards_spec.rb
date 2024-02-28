@@ -19,6 +19,8 @@ RSpec.describe('Viewing rewards', type: :feature) do
     end
 
     it 'user logs in with Google as member & views rewards' do
+
+
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -31,6 +33,8 @@ RSpec.describe('Viewing rewards', type: :feature) do
     end
 
     it 'user logs in with Google as member & views reward details successfully' do
+
+
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -47,6 +51,8 @@ RSpec.describe('Viewing rewards', type: :feature) do
       expect(page).to(have_content('50'))
       expect(page).to(have_content('1.99'))
       expect(page).to(have_content('10'))
+
+      reward.destroy
     end
 
     it 'user logs in with Google as member & purchasing reward successfully' do
