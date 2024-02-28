@@ -5,15 +5,15 @@
 <%= form_tag(user_history_activity_path(@user), method: :get) do %>
   <div style="margin-bottom: 10px; margin-top: 10px;">
     <%= label_tag(:activity_id, "Activity: ") %>
-    <%= select_tag(:activity_id, options_from_collection_for_select(Activity.all, :id, :name), include_blank: true) %>
+    <%= select_tag(:activity_id, options_from_collection_for_select(Activity.all, :id, :name, params[:activity_id]), include_blank: true) %>
   </div>
   <div style="margin-bottom: 10px;">
     <%= label_tag(:start_date, "Start date:") %>
-    <%= date_field_tag(:start_date) %>
+    <%= date_field_tag(:start_date, params[:start_date]) %>
   </div>
   <div style="margin-bottom: 10px;">
     <%= label_tag(:end_date, "End date:") %>
-    <%= date_field_tag(:end_date) %>
+    <%= date_field_tag(:end_date, params[:end_date]) %>
   </div>
   <div style="margin-bottom: 10px;">
     <%= submit_tag("Filter") %>
