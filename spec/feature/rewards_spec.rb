@@ -31,6 +31,8 @@ RSpec.describe('Viewing rewards', type: :feature) do
     end
 
     it 'user logs in with Google as member & views reward details successfully' do
+
+
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -38,15 +40,15 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'View Rewards'
 
       # Assuming rewards are listed on the page
-      expect(page).to(have_content('MAES Hoodie'))
+      expect(page).to(have_content('Sample Reward'))
 
       click_on 'See details'
 
-      expect(page).to(have_content('MAES Hoodie details'))
-      expect(page).to(have_content('MAES Hoodie'))
-      expect(page).to(have_content('100'))
-      expect(page).to(have_content('19.99'))
-      expect(page).to(have_content('20'))
+      expect(page).to(have_content('Sample Reward details'))
+      expect(page).to(have_content('Sample Reward'))
+      expect(page).to(have_content('50'))
+      expect(page).to(have_content('1.99'))
+      expect(page).to(have_content('10'))
     end
 
     it 'user logs in with Google as member & purchasing reward successfully' do
@@ -56,7 +58,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Rewards'
       # Assuming rewards are listed on the page
-      expect(page).to(have_content('MAES Hoodie'))
+      expect(page).to(have_content('Sample Reward'))
 
       click_on 'Purchase'
 
@@ -84,7 +86,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
         click_on 'Rewards'
         # Assuming rewards are listed on the page
-        expect(page).to(have_content('MAES Hoodie'))
+        expect(page).to(have_content('Sample Reward'))
 
         click_on 'Purchase'
 
@@ -110,7 +112,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
         click_on 'Rewards'
 
         # Assuming rewards are listed on the page
-        expect(page).to(have_content('MAES Hoodie'))
+        expect(page).to(have_content('Sample Reward'))
 
         click_on 'Purchase'
 
@@ -166,8 +168,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       visit set_admin_session_path
       visit admin_dashboard_path
       click_on 'Rewards'
-      visit rewards_path
-
       visit new_reward_path
 
       fill_in 'reward[name]', with: 'Test Reward'
@@ -222,14 +222,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       visit set_admin_session_path
       visit admin_dashboard_path
       click_on 'Rewards'
-
-      click_on 'See details'
-
-      expect(page).to(have_content('MAES Hoodie'))
-      expect(page).to(have_content('100'))
-      expect(page).to(have_content('19.99'))
-      expect(page).to(have_content('20'))
-
       visit new_reward_path
 
       fill_in 'reward[name]', with: 'Test Reward'
@@ -245,6 +237,9 @@ RSpec.describe('Viewing rewards', type: :feature) do
       end
       expect(page).to(have_content('Detailed view'))
       expect(page).to(have_content('Test Reward'))
+      expect(page).to(have_content('10'))
+      expect(page).to(have_content('20.99'))
+      expect(page).to(have_content('50'))
     end
   end
 end
