@@ -31,8 +31,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
     end
 
     it 'user logs in with Google as member & views reward details successfully' do
-
-
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
