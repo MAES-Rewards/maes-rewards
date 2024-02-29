@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-02-13T00:17:27+00:00">2024-02-13T00:17:27+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-02-15T19:00:21+00:00">2024-02-15T19:00:21+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  70.96%
+  69.3%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.74
+         0.72
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>458</b> relevant lines,
+    <b>469</b> relevant lines,
     <span class="green"><b>325</b> lines covered</span> and
-    <span class="red"><b>133</b> lines missed. </span>
+    <span class="red"><b>144</b> lines missed. </span>
     (<span class="red">
-  70.96%
+  69.3%
 </span>
 )
   </div>
@@ -303,12 +303,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#24e475b0aa1e530fdd159e061fbf1fb3ab7251d1" class="src_link" title="spec/feature/activity_spec.rb">spec/feature/activity_spec.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">44.74 %</td>
-            <td class="cell--number">74</td>
-            <td class="cell--number">38</td>
+            <td class="red strong cell--number t-file__coverage">34.69 %</td>
+            <td class="cell--number">86</td>
+            <td class="cell--number">49</td>
             <td class="cell--number">17</td>
-            <td class="cell--number">21</td>
-            <td class="cell--number">0.45</td>
+            <td class="cell--number">32</td>
+            <td class="cell--number">0.35</td>
             
           </tr>
         
@@ -7904,7 +7904,7 @@
     <h3>spec/feature/activity_spec.rb</h3>
     <h4>
       <span class="red">
-  44.74%
+  34.69%
 </span>
 
       lines covered
@@ -7913,9 +7913,9 @@
     
 
     <div class="t-line-summary">
-      <b>38</b> relevant lines.
+      <b>49</b> relevant lines.
       <span class="green"><b>17</b> lines covered</span> and
-      <span class="red"><b>21</b> lines missed.</span>
+      <span class="red"><b>32</b> lines missed.</span>
     </div>
 
     
@@ -8548,7 +8548,7 @@
 
             
 
-            <code class="ruby">    fill_in &#39;activity[default_points]&#39;, with: 100</code>
+            <code class="ruby">    fill_in &#39;activity[default_points]&#39;, with: -1</code>
           </li>
         </div>
       
@@ -8564,13 +8564,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="59">
+          <li class="missed" data-hits="0" data-linenumber="59">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    expect(page).to(have_content(&#39;Activity could not be created&#39;))</code>
           </li>
         </div>
       
@@ -8581,7 +8581,7 @@
 
             
 
-            <code class="ruby">    visit activities_path</code>
+            <code class="ruby">    fill_in &#39;activity[default_points]&#39;, with: 100</code>
           </li>
         </div>
       
@@ -8592,29 +8592,29 @@
 
             
 
+            <code class="ruby">    click_on &#39;Create Activity&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="62">
+            
+            
+
+            
+
             <code class="ruby">    expect(page).to(have_content(&#39;Test Activity&#39;))</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="never" data-hits="" data-linenumber="63">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="63">
-            
-            
-
-            
-
-            <code class="ruby">    visit activity_path(Activity.last)</code>
           </li>
         </div>
       
@@ -8625,7 +8625,7 @@
 
             
 
-            <code class="ruby">    expect(page).to(have_content(&#39;Test Activity&#39;))</code>
+            <code class="ruby">    visit activities_path</code>
           </li>
         </div>
       
@@ -8636,23 +8636,12 @@
 
             
 
-            <code class="ruby">    expect(page).to(have_content(&#39;Edit&#39;))</code>
+            <code class="ruby">    expect(page).to(have_content(&#39;Test Activity&#39;))</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="66">
-            
-            
-
-            
-
-            <code class="ruby">    expect(page).to(have_content(&#39;Delete&#39;))</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="67">
+          <li class="never" data-hits="" data-linenumber="66">
             
             
 
@@ -8663,13 +8652,24 @@
         </div>
       
         <div>
+          <li class="missed" data-hits="0" data-linenumber="67">
+            
+            
+
+            
+
+            <code class="ruby">    visit activity_path(Activity.last)</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="missed" data-hits="0" data-linenumber="68">
             
             
 
             
 
-            <code class="ruby">    click_on &#39;Delete&#39;</code>
+            <code class="ruby">    expect(page).to(have_content(&#39;Test Activity&#39;))</code>
           </li>
         </div>
       
@@ -8680,7 +8680,7 @@
 
             
 
-            <code class="ruby">    expect(page).to(have_content(&#39;Are you sure&#39;))</code>
+            <code class="ruby">    expect(page).to(have_content(&#39;Edit&#39;))</code>
           </li>
         </div>
       
@@ -8691,18 +8691,18 @@
 
             
 
-            <code class="ruby">    click_on &#39;Delete Activity&#39;</code>
+            <code class="ruby">    expect(page).to(have_content(&#39;Delete&#39;))</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="71">
+          <li class="never" data-hits="" data-linenumber="71">
             
             
 
             
 
-            <code class="ruby">    expect(page).to(have_content(&#39;Activity was successfully deleted&#39;))</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -8713,12 +8713,144 @@
 
             
 
+            <code class="ruby">    click_on &#39;Edit&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="73">
+            
+            
+
+            
+
+            <code class="ruby">    fill_in &#39;activity[description]&#39;, with: &#39;&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="74">
+            
+            
+
+            
+
+            <code class="ruby">    click_on &#39;Save Changes&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="75">
+            
+            
+
+            
+
+            <code class="ruby">    expect(page).to(have_content(&#39;Activity could not be updated&#39;))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="76">
+            
+            
+
+            
+
+            <code class="ruby">    fill_in &#39;activity[description]&#39;, with: &#39;A New Test Description&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="77">
+            
+            
+
+            
+
+            <code class="ruby">    click_on &#39;Save Changes&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="78">
+            
+            
+
+            
+
+            <code class="ruby">    expect(page).to(have_content(&#39;A New Test Description&#39;))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="79">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="80">
+            
+            
+
+            
+
+            <code class="ruby">    click_on &#39;Delete&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="81">
+            
+            
+
+            
+
+            <code class="ruby">    expect(page).to(have_content(&#39;Are you sure&#39;))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="82">
+            
+            
+
+            
+
+            <code class="ruby">    click_on &#39;Delete Activity&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="83">
+            
+            
+
+            
+
+            <code class="ruby">    expect(page).to(have_content(&#39;Activity was successfully deleted&#39;))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="84">
+            
+            
+
+            
+
             <code class="ruby">    expect(page).not_to(have_content(&#39;Test Activity&#39;))</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="85">
             
             
 
@@ -8729,7 +8861,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="74">
+          <li class="never" data-hits="" data-linenumber="86">
             
             
 
