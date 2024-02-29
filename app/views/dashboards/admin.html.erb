@@ -1,8 +1,8 @@
-<h1>ADMIN Page</h1>
-<%= link_to "Sign Out", destroy_admin_session_path %>
-<%= link_to "View Rewards", rewards_path%>
-<%= link_to "Activities", activities_path%>
-<%= link_to "Assign Points", member_points_url%>
+
+
+<h2> Admin Home </h2>
+
+<h3>All Members</h3>
 
 <table>
     <tr>
@@ -10,6 +10,7 @@
         <th>Email</th>
         <th>Points</th>
         <th>Is Admin</th>
+        <th>Actions</th>
     </tr>
     <% @users.each do |user| %>
         <tr>
@@ -17,8 +18,8 @@
             <td><%= user.email %></td>
             <td><%= user.points %></td>
             <td><%= user.is_admin %></td>
-            <td><%= link_to "Edit", edit_user_path(user) %></td>
-            <td><%= link_to "Delete", delete_user_path(user) %></td>
+            <td><%= link_to "Edit", edit_user_path(user), class: "primary_link" %> <%= link_to "Delete", delete_user_path(user), class: "primary_link" %></td>
+
         </tr>
     <% end %>
 </table>
