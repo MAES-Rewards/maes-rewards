@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'rewards/handle_purchase/:id/:user_id', to: 'rewards#handle_purchase', as: 'handle_purchase'
   get 'users/index', to: 'users#index', as: 'users_index'
   get 'users/points', to: 'users#points', as: 'member_points'
+  get 'users/:id/activityhistory', to: 'users#activityhistory', as: 'user_history_activity'
 
   post 'handle_points', to: 'users#handle_points', as: :handle_points
 

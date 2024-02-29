@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # has_many :earn_transaction
-  # has_many :spend_transaction
+  has_many :earn_transactions, dependent: :nullify
+  has_many :spend_transaction, dependent: :nullify
   validates :name, presence: true
   # add formatting validation later
   validates :email, presence: true
