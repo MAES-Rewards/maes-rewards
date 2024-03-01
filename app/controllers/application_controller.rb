@@ -20,4 +20,12 @@ class ApplicationController < ActionController::Base
       redirect_to(destroy_admin_session_path)
     end
   end
+
+  def authorize_user
+    user_id = Integer(params[:id], 10)
+    if session[:user_id] != user_id
+      flash[:alert] = 'You are not authorized to view this page.'
+      redirect_to(member_dashboard_path(session[:user_id]))
+    end
+  end
 end

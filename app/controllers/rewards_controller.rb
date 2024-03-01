@@ -2,6 +2,7 @@
 
 class RewardsController < ApplicationController
   helper_method :confirmpurchase
+  before_action :authorize_user, only: %I[memberindex handle_purchase membershow purchase]
 
   def memberindex
     @rewards = Reward.order(:name)

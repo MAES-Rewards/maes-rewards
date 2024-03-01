@@ -2,6 +2,7 @@
 
 class DashboardsController < ApplicationController
   before_action :admin_check, only: [:admin]
+  before_action :authorize_user, only: [:member]
 
   def member
     # @user = User.where(:is_admin => false).where(email: params[:email])

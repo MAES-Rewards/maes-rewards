@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   before_action :set_dashboard_path, only: [:activityhistory]
   before_action :set_user, only: [:activityhistory]
-  before_action :authorize_user, only: [:activityhistory]
+  before_action :authorize_user, only: %I[activityhistory show]
   before_action :admin_check, only: %I[points handle_points update delete destroy]
 
   def index; end
@@ -81,14 +81,6 @@ class UsersController < ApplicationController
     unless @user
       flash[:alert] = 'User not found.'
       redirect_to(destroy_admin_session_path)
-    end
-  end
-
-  def authorize_user
-    user_id = Integer(params[:id], 10)
-    if session[:user_id] != user_id
-      flash[:alert] = 'You are not authorized to view this page.'
-      redirect_to(member_dashboard_path(session[:user_id]))
     end
   end
 
