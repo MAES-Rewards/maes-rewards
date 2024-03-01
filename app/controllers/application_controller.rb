@@ -11,4 +11,13 @@ class ApplicationController < ActionController::Base
       render(partial: 'layouts/membermenu')
     end
   end
+
+  private
+
+  def admin_check
+    unless session[:is_admin]
+      flash[:alert] = 'Access denied. Please log in as an admin.'
+      redirect_to(destroy_admin_session_path)
+    end
+  end
 end
