@@ -151,7 +151,7 @@ class UsersController < ApplicationController
         # TODO: Add points here when added to EarnTransaction
         type_id: 'spend',
         type: 'Spent',
-        points: "\u2212#{reward.point_value}",
+        points: "\u2212#{spend_txn.points}",
         timestamp: reward[:created_at]
       }
     end
