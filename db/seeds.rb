@@ -48,12 +48,13 @@ Activity.create!({
 EarnTransaction.create!({
   user_id: 1,
   activity_id: 1,
-  points: 10
+  points: 200
 }
                        )
 
 SpendTransaction.create!({
   user_id: 1,
-  reward_id: 1
+  reward_id: 1,
+  points: 100
 }
                         )
