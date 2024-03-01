@@ -86,35 +86,37 @@ class UsersController < ApplicationController
     @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date])) if params[:end_date].present?
   end
 
-  def rewardhistory
-    #get all spend transactions
-    @spend_transactions = SpendTransaction.all.order(created_at: :desc) 
-    @user = []
-    @rewards = []
+  def history
+    earn = EarnTransaction.all
+    spend = SpendTransaction.all
+    @history = []
 
-    @spend_transactions.each do |spend|
-      reward = Reward.find_by(id: spend.reward_id)
-      user = User.find_by(id: spend.user_id)
+    earn.each do |e|
+      activity = Activity.find_by(id: e.activity_id)
+      user = User.find_by(id: e.user_id)
 
-      if reward && user
-        @rewards << reward
-        @user << user
+      if activity && user
+        #            Type     user id,  user name,  activity id,  activity name,     points,            created at,      updated at
+        @history << [user.id, user.name, activity.id, activity.name, "+#{e.points}", e.created_at, e.updated_at]
       else
         break
       end
 
     end
 
-    # if @spend_transactions.length > 0
-    #   n = @spend_transactions.length()
-    #   i = 0
-    #   loop do
-    #     @rewards.append(Reward.find(@spend_transactions[i].reward_id))
-    #     @user.append(User.find(@spend_transactions[i].user_id))
-    #     i += 1
-    #     break if i >= n
-    #   end
-    # end
+    spend.each do |s|
+      reward = Reward.find_by(id: s.reward_id)
+      user = User.find_by(id: s.user_id)
+
+      if reward && user
+        #           user id,   user name,  reward id, reward name,         points,     created at,   updated at
+        @history << [user.id, user.name, reward.id, reward.name, -1 * reward.point_value, s.created_at, s.updated_at]
+      else
+        break
+      end
+    end
+
+    @history.sort_by! { |h| h[5] }.reverse!
   end
 
   def set_user
