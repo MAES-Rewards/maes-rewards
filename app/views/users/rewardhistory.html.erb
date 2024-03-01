@@ -1,14 +1,20 @@
 <table>
     <tr>
+        <th>Transaction ID</th>
         <th>User ID</th>
+        <th>User Name</th>
         <th>Reward ID</th>
+        <th>Reward Name</th>
         <th>Created At</th>
         <th>Updated At</th>
     </tr>
-    <% @spend_transactions.each do |spend| %>
+    <% @spend_transactions.zip(@rewards, @user).each do |spend, reward, u| %>
         <tr >
+            <td><%= spend.id %> </td>
             <td><%= spend.user_id %> </td>
+            <td><%= u&.name %> </td>
             <td><%= spend.reward_id %> </td>
+            <td><%= reward&.name %> </td>
             <td><%= spend.created_at %> </td>
             <td><%= spend.updated_at %> </td>
         </tr>

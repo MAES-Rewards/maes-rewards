@@ -88,7 +88,33 @@ class UsersController < ApplicationController
 
   def rewardhistory
     #get all spend transactions
-    @spend_transactions = SpendTransaction.all
+    @spend_transactions = SpendTransaction.all.order(created_at: :desc) 
+    @user = []
+    @rewards = []
+
+    @spend_transactions.each do |spend|
+      reward = Reward.find_by(id: spend.reward_id)
+      user = User.find_by(id: spend.user_id)
+
+      if reward && user
+        @rewards << reward
+        @user << user
+      else
+        break
+      end
+
+    end
+
+    # if @spend_transactions.length > 0
+    #   n = @spend_transactions.length()
+    #   i = 0
+    #   loop do
+    #     @rewards.append(Reward.find(@spend_transactions[i].reward_id))
+    #     @user.append(User.find(@spend_transactions[i].user_id))
+    #     i += 1
+    #     break if i >= n
+    #   end
+    # end
   end
 
   def set_user
