@@ -96,8 +96,8 @@ class UsersController < ApplicationController
       user = User.find_by(id: e.user_id)
 
       if activity && user
-        #            Type     user id,  user name,  activity id,  activity name,     points,            created at,      updated at
-        @history << [user.id, user.name, activity.id, activity.name, "+#{e.points}", e.created_at, e.updated_at]
+        #            Type,   user id,  user name,  activity id,  activity name,     points,            created at,      updated at
+        @history << ["Earned",user.id, user.name, activity.id, activity.name, "+#{e.points}", e.created_at, e.updated_at]
       else
         break
       end
@@ -109,8 +109,8 @@ class UsersController < ApplicationController
       user = User.find_by(id: s.user_id)
 
       if reward && user
-        #           user id,   user name,  reward id, reward name,         points,     created at,   updated at
-        @history << [user.id, user.name, reward.id, reward.name, -1 * reward.point_value, s.created_at, s.updated_at]
+        #             Tyoe  ,user id,   user name,  reward id, reward name,         points,     created at,   updated at
+        @history << ["Spent", user.id, user.name, reward.id, reward.name, -1 * reward.point_value, s.created_at, s.updated_at]
       else
         break
       end
