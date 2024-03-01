@@ -1,1 +1,16 @@
-<p> "HI" </p>
+<table>
+    <tr>
+        <th>User ID</th>
+        <th>Reward ID</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+    </tr>
+    <% @spend_transactions.each do |spend| %>
+        <tr >
+            <td><%= spend.user_id %> </td>
+            <td><%= spend.reward_id %> </td>
+            <td><%= spend.created_at %> </td>
+            <td><%= spend.updated_at %> </td>
+        </tr>
+    <% end %>
+</table>

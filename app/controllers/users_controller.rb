@@ -88,7 +88,7 @@ class UsersController < ApplicationController
 
   def rewardhistory
     #get all spend transactions
-    @spend_transactions = SpendTransaction.all.includes(:reward, :user).order(created_at: :desc)
+    @spend_transactions = SpendTransaction.all
   end
 
   def set_user
