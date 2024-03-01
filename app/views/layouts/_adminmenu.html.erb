@@ -1,0 +1,50 @@
+<% content_for :head do %>
+  <link rel="stylesheet" href="/assets/application.css.scss">
+<% end %>
+<div class="navbar">
+<nav>
+  <ul>
+    <li><%= link_to "Home", admin_dashboard_url %></li>
+    <li><%= link_to "Rewards", rewards_path%></li>
+    <li><%= link_to "Activities", activities_path%></li>
+    <li><%= link_to "Assign Points", member_points_url%></li>
+    <li><%= link_to "Sign Out", destroy_admin_session_path %></li>
+  </ul>
+</nav>
+</div>
+
+<style>
+nav {
+  background-color: maroon;
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+nav li {
+
+  margin-right: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: black;
+}
+
+</style>
