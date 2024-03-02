@@ -110,7 +110,7 @@ class UsersController < ApplicationController
 
       if reward && user
         #             Tyoe  ,user id,   user name,  reward id, reward name,         points,     created at,   updated at
-        @history << ["Spent", user.id, user.name, reward.id, reward.name, -1 * reward.point_value, s.created_at, s.updated_at]
+        @history << ["Spent", user.id, user.name, reward.id, reward.name, "\u2212#{reward.point_value}", s.created_at, s.updated_at]
       else
         break
       end
