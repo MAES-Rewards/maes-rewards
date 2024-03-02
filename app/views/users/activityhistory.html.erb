@@ -35,3 +35,42 @@
     </tr>
   <% end %>
 </table>
+
+
+<h1>Reward History</h1>
+<p>All of the rewards you have purchased are shown below.</p>
+
+<%= form_tag(user_history_activity_path(@user), method: :get) do %>
+  <div style="margin-bottom: 10px; margin-top: 10px;">
+    <%= label_tag(:reward_id, "Reward: ") %>
+    <%= select_tag(:reward_id, options_from_collection_for_select(Reward.all, :id, :name, params[:reward_id]), include_blank: true) %>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <%= label_tag(:reward_start_date, "Start date:") %>
+    <%= date_field_tag(:reward_start_date, params[:reward_start_date]) %>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <%= label_tag(:reward_end_date, "End date:") %>
+    <%= date_field_tag(:reward_end_date, params[:reward_end_date]) %>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <%= submit_tag("Filter") %>
+    <%= button_tag("Reset", type: 'button', onclick: "window.location.href='#{user_history_activity_path(@user)}';") %>
+  </div>
+<% end %>
+
+
+<table>
+  <tr>
+    <th>Reward Name</th>
+    <th>Points Spent</th>
+    <th>Time</th>
+  </tr>
+  <% @spend_transactions.each do |spend_transaction| %>
+    <tr>
+      <td><%= spend_transaction.reward.name %></td>
+      <td><%= spend_transaction.points %></td>
+      <td><%= spend_transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+    </tr>
+  <% end %>
+</table>

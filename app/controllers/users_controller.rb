@@ -85,6 +85,12 @@ class UsersController < ApplicationController
     @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id]) if params[:activity_id].present?
     @earn_transactions = @earn_transactions.where('created_at >= ?', Date.parse(params[:start_date])) if params[:start_date].present?
     @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date])) if params[:end_date].present?
+  
+    @spend_transactions = @user.spend_transactions.includes(:reward).order(created_at: :desc)
+    @spend_transactions = @spend_transactions.where(reward_id: params[:reward_id]) if params[:reward_id].present?
+    @spend_transactions = @spend_transactions.where('created_at >= ?', Date.parse(params[:reward_start_date])) if params[:reward_start_date].present?
+    @spend_transactions = @spend_transactions.where('created_at <= ?', Date.parse(params[:reward_end_date])) if params[:reward_end_date].present?
+  
   end
 
   def set_user
