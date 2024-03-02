@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:activityhistory]
   before_action :authorize_user, only: [:activityhistory]
 
-  def index; end
+  # def index; end
 
   def show
     @user = User.find(params[:id])
@@ -85,12 +85,18 @@ class UsersController < ApplicationController
     @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id]) if params[:activity_id].present?
     @earn_transactions = @earn_transactions.where('created_at >= ?', Date.parse(params[:start_date])) if params[:start_date].present?
     @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date])) if params[:end_date].present?
-  
     @spend_transactions = @user.spend_transactions.includes(:reward).order(created_at: :desc)
     @spend_transactions = @spend_transactions.where(reward_id: params[:reward_id]) if params[:reward_id].present?
-    @spend_transactions = @spend_transactions.where('created_at >= ?', Date.parse(params[:reward_start_date])) if params[:reward_start_date].present?
-    @spend_transactions = @spend_transactions.where('created_at <= ?', Date.parse(params[:reward_end_date])) if params[:reward_end_date].present?
-  
+    @spend_transactions = @spend_transactions.where(created_at_since_condition)
+    @spend_transactions = @spend_transactions.where(created_at_until_condition)
+  end
+
+  def created_at_since_condition
+    ['created_at >= ?', Date.parse(params[:reward_start_date])] if params[:reward_start_date].present?
+  end
+
+  def created_at_until_condition
+    ['created_at <= ?', Date.parse(params[:reward_end_date])] if params[:reward_end_date].present?
   end
 
   def set_user
@@ -113,7 +119,7 @@ class UsersController < ApplicationController
     @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
   end
 
-  def new; end
+  # def new; end
 
   def edit
     @user = User.find(params[:id])
@@ -161,12 +167,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(
-      :name,
-      :email,
-      :points,
-      :is_admin
-    )
+    params.require(:user).permit(:name, :email, :points, :is_admin)
   end
 
   private
