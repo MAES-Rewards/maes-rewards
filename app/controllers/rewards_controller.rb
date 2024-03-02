@@ -6,7 +6,7 @@ class RewardsController < ApplicationController
 
   def memberindex
     @rewards = Reward.order(:name)
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def handle_purchase

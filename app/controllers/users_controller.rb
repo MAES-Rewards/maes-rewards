@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def index; end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   # find all non-admin users to assign points in bulk
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:user_id])
     unless @user
       flash[:alert] = 'User not found.'
       redirect_to(destroy_admin_session_path)
@@ -91,11 +91,11 @@ class UsersController < ApplicationController
   def new; end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     if @user.update(user_params)
       flash[:notice] = 'User was successfully updated.'
       if session[:is_admin]
@@ -110,12 +110,12 @@ class UsersController < ApplicationController
   end
 
   def delete
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def destroy
     flash[:notice] = 'User successfully deleted.'
-    User.find(params[:id]).destroy!
+    User.find(params[:user_id]).destroy!
     redirect_to(admin_dashboard_path)
   end
 
