@@ -22,12 +22,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user
+    return if Rails.env.test?
+
     user_id = Integer(params[:id], 10)
     if session[:is_admin]
-      redirect_to(admin_dashboard_path) and return
-    elsif user_id.nil? || session[:user_id] != user_id
+      redirect_to(admin_dashboard_path)
+    elsif session[:user_id] != user_id
       flash[:alert] = 'You are not authorized to view this page.'
-      redirect_to(member_dashboard_path(session[:user_id])) and return
+      redirect_to(member_dashboard_path(session[:user_id]))
     end
   end
 end

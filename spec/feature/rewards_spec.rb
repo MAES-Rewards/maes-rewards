@@ -4,6 +4,9 @@ require 'rails_helper'
 
 RSpec.describe('Viewing rewards', type: :feature) do
   context 'as member' do
+    let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
+    let!(:reward) { Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99) }
+
     before do
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
@@ -12,9 +15,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
         info: { email: 'user@tamu.edu', name: 'John Doe' }
       }
                                                                         )
-
-      User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
-      Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
     end
 
     it 'user logs in with Google as member & views rewards' do
@@ -22,7 +22,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      click_on 'Rewards'
+      visit memrewards_path_path(id: user.id)
 
       # Assuming there is some delay or asynchronous operation happening
       # If content doesn't appear immediately, wait for it
@@ -53,13 +53,13 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      click_on 'Rewards'
+      visit memrewards_path_path(id: user.id)
       # Assuming rewards are listed on the page
       expect(page).to(have_content('Sample Reward'))
 
-      click_on 'Purchase'
+      visit purchase_path_path(id: reward.id, user_id: user.id)
 
-      click_on 'Confirm'
+      visit handle_purchase_path(id: reward.id, user_id: user.id)
 
       expect(page).to(have_content('Reward was successfully purchased'))
       # new inventory

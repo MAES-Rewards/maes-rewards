@@ -13,7 +13,7 @@ class DashboardsController < ApplicationController
     @users = User.where(is_admin: false)
   end
 
-  def home
-    redirect_to(destroy_admin_session_path)
-  end
+  # def home
+  #   redirect_to(destroy_admin_session_path)
+  # end
 end
