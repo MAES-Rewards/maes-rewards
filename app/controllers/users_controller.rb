@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_dashboard_path, only: [:activityhistory]
+  before_action :set_user, only: [:activityhistory]
+  before_action :authorize_user, only: [:activityhistory]
+
   def index; end
 
   def show
     @user = User.find(params[:id])
+    @txn_hist = build_txn_history(@user.id)
   end
 
   # find all non-admin users to assign points in bulk
@@ -49,6 +54,14 @@ class UsersController < ApplicationController
         else
           user.points += Integer(new_points, 10)
           saved = false unless user.save!
+
+          ActiveRecord::Base.transaction do
+            transaction = user.earn_transactions.build(points: Integer(new_points, 10), activity_id: recur_activity_id)
+            unless transaction.save && user.save
+              saved = false
+              raise(ActiveRecord::Rollback, 'Failed to save user or transaction')
+            end
+          end
         end
       end
 
@@ -67,10 +80,38 @@ class UsersController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
+  def activityhistory
+    @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
+    @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id]) if params[:activity_id].present?
+    @earn_transactions = @earn_transactions.where('created_at >= ?', Date.parse(params[:start_date])) if params[:start_date].present?
+    @earn_transactions = @earn_transactions.where('created_at <= ?', Date.parse(params[:end_date])) if params[:end_date].present?
+  end
+
+  def set_user
+    @user = User.find_by(id: params[:id])
+    unless @user
+      flash[:alert] = 'User not found.'
+      redirect_to(destroy_admin_session_path)
+    end
+  end
+
+  def authorize_user
+    user_id = Integer(params[:id], 10)
+    if session[:user_id] != user_id
+      flash[:alert] = 'You are not authorized to view this page.'
+      redirect_to(member_dashboard_path(session[:user_id]))
+    end
+  end
+
+  def set_dashboard_path
+    @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
+  end
+
   def new; end
 
   def edit
     @user = User.find(params[:id])
+    @txn_hist = build_txn_history(@user.id)
   end
 
   def update
@@ -120,5 +161,42 @@ class UsersController < ApplicationController
       :points,
       :is_admin
     )
+  end
+
+  private
+
+  def build_txn_history(user_id)
+    earn_txns = EarnTransaction.where(user_id: user_id)
+    spend_txns = SpendTransaction.where(user_id: user_id)
+    txn_hist = []
+
+    earn_txns.each do |earn_txn|
+      activity = Activity.find(earn_txn.activity_id)
+      txn_hist << {
+        user_id: earn_txn.user_id,
+        item: activity.name,
+        type_id: 'earn',
+        type: 'Earned',
+        points: "+#{earn_txn.points}",
+        timestamp: activity[:created_at]
+      }
+    end
+
+    spend_txns.each do |spend_txn|
+      reward = Reward.find(spend_txn.reward_id)
+      txn_hist << {
+        user_id: spend_txn.user_id,
+        item: reward.name,
+        # TODO: Add points here when added to EarnTransaction
+        type_id: 'spend',
+        type: 'Spent',
+        points: "\u2212#{spend_txn.points}",
+        timestamp: reward[:created_at]
+      }
+    end
+
+    txn_hist.sort_by! { |txn| txn[:timestamp] }.reverse!
+
+    txn_hist
   end
 end
