@@ -6,14 +6,18 @@ class DashboardsController < ApplicationController
 
   def member
     # @user = User.where(:is_admin => false).where(email: params[:email])
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def admin
     @users = User.where(is_admin: false)
   end
 
-  # def home
-  #   redirect_to(destroy_admin_session_path)
-  # end
+  def show
+    if session[:is_admin]
+      redirect_to admin_dashboard_path
+    else
+      redirect_to member_dashboard_path(session[:user_id])
+    end
+  end
 end

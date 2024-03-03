@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user
-    return if Rails.env.test?
+    # return if Rails.env.test?
 
-    user_id = Integer(params[:id], 10)
+    user_id = Integer(params[:user_id], 10)
     if session[:is_admin]
       redirect_to(admin_dashboard_path)
     elsif session[:user_id] != user_id
