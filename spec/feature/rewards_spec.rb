@@ -14,7 +14,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
         info: { email: 'user@tamu.edu', name: 'John Doe' }
       }
                                                                         )
-      User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
+      page.set_rack_session(user_id: user.id, is_admin: false)
       Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
     end
 
