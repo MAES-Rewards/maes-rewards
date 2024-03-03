@@ -15,6 +15,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       }
                                                                         )
       page.set_rack_session(user_id: user.id, is_admin: false)
+      Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
     end
 
     it 'user logs in with Google as member & views rewards' do
