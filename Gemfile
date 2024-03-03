@@ -88,4 +88,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'webdrivers', '~> 4.0'
+  gem 'rack_session_access'
 end
