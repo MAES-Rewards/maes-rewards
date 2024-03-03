@@ -53,7 +53,7 @@
     <%=
         select_tag "recur_activity_id",
         options_for_select(
-            [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] } + [["Custom One-Time Activity\u2026", nil]]
+            [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] }
         ),
         id: "activity_select_box"
     %>

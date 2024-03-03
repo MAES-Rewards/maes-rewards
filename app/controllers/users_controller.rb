@@ -52,6 +52,8 @@ class UsersController < ApplicationController
         ActiveRecord::Base.transaction do
           transaction = user.earn_transactions.build(points: Integer(new_points, 10), activity_id: recur_activity_id)
           unless transaction.save && user.save
+            user.errors.full_messages
+            transaction.errors.full_messages
             saved = false
             raise(ActiveRecord::Rollback, 'Failed to save user or transaction')
           end
