@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe('Activity', type: :feature) do
+  let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
   context 'MEMBER login' do
     before do
       OmniAuth.config.test_mode = true
@@ -13,8 +14,8 @@ RSpec.describe('Activity', type: :feature) do
           email: 'user@tamu.edu',
           name: 'John Doe'
         }
-      }
-                                                                        )
+      })
+      page.set_rack_session(user_id: user.id, is_admin: false)
     end
 
     it 'member user logs in with Google to new activity page' do
@@ -26,6 +27,7 @@ RSpec.describe('Activity', type: :feature) do
   end
 
   context 'ADMIN login' do
+    let!(:user) { User.create!(email: 'jbeeber@tamu.edu', name: 'James Beeber', points: 100, is_admin: true) }
     before do
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
@@ -35,8 +37,8 @@ RSpec.describe('Activity', type: :feature) do
           email: 'jbeeber@tamu.edu',
           name: 'James Beeber'
         }
-      }
-                                                                        )
+      })
+      page.set_rack_session(is_admin: true)
     end
 
     it 'admin user logs in with Google and creates, edits, and deletes activity' do
