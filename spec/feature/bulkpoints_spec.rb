@@ -4,9 +4,10 @@ require 'rails_helper'
 
 RSpec.describe('Bulk Points', type: :feature) do
   let!(:user1) { User.create!(email: 'user1@tamu.edu', name: 'Jim Doe', points: 100, is_admin: false) }
-  let!(:user2) { User.create!(email: 'user2@tamu.edu', name: 'Jane Doe', points: 10, is_admin: false) }
-  Activity.create(name: "Custom One-Time Activity", description: "Single-use activities", default_points: 0)
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
+  let!(:user2) { User.create!(email: 'user2@tamu.edu', name: 'Jane Doe', points: 10, is_admin: false) }
+
+  Activity.create!(name: 'Custom One-Time Activity', description: 'Single-use activities', default_points: 0)
 
   context 'Failed Attempts' do
     before do
@@ -15,9 +16,9 @@ RSpec.describe('Bulk Points', type: :feature) do
         provider: 'google_oauth2',
         uid: '123456',
         info: { email: 'user@tamu.edu', name: 'John Doe' }
-      })
+      }
+                                                                        )
       page.set_rack_session(user_id: user.id, is_admin: false)
-
     end
 
     it 'Attempts to subtract too many points' do

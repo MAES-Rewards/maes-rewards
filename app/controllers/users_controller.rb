@@ -31,9 +31,6 @@ class UsersController < ApplicationController
     recur_activity_id = params[:recur_activity_id]
     onetime_activity_string = params[:onetime_activity_string]
 
-
-
-
     # check if for activity associated one-time & recurring, both are blank or both are selected
     if recur_activity_id.blank? && onetime_activity_string.blank?
       flash[:alert] = 'Please select or enter an activity.'
