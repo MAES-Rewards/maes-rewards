@@ -16,7 +16,17 @@ class RewardsController < ApplicationController
       # Update the inventory and handle the response
       @reward.inventory -= 1
       @user.points -= @reward.point_value
-      if @reward.save && @user.save
+
+      saved = true
+      ActiveRecord::Base.transaction do
+        transaction = @user.spend_transactions.build(points: @reward.point_value, reward_id: @reward.id)
+        unless transaction.save && @user.save
+          saved = false
+          raise(ActiveRecord::Rollback, 'Failed to save user or transaction')
+        end
+      end
+
+      if saved
         flash[:notice] = 'Reward was successfully purchased.'
       else
         flash[:alert] = 'Reward could not be purchased.'

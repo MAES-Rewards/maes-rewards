@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
+    @txn_hist = build_txn_history(@user.id)
   end
 
   # find all non-admin users to assign points in bulk
@@ -92,6 +93,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
+    @txn_hist = build_txn_history(@user.id)
   end
 
   def update
@@ -126,5 +128,42 @@ class UsersController < ApplicationController
       :points,
       :is_admin
     )
+  end
+
+  private
+
+  def build_txn_history(user_id)
+    earn_txns = EarnTransaction.where(user_id: user_id)
+    spend_txns = SpendTransaction.where(user_id: user_id)
+    txn_hist = []
+
+    earn_txns.each do |earn_txn|
+      activity = Activity.find(earn_txn.activity_id)
+      txn_hist << {
+        user_id: earn_txn.user_id,
+        item: activity.name,
+        type_id: 'earn',
+        type: 'Earned',
+        points: "+#{earn_txn.points}",
+        timestamp: activity[:created_at]
+      }
+    end
+
+    spend_txns.each do |spend_txn|
+      reward = Reward.find(spend_txn.reward_id)
+      txn_hist << {
+        user_id: spend_txn.user_id,
+        item: reward.name,
+        # TODO: Add points here when added to EarnTransaction
+        type_id: 'spend',
+        type: 'Spent',
+        points: "\u2212#{spend_txn.points}",
+        timestamp: reward[:created_at]
+      }
+    end
+
+    txn_hist.sort_by! { |txn| txn[:timestamp] }.reverse!
+
+    txn_hist
   end
 end
