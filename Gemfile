@@ -85,8 +85,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'rack_session_access'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'webdrivers', '~> 4.0'
-  gem 'rack_session_access'
 end

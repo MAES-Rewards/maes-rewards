@@ -15,9 +15,9 @@ class DashboardsController < ApplicationController
 
   def show
     if session[:is_admin]
-      redirect_to admin_dashboard_path
+      redirect_to(admin_dashboard_path)
     else
-      redirect_to member_dashboard_path(session[:user_id])
+      redirect_to(member_dashboard_path(session[:user_id]))
     end
   end
 end

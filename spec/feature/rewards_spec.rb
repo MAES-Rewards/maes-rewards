@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe('Viewing rewards', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
-  let!(:reward) { Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99) }
+
   context 'as member' do
     before do
       OmniAuth.config.test_mode = true
@@ -12,7 +12,8 @@ RSpec.describe('Viewing rewards', type: :feature) do
         provider: 'google_oauth2',
         uid: '123456',
         info: { email: 'user@tamu.edu', name: 'John Doe' }
-      })
+      }
+                                                                        )
       page.set_rack_session(user_id: user.id, is_admin: false)
     end
 
