@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_dashboard_path, only: [:activityhistory]
   before_action :set_user, only: [:activityhistory]
   before_action :authorize_user, only: %I[activityhistory show]
-  before_action :admin_check, only: %I[points handle_points update delete destroy edit]
+  before_action :admin_check, only: %I[points handle_points update delete destroy edit history]
 
   # def index; end
 
@@ -90,6 +90,8 @@ class UsersController < ApplicationController
   def created_at_until_condition
     ['created_at <= ?', Date.parse(params[:reward_end_date])] if params[:reward_end_date].present?
   end
+
+  def history; end
 
   def set_user
     @user = User.find_by(id: params[:user_id])

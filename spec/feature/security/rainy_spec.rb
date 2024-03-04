@@ -22,7 +22,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # Member Login Sunny Day Test
-    it 'logins in to the website using Google OAuth' do
+    it 'logins to the website using Google OAuth' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -30,7 +30,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # Member Home Sunny Day Test
-    it 'logins in to the website and presses home' do
+    it 'logins to the website and presses home' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -41,7 +41,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # Member Home Rainy Day Test
-    it 'logins in to the website and attempts to go to dashboard of other member' do
+    it 'logins to the website and attempts to go to dashboard of other member' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -53,7 +53,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # Member Rewards Rainy Day Tests
-    it 'logins in to the website and attempts to view rewards of other member' do
+    it 'logins to the website and attempts to view rewards of other member' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -69,7 +69,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('You are not authorized to view this page'))
     end
 
-    it 'logins in to the website, navigate to rewards, and attempts to see detail of reward of other member' do
+    it 'logins to the website, navigate to rewards, and attempts to see detail of reward of other member' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -92,7 +92,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('You are not authorized to view this page'))
     end
 
-    it 'logins in to the website and attemps to purchase reward as other member' do
+    it 'logins to the website and attemps to purchase reward as other member' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -116,7 +116,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # Member My Account Rainy Day Tests
-    it 'logins in to the website and attempts to view account of other user' do
+    it 'logins to the website and attempts to view account of other user' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -128,7 +128,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # Member View My History Rainy Day Tests
-    it 'logins in to the website and attempts to view activity history of other member' do
+    it 'logins to the website and attempts to view activity history of other member' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
@@ -345,7 +345,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # access admin rewards page without loggin in
-    it 'not loggin in, trying to access admin rewards page' do
+    it 'not logging in, trying to access admin rewards page' do
       visit admin_dashboard_path
       expect(page).to(have_content('Log in to MAES App'))
 
@@ -417,7 +417,7 @@ RSpec.describe('Testing Security', type: :feature) do
     end
 
     # access members rewards page without loggin in
-    it 'not loggin in, trying to access members rewards page' do
+    it 'not logging in, trying to access members rewards page' do
       visit member_dashboard_path(user_id: user.id)
       expect(page).to(have_content('Log in to MAES App'))
 
