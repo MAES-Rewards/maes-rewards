@@ -97,11 +97,10 @@ class UsersController < ApplicationController
 
       if activity && user
         #            Type,   user name,   activity name,     points,            created at,      updated at
-        @history << ["Earned",user.name, activity.name, "+#{e.points}", e.created_at, e.updated_at]
+        @history << ['Earned', user.name, activity.name, "+#{e.points}", e.created_at, e.updated_at]
       else
         break
       end
-
     end
 
     spend.each do |s|
@@ -110,7 +109,7 @@ class UsersController < ApplicationController
 
       if reward && user
         #             Type     user name, reward name,         points,     created at,   updated at
-        @history << ["Spent",  user.name, reward.name, "\u2212#{reward.point_value}", s.created_at, s.updated_at]
+        @history << ['Spent', user.name, reward.name, "\u2212#{reward.point_value}", s.created_at, s.updated_at]
       else
         break
       end
