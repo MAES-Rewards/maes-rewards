@@ -1,12 +1,16 @@
-<h1>My Account</h1>
+
 
 <% if session[:is_admin] %>
-  <%= link_to("Go back to landing page", admin_dashboard_url)%>
+  <h1><%=@user.name%>'s Account</h1>
+
 <% else %>
-  <%= link_to("Go back to My Account", user_path(@user))%><br>
+  <h1>Edit My Account</h1>
+  <%= link_to("Go back to My Account", user_path(@user), class: "primary_link")%><br>
 <%end%>
 
-<%= link_to("Delete the account", delete_user_path(@user)) %>
+<%= link_to("Delete the account", delete_user_path(@user), class: "primary_link") %>
+<br> <br>
+<%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link") %>
 
 <div class="rewards edit">
   <h2>Info:</h2>
@@ -23,10 +27,10 @@
   <% end %>
 </div>
 
+<%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>
+
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
     <%= message %>
   </div>
 <% end %>
-
-

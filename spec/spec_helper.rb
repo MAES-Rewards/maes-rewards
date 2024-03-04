@@ -18,6 +18,7 @@ require 'simplecov'
 require 'capybara'
 require 'selenium-webdriver'
 require 'rack/test'
+require 'rack_session_access/capybara'
 
 SimpleCov.start
 
