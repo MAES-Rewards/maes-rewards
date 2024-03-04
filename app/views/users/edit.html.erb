@@ -27,6 +27,8 @@
   <% end %>
 </div>
 
+<%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>
+
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
     <%= message %>
