@@ -40,28 +40,28 @@ RSpec.describe('Testing History', type: :feature) do
     end
 
     it 'assings points to a user and checks history' do
-        visit new_admin_session_path
-    
-        click_on 'Sign in via Google'
-    
-        click_on 'Assign Points'
-    
-        expect(page).to(have_content('Assign Points to Members'))
+      visit new_admin_session_path
 
-        check('selected_users[]', match: :first, option: user1.id)
-    
-        fill_in 'new_points', with: 10
-    
-        select 'Sample Activity', from: 'recur_activity_id'
-    
-        click_button 'Submit'
-    
-        click_on 'History'
-    
-        expect(page).to(have_content('Activity'))
-        expect(page).to(have_content('Jim Doe'))
-        expect(page).to(have_content('Sample Activity'))
-        expect(page).to(have_content('+10'))
+      click_on 'Sign in via Google'
+
+      click_on 'Assign Points'
+
+      expect(page).to(have_content('Assign Points to Members'))
+
+      check('selected_users[]', match: :first, option: user1.id)
+
+      fill_in 'new_points', with: 10
+
+      select 'Sample Activity', from: 'recur_activity_id'
+
+      click_button 'Submit'
+
+      click_on 'History'
+
+      expect(page).to(have_content('Activity'))
+      expect(page).to(have_content('Jim Doe'))
+      expect(page).to(have_content('Sample Activity'))
+      expect(page).to(have_content('+10'))
     end
   end
 end
