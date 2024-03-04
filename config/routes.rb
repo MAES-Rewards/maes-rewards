@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   delete 'users/:user_id', to: 'users#destroy'
   get 'users/:user_id/edit', to: 'users#edit', as: 'edit_user'
   get 'users/:user_id/delete', to: 'users#delete', as: 'delete_user'
-  
 
   post 'handle_points', to: 'users#handle_points', as: :handle_points
 
