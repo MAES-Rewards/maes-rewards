@@ -10,14 +10,15 @@ Rails.application.routes.draw do
 
   get '/set_admin_session', to: 'sessiontest#set_admin_session', as: :set_admin_session
 
-  get 'dashboards/member/:user_id', to: 'dashboards#member', as: 'member_dashboard'
+  get 'dashboards/member/:id', to: 'dashboards#member', as: 'member_dashboard'
   get 'dashboards/admin', to: 'dashboards#admin', as: 'admin_dashboard'
-  get 'rewards/memberindex/:user_id', to: 'rewards#memberindex', as: 'memrewards_path'
+  get 'rewards/memberindex/:id', to: 'rewards#memberindex', as: 'memrewards_path'
   get 'rewards/purchase/:id/:user_id', to: 'rewards#purchase', as: 'purchase_path'
   get 'rewards/membershow/:id/:user_id', to: 'rewards#membershow', as: 'memshow_path'
   get 'rewards/handle_purchase/:id/:user_id', to: 'rewards#handle_purchase', as: 'handle_purchase'
   get 'users/index', to: 'users#index', as: 'users_index'
   get 'users/points', to: 'users#points', as: 'member_points'
+  get 'users/history', to: 'users#history', as: 'history'
   get 'users/:user_id/activityhistory', to: 'users#activityhistory', as: 'user_history_activity'
   get 'users/:user_id', to: 'users#show', as: 'user'
   patch 'users/:user_id', to: 'users#update'
@@ -25,8 +26,7 @@ Rails.application.routes.draw do
   delete 'users/:user_id', to: 'users#destroy'
   get 'users/:user_id/edit', to: 'users#edit', as: 'edit_user'
   get 'users/:user_id/delete', to: 'users#delete', as: 'delete_user'
-  get 'users/history', to: 'users#history', as: 'history'
-
+  
 
   post 'handle_points', to: 'users#handle_points', as: :handle_points
 
