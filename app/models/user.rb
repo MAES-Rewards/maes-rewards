@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   has_many :earn_transactions, dependent: :nullify
-  has_many :spend_transaction, dependent: :nullify
+  has_many :spend_transactions, dependent: :nullify
   validates :name, presence: true
   # add formatting validation later
   validates :email, presence: true

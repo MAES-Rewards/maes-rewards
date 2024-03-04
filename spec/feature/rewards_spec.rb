@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe('Viewing rewards', type: :feature) do
+  let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
+
   context 'as member' do
     before do
       OmniAuth.config.test_mode = true
@@ -12,8 +14,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
         info: { email: 'user@tamu.edu', name: 'John Doe' }
       }
                                                                         )
-
-      User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
+      page.set_rack_session(user_id: user.id, is_admin: false)
       Reward.create!(name: 'Sample Reward', point_value: 50, inventory: 10, dollar_price: 1.99)
     end
 
@@ -34,7 +35,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      click_on 'Rewards'
+      click_on 'View Rewards'
 
       # Assuming rewards are listed on the page
       expect(page).to(have_content('Sample Reward'))
@@ -73,6 +74,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
     context 'when user has insufficient points' do
       before do
         User.find_by(email: 'user@tamu.edu').update!(points: 20)
+        page.set_rack_session(user_id: user.id, is_admin: false)
       end
 
       it 'user logs in with Google as member & attempts purchase with insufficient point earnings' do
@@ -96,6 +98,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       before do
         User.find_by(email: 'user@tamu.edu').update!(points: 50)
         Reward.find_by(name: 'Sample Reward').update!(inventory: 0)
+        page.set_rack_session(user_id: user.id, is_admin: false)
       end
 
       it 'user logs in with Google as member & attempts purchase on reward with insufficient inventory' do
@@ -129,6 +132,7 @@ RSpec.describe('Viewing rewards', type: :feature) do
       # Assuming there is some delay or asynchronous operation happening
       # If content doesn't appear immediately, wait for it
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
+      page.set_rack_session(is_admin: true)
     end
 
     it 'user logs in with Google & creates reward' do
@@ -172,7 +176,9 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       visit rewards_path
 
-      click_on 'Delete'
+      within('tr', text: 'Test Reward') do
+        click_on 'Delete'
+      end
 
       click_on 'Delete Reward'
 
@@ -196,7 +202,9 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       visit rewards_path
 
-      click_on 'Edit'
+      within('tr', text: 'Test Reward') do
+        click_on 'Edit'
+      end
 
       fill_in 'reward[name]', with: 'Edited Reward'
 
@@ -222,7 +230,9 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       visit rewards_path
 
-      click_on 'See details'
+      within('tr', text: 'Test Reward') do
+        click_on 'See details'
+      end
       expect(page).to(have_content('Detailed view'))
       expect(page).to(have_content('Test Reward'))
       expect(page).to(have_content('10'))
