@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_052732) do
   create_table "spend_transactions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "reward_id"
+    t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,22 @@
+<h1>History </h1>
+
+<table>
+    <tr>
+        <th>Type</th>
+        <th>User Name</th>
+        <th>Reward/Activity Name</th>
+        <th>Points</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+    </tr>
+    <% @history.each do |h| %>
+        <tr >
+            <td><%= h[0] %> </td>
+            <td><%= h[1] %> </td>
+            <td><%= h[2] %> </td>
+            <td><%= h[3] %> </td>
+            <td><%= h[4] %> </td>
+            <td><%= h[5] %> </td>
+        </tr>
+    <% end %>
+</table>

@@ -1,7 +1,17 @@
-<h1>MEMBER Page</h1>
-<%= link_to "Sign Out", destroy_admin_session_path %>
-<%= link_to "View Rewards", memrewards_path_url(@user) %>
-<%= link_to "My Account", user_path(@user)%>
-<h1>
-    Welcome, <%= @user.name %>!
-</h1>
+<h2>Member Home: Welcome, <%= @user.name %>!</h2>
+<p>Welcome to our exclusive rewards program!
+As a valued member of MAES, you are now part of a community where every interaction counts.
+Earn points effortlessly by attending our meetings, proudly sporting our merchandise, and participating in various exciting activities.
+Your loyalty is our priority, and each point you accumulate brings you one step closer to exclusive rewards and privileges.
+From personalized merchandise to unforgettable experiences, your dedication unlocks a world of possibilities.
+Thank you for being a vital part of our organization, where your engagement not only enhances your experience but also
+ contributes to the collective success of our dynamic rewards program.
+ Start earning points today! Welcome to a journey filled with extraordinary perks, and thank you for using MAES Rewards!</p>
+
+ <%= image_tag("maeslinklogo.jpeg", size: '800x400', alt: "MAES Logo", class: "linklogo") %>
+
+ <% flash.each do |type, message| %>
+    <div class="flash flash-<%= type %>">
+      <%= message %>
+    </div>
+  <% end %>

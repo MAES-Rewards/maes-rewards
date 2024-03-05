@@ -1,10 +1,10 @@
 
 <% if session[:is_admin] %>
   <h1>Delete member account</h1>
-  <%= link_to("Go back to landing page", admin_dashboard_url)%>
+  <%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link")%>
 <% else %>
   <h1>Delete your account</h1>
-  <%= link_to("Go back to My Account", user_path(@user))%><br>
+  <%= link_to("Go back to My Account", user_path(@user), class: "primary_link")%><br>
 <%end%>
 
 

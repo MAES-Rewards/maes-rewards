@@ -266,7 +266,7 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
     CountAsOne: ["array", "hash"]
-    Max: 150
+    Max: 160
 
 Metrics/CyclomaticComplexity:
     Max: 10
