@@ -28,7 +28,7 @@ RSpec.describe('Transaction History', type: :feature) do
 
       visit edit_user_path(user1)
 
-      expect(page).not_to have_content('+25')
+      expect(page).not_to(have_content('+25'))
 
       visit admin_dashboard_path
 
@@ -40,7 +40,7 @@ RSpec.describe('Transaction History', type: :feature) do
       fill_in 'new_points', with: 25
 
       # Select associated recurring activity
-      select 'Test Activity', from: 'recur_activity_id'
+      select activity1.name, from: 'recur_activity_id'
 
       # Fill in associated one-time activity (optional)
       fill_in 'onetime_activity_string', with: ''
@@ -48,11 +48,11 @@ RSpec.describe('Transaction History', type: :feature) do
       # Submit the form
       click_button 'Submit'
 
-      expect(page).to have_content('User(s) were successfully updated.')
+      expect(page).to(have_content('User(s) were successfully updated.'))
 
       visit edit_user_path(user1)
 
-      expect(page).to have_content('+25')
+      expect(page).to(have_content('+25'))
     end
 
     it 'User purchases reward & shown in admin txn history' do
@@ -62,11 +62,11 @@ RSpec.describe('Transaction History', type: :feature) do
       visit admin_dashboard_path
 
       # Give user1 enough points
-      user1.update(points: 25)
+      user1.update!(points: 25)
 
       visit edit_user_path(user1)
 
-      expect(page).not_to have_content("\u221220")
+      expect(page).not_to(have_content("\u221220"))
 
       page.set_rack_session(user_id: user1.id, is_admin: false)
 
@@ -75,13 +75,13 @@ RSpec.describe('Transaction History', type: :feature) do
       click_on 'Purchase'
       click_on 'Confirm'
 
-      expect(page).to have_content('Reward was successfully purchased.')
+      expect(page).to(have_content('Reward was successfully purchased.'))
 
       page.set_rack_session(user_id: user2.id, is_admin: true)
 
       visit edit_user_path(user1)
 
-      expect(page).to have_content("\u221220")
+      expect(page).to(have_content("\u221220"))
     end
 
     it 'User fails to purchase reward & not shown in admin txn history' do
@@ -94,7 +94,7 @@ RSpec.describe('Transaction History', type: :feature) do
 
       visit edit_user_path(user1)
 
-      expect(page).not_to have_content("\u221220")
+      expect(page).not_to(have_content("\u221220"))
 
       page.set_rack_session(user_id: user1.id, is_admin: false)
 
@@ -103,13 +103,13 @@ RSpec.describe('Transaction History', type: :feature) do
       click_on 'Purchase'
       click_on 'Confirm'
 
-      expect(page).to have_content('Reward is out of stock or user does not have sufficient points.')
+      expect(page).to(have_content('Reward is out of stock or user does not have sufficient points.'))
 
       page.set_rack_session(user_id: user2.id, is_admin: true)
 
       visit edit_user_path(user1)
 
-      expect(page).not_to have_content("\u221220")
+      expect(page).not_to(have_content("\u221220"))
     end
   end
 end
