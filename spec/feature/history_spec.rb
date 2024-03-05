@@ -8,15 +8,16 @@ RSpec.describe('Transaction History', type: :feature) do
   let!(:activity1) { Activity.create!(name: 'Test Activity', description: 'Description of Test Activity', default_points: 25) }
   let!(:reward1) { Reward.create!(name: 'Test Activity', point_value: 20, dollar_price: 19.99, inventory: 1) }
 
-  context 'Successful Attempts' do
+  context 'Successful & Unsuccessful Attempts' do
     before do
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
         provider: 'google_oauth2',
         uid: '123456',
-        info: { email: 'user@tamu.edu', name: 'John Doe' }
+        info: { email: 'user2@tamu.edu', name: 'John Doe' }
       }
                                                                         )
+      page.set_rack_session(user_id: user2.id, is_admin: true)
     end
 
     it 'User completes activity & shown in admin txn history' do
@@ -25,9 +26,9 @@ RSpec.describe('Transaction History', type: :feature) do
       visit set_admin_session_path
       visit admin_dashboard_path
 
-      visit user_edit_path(user1)
+      visit edit_user_path(user1)
 
-      expect(page).not_to have_content("+30")
+      expect(page).not_to have_content('+25')
 
       visit admin_dashboard_path
 
@@ -49,9 +50,66 @@ RSpec.describe('Transaction History', type: :feature) do
 
       expect(page).to have_content('User(s) were successfully updated.')
 
-      visit user_path(user1)
+      visit edit_user_path(user1)
 
-      expect(page).to have_content('+30')
+      expect(page).to have_content('+25')
+    end
+
+    it 'User purchases reward & shown in admin txn history' do
+      visit new_admin_session_path
+      click_on 'Sign in via Google'
+      visit set_admin_session_path
+      visit admin_dashboard_path
+
+      # Give user1 enough points
+      user1.update(points: 25)
+
+      visit edit_user_path(user1)
+
+      expect(page).not_to have_content("\u221220")
+
+      page.set_rack_session(user_id: user1.id, is_admin: false)
+
+      visit memshow_path_url(id: reward1.id, user_id: user1.id)
+
+      click_on 'Purchase'
+      click_on 'Confirm'
+
+      expect(page).to have_content('Reward was successfully purchased.')
+
+      page.set_rack_session(user_id: user2.id, is_admin: true)
+
+      visit edit_user_path(user1)
+
+      expect(page).to have_content("\u221220")
+    end
+
+    it 'User fails to purchase reward & not shown in admin txn history' do
+      visit new_admin_session_path
+      click_on 'Sign in via Google'
+      visit set_admin_session_path
+      visit admin_dashboard_path
+
+      # Don't give user1 enough points
+
+      visit edit_user_path(user1)
+
+      expect(page).not_to have_content("\u221220")
+
+      page.set_rack_session(user_id: user1.id, is_admin: false)
+
+      visit memshow_path_url(id: reward1.id, user_id: user1.id)
+
+      click_on 'Purchase'
+      click_on 'Confirm'
+
+      expect(page).to have_content('Reward is out of stock or user does not have sufficient points.')
+
+      page.set_rack_session(user_id: user2.id, is_admin: true)
+
+      visit edit_user_path(user1)
+
+      expect(page).not_to have_content("\u221220")
     end
   end
 end
