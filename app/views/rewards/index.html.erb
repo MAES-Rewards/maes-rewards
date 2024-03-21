@@ -3,7 +3,13 @@
 <%= link_to("Add New Reward", new_reward_path, class: 'primary_link') %>
 <br> <br>
 
-<table class="listing" summary="Reward list" style="width: 100%;">
+<!-- search bar & buttons -->
+<div>
+  <%= label_tag "search", "Search:" %>
+  <%= text_field_tag "search", nil, id: "search_bar" %>
+</div>
+
+<table id="rewards_table" class="listing" summary="Reward list" style="width: 100%;>
   <tr class="header">
     <th>Name</th>
     <th>Point price</th>
@@ -31,3 +37,24 @@
     <%= message %>
   </div>
 <% end %>
+
+<script>
+
+// JavaScript for filtering members based on the search bar
+const searchInput = document.getElementById("search_bar");
+const rewardTable = document.getElementById("rewards_table");
+
+searchInput.addEventListener("input", () => {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  const rows = rewardTable.querySelectorAll("tr");
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const rewardName = row.querySelector("td:first-child").textContent.trim().toLowerCase();
+    const isVisible = rewardName.includes(searchQuery);
+    row.style.display = isVisible ? "table-row" : "none";
+  }
+});
+
+</script>
