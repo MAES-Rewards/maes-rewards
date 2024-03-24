@@ -1,4 +1,4 @@
-<h1>History </h1>
+<h1>History</h1>
 
 <!-- search bar & buttons -->
 <div>
@@ -12,6 +12,16 @@
   </select>
 </div>
 
+<!-- Filter preset values -->
+<div>
+  <label for="filter_selector">Filter by type:</label>
+  <select id="filter_selector">
+    <option value="">All</option>
+    <option value="spent">Spent</option>
+    <option value="earned">Earned</option>
+  </select>
+</div>
+
 <table id="history_table">
     <tr>
         <th>Type</th>
@@ -22,7 +32,7 @@
         <th>Updated At</th>
     </tr>
     <% @history.each do |h| %>
-        <tr >
+        <tr>
             <td><%= h[0] %> </td>
             <td><%= h[1] %> </td>
             <td><%= h[2] %> </td>
@@ -37,11 +47,13 @@
 // JavaScript for filtering members based on the search bar
 const searchInput = document.getElementById("search_bar");
 const columnSelector = document.getElementById("column_selector");
+const filterSelector = document.getElementById("filter_selector");
 const histTable = document.getElementById("history_table");
 
 function filterTable() {
   const searchQuery = searchInput.value.trim().toLowerCase();
   const selectedColumn = columnSelector.value;
+  const selectedFilter = filterSelector.value.toLowerCase(); // Get selected filter value
   const rows = histTable.querySelectorAll("tr");
 
   // Determine the cell index based on the selected column
@@ -68,7 +80,25 @@ function filterTable() {
   }
 }
 
+function filterTableByType() {
+  const selectedFilter = filterSelector.value.toLowerCase(); // Retrieve selected filter value
+  const rows = histTable.querySelectorAll("tr");
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const rowType = row.cells[0].textContent.trim().toLowerCase();
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    const searchVisible = row.cells[1].textContent.trim().toLowerCase().includes(searchQuery) ||
+                          row.cells[2].textContent.trim().toLowerCase().includes(searchQuery); // Check if search query matches user name or reward/activity name
+
+    // Check if row type matches filter value and search visibility
+    const isVisible = (selectedFilter === "" || rowType === selectedFilter) && searchVisible;
+    row.style.display = isVisible ? "" : "none";
+  }
+}
+
 searchInput.addEventListener("input", filterTable);
 columnSelector.addEventListener("change", filterTable);
-
+filterSelector.addEventListener("change", filterTableByType);
 </script>
