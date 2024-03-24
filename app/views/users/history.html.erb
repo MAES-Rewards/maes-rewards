@@ -1,6 +1,18 @@
 <h1>History </h1>
 
-<table>
+<!-- search bar & buttons -->
+<div>
+  <%= label_tag "search", "Search:" %>
+  <%= text_field_tag "search", nil, id: "search_bar" %>
+
+  <label for="column_selector">Search Column:</label>
+  <select id="column_selector">
+    <option value="user_name">User Name</option>
+    <option value="reward_activity_name">Reward/Activity Name</option>
+  </select>
+</div>
+
+<table id="history_table">
     <tr>
         <th>Type</th>
         <th>User Name</th>
@@ -20,3 +32,43 @@
         </tr>
     <% end %>
 </table>
+
+<script>
+// JavaScript for filtering members based on the search bar
+const searchInput = document.getElementById("search_bar");
+const columnSelector = document.getElementById("column_selector");
+const histTable = document.getElementById("history_table");
+
+function filterTable() {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  const selectedColumn = columnSelector.value;
+  const rows = histTable.querySelectorAll("tr");
+
+  // Determine the cell index based on the selected column
+  let cellIndex;
+  switch (selectedColumn) {
+    case "user_name":
+      cellIndex = 1;
+      break;
+    case "reward_activity_name":
+      cellIndex = 2;
+      break;
+    default:
+      break;
+  }
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    if (cellIndex !== undefined) {
+      const rowData = row.cells[cellIndex].textContent.trim().toLowerCase();
+      const isVisible = rowData.includes(searchQuery);
+      row.style.display = isVisible ? "" : "none";
+    }
+  }
+}
+
+searchInput.addEventListener("input", filterTable);
+columnSelector.addEventListener("change", filterTable);
+
+</script>
