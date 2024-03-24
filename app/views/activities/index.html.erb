@@ -1,7 +1,7 @@
 
 <div class="activities index">
   <h1>Activities</h1>
-
+  <p>All of the activities that can be associated with points earnings are shown below.</p>
 
   <%= link_to("Add New Activity", new_activity_path, class: "primary_link") %>
   <br> <br>
@@ -11,6 +11,7 @@
   <%= label_tag "search", "Search:" %>
   <%= text_field_tag "search", nil, id: "search_bar" %>
 </div>
+<br />
   <table id="activities_table" class="listing" style="width: 100%;">
     <tr class="header">
       <th>Name</th>
