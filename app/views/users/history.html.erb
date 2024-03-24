@@ -23,6 +23,7 @@
   </select>
 
   <button id="point_price_btn">Filter by Points</button>
+  <button id="date_btn">Filter by Date</button>
 
 </div>
 <br />
@@ -33,6 +34,16 @@
   <input type="number" id="point_price_min" min="0">
   <label for="point_price_max">Points (Max):</label>
   <input type="number" id="point_price_max" min="0">
+</div>
+
+<!-- Filter by date intervals -->
+<div id="date_filters" style="display: none;">
+  <label for="date_min">Date (Min):</label>
+  <input type="date" id="date_min">
+  <label for="date_max">Date (Max):</label>
+  <input type="date" id="date_max">
+  <!-- Reset button for date filter -->
+<button id="reset_date_filter">Reset Date Filter</button>
 </div>
 
 <br />
@@ -71,21 +82,47 @@ const pointPriceMaxInput = document.getElementById("point_price_max");
 const pointPriceBtn = document.getElementById("point_price_btn");
 const pointPriceFilters = document.getElementById("point_price_filters");
 
+const dateMinInput = document.getElementById("date_min");
+const dateMaxInput = document.getElementById("date_max");
+const dateBtn = document.getElementById("date_btn");
+const dateFilters = document.getElementById("date_filters");
+
+const resetDateFilterBtn = document.getElementById("reset_date_filter");
+
+resetDateFilterBtn.addEventListener("click", () => {
+  // Clear date filter inputs
+  dateMinInput.value = "";
+  dateMaxInput.value = "";
+
+  // Trigger table filtering
+  filterTable();
+});
+
+
+
 function toggleFilters(button, filters) {
   const isHidden = filters.style.display === "none";
   pointPriceFilters.style.display = "none";
+  dateFilters.style.display = "none";
 
   if (isHidden) {
     filters.style.display = "block";
     button.style.fontWeight = "bold"; // Indicate active button
   } else {
+    filters.style.display = "none";
     button.style.fontWeight = "normal";
   }
 }
 
+
 pointPriceBtn.addEventListener("click", () => {
   toggleFilters(pointPriceBtn, pointPriceFilters);
 });
+
+dateBtn.addEventListener("click", () => {
+  toggleFilters(dateBtn, dateFilters);
+});
+
 
 
 function filterTable() {
@@ -95,6 +132,9 @@ function filterTable() {
   const rows = histTable.querySelectorAll("tr");
   const pointPriceMin = parseInt(pointPriceMinInput.value);
   const pointPriceMax = parseInt(pointPriceMaxInput.value) || Infinity;
+  const dateMin = dateMinInput.value; // Get date inputs
+  const dateMax = dateMaxInput.value;
+
 
   // Determine the cell index based on the selected column
   let cellIndex;
@@ -113,38 +153,37 @@ function filterTable() {
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
     const points = parseInt(row.cells[3].textContent);
-    searchVisible = true;
-    if (cellIndex !== undefined) {
-      const rowData = row.cells[cellIndex].textContent.trim().toLowerCase();
-      searchVisible = rowData.includes(searchQuery);
-    }
-    const pointsVisible = points >= pointPriceMin && points <= pointPriceMax;
-    const isVisible = searchVisible && pointsVisible;
-    row.style.display = isVisible ? "" : "none";
-  }
-}
-
-function filterTableByType() {
-  const selectedFilter = filterSelector.value.toLowerCase(); // Retrieve selected filter value
-  const rows = histTable.querySelectorAll("tr");
-
-  // Start from the second row (index 1) to skip the header row
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
+    const createdAt = new Date(row.cells[4].textContent);
     const rowType = row.cells[0].textContent.trim().toLowerCase();
-    const searchQuery = searchInput.value.trim().toLowerCase();
     const searchVisible = row.cells[1].textContent.trim().toLowerCase().includes(searchQuery) ||
                           row.cells[2].textContent.trim().toLowerCase().includes(searchQuery); // Check if search query matches user name or reward/activity name
 
-    // Check if row type matches filter value and search visibility
-    const isVisible = (selectedFilter === "" || rowType === selectedFilter) && searchVisible;
+    let pointsVisible = true;
+    if (!isNaN(pointPriceMin) && !isNaN(pointPriceMax)) {
+      pointsVisible = points >= pointPriceMin && points <= pointPriceMax;
+    }
+
+    let dateVisible = true;
+    if (dateMin && dateMax) {
+      const rowDate = new Date(createdAt);
+      const minDate = new Date(dateMin);
+      const maxDate = new Date(dateMax);
+      dateVisible = rowDate >= minDate && rowDate <= maxDate;
+    }
+    const isTypeVisible = (selectedFilter === "" || rowType === selectedFilter);
+    const isVisible = searchVisible && pointsVisible && dateVisible && isTypeVisible;
     row.style.display = isVisible ? "" : "none";
   }
 }
 
+
+
 searchInput.addEventListener("input", filterTable);
 columnSelector.addEventListener("change", filterTable);
-filterSelector.addEventListener("change", filterTableByType);
+filterSelector.addEventListener("change", filterTable);
 pointPriceMinInput.addEventListener("input", filterTable);
 pointPriceMaxInput.addEventListener("input", filterTable);
+dateMinInput.addEventListener("input", filterTable);
+dateMaxInput.addEventListener("input", filterTable);
+
 </script>
