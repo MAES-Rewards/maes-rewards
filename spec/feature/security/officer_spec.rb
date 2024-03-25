@@ -25,7 +25,7 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
     end
 
     # Officer Home Sunny Day Test
@@ -34,11 +34,11 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Home'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
     end
 
     # Officer Rewards Sunny Day Tests
@@ -47,11 +47,11 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
 
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
     end
@@ -60,10 +60,10 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -77,10 +77,10 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -96,10 +96,10 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -120,10 +120,10 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -138,7 +138,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -150,7 +150,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -167,7 +167,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -186,7 +186,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -210,7 +210,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -230,7 +230,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Assign Points'
       expect(page).to(have_content('Assign Points to Members'))
