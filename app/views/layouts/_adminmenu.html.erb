@@ -9,10 +9,20 @@
     <li><%= link_to "Activities", activities_path%></li>
     <li><%= link_to "Assign Points", member_points_url%></li>
     <li><%= link_to "History", history_path %></li>
+    <li>
+      <div id="google_element"></div>
+    </li>
     <li><%= link_to "Sign Out", destroy_admin_session_path %></li>
   </ul>
 </nav>
 </div>
+
+<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+<script>
+  function loadGoogleTranslate() {
+    new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es,pt,qu,gn', autoDisplay: false}, "google_element");
+  }
+</script>
 
 <style>
 nav {
