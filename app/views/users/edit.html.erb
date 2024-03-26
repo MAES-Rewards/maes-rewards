@@ -1,19 +1,16 @@
 
 
-<% if session[:is_admin] %>
-  <h1><%=@user.name%>'s Account</h1>
+ <h1><%=@user.name%>'s Account</h1>
+ <h2>Account Info:</h2>
 
-<% else %>
-  <h1>Edit My Account</h1>
-  <%= link_to("Go back to My Account", user_path(@user), class: "primary_link")%><br>
-<%end%>
+<div class="actions">
 
-<%= link_to("Delete the account", delete_user_path(@user), class: "primary_link") %>
-<br> <br>
-<%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link") %>
-
-<div class="rewards edit">
-  <h2>Info:</h2>
+  <%= link_to("Delete the account", delete_user_path(@user), class: "primary_link") %>
+  <%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link") %>
+  <br>
+</div>
+<br />
+<div class="edit">
 
   <%= form_for(@user) do |u| %>
     <% # url: task_path(@task), method: 'patch' %>
@@ -21,11 +18,14 @@
      <%= render(partial: 'form', locals: {u: u})%>
 
     <div class="form-buttons">
+      <br />
       <%= u.submit("Save changes") %>
     </div>
 
   <% end %>
 </div>
+<br />
+<h2>Account Transactions:</h2>
 
 <%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>
 
@@ -34,3 +34,6 @@
     <%= message %>
   </div>
 <% end %>
+
+<br />
+<br />

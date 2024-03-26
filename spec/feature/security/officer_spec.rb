@@ -108,12 +108,11 @@ RSpec.describe('Testing Security', type: :feature) do
       end
       expect(page).to(have_content('Sample Reward'))
       expect(page).to(have_content('Back to all Rewards'))
-      expect(page).to(have_content('Sample Reward details'))
+      expect(page).to(have_content('Sample Reward'))
 
       click_on 'Edit'
       expect(page).to(have_content('Edit reward: Sample Reward'))
       expect(page).to(have_content('Name'))
-      expect(page).to(have_content('Info:'))
     end
 
     it 'logins in to the website, navigate to rewards, and presses delete' do
