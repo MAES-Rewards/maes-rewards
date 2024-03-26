@@ -4,9 +4,19 @@
     <li><%= link_to "View Rewards", memrewards_path_url(session[:user_id]) %></li>
     <li><%= link_to "My Account", user_path(session[:user_id])%></li>
     <li><%= link_to 'View My History', user_history_activity_path(session[:user_id]) %></li>
+    <li>
+      <div id="google_element"></div>
+    </li>
     <li><%= link_to "Sign Out", destroy_admin_session_path %></li>
   </ul>
 </nav>
+
+<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+<script>
+  function loadGoogleTranslate() {
+    new google.translate.TranslateElement("google_element");
+  }
+</script>
 
 <style>
 nav {
