@@ -219,7 +219,7 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Activity') do
         click_on 'Delete'
       end
-      expect(page).to(have_content('Delete Activity'))
+      expect(page).to(have_content('Delete activity: Sample Activity'))
       expect(page).to(have_content('Are you sure you want to permanently delete this activity?'))
       expect(page).to(have_content('Sample Activity'))
     end
