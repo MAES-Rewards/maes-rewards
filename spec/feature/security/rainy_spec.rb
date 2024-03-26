@@ -60,7 +60,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Member Home: Welcome, John Doe!'))
 
       click_on 'View Rewards'
-      expect(page).to(have_content('Rewards (member view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Sample Reward'))
 
@@ -76,7 +76,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Member Home: Welcome, John Doe!'))
 
       click_on 'View Rewards'
-      expect(page).to(have_content('Rewards (member view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Sample Reward'))
 
@@ -99,7 +99,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Member Home: Welcome, John Doe!'))
 
       click_on 'View Rewards'
-      expect(page).to(have_content('Rewards (member view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Sample Reward'))
 

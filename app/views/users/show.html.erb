@@ -18,12 +18,13 @@
         <td><%= @user.email %></td>
         <td><%= @user.points %></td>
         <td><%= @user.is_admin ? "Yes" : "No" %></td>
-        <td><%= @user.created_at %></td>
-        <td><%= @user.updated_at %></td>
+        <td><%= @user.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= @user.updated_at.strftime("%m/%d/%Y") %></td>
       </tr>
   </tbody>
 </table>
 <br />
 <br />
+<h2>Transactions</h2>
 <p>All of your account transactions are shown below.</p>
 <%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>
