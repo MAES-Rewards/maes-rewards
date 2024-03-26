@@ -1,14 +1,13 @@
-<h1>Detailed view</h1>
-<%= link_to("Back to all Rewards", rewards_path, class: "primary_link") %>
-
+<h1><%= @reward.name %></h1>
 <div class="rewards show">
-  <h2><%= @reward.name %> details</h2>
-
   <div class="actions">
+    <br />
+    <%= link_to("Back to all Rewards", rewards_path, class: "primary_link") %>
     <%= link_to('Edit', edit_reward_path(@reward), class: "primary_link") %>
     <%= link_to('Delete', delete_reward_path(@reward), class: "primary_link") %>
-  </div>
 
+  </div>
+  <br />
   <table summary="reward detail view">
     <tr>
       <th>Name</th>
