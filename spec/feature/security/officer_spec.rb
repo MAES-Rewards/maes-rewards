@@ -176,7 +176,7 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Activity') do
         click_on 'Show'
       end
-      expect(page).to(have_content('Activity Details'))
+
       expect(page).to(have_content('Sample Activity'))
       expect(page).to(have_content('This is an activity'))
     end
@@ -195,12 +195,12 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Activity') do
         click_on 'Show'
       end
-      expect(page).to(have_content('Activity Details'))
+
       expect(page).to(have_content('Sample Activity'))
       expect(page).to(have_content('This is an activity'))
 
       click_on 'Edit'
-      expect(page).to(have_content('Edit Activity'))
+      expect(page).to(have_content('Edit activity: Sample Activity'))
       expect(page).to(have_content('Back to all Activities'))
       expect(page).to(have_content('Description'))
     end

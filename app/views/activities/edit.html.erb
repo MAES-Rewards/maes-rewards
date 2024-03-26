@@ -1,5 +1,5 @@
 <div class="activities edit">
-  <h1>Edit Activity</h1>
+  <h1>Edit activity: <%= @activity.name %></h1>
   <%= link_to('Back to all Activities', activities_path, class: "primary_link") %>
   <br> <br>
   <%= form_for(@activity) do |f| %>
