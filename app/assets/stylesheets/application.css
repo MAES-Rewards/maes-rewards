@@ -32,7 +32,7 @@
 
 }
 
-h2 {
+h1, h2 {
   /* Webpage titles */
   color: black;
   text-align: center;
@@ -42,11 +42,6 @@ h2 {
   text-align: center; 
   color: white;
   padding-right: 50px;
-}
-
-h1 {
-  text-align: center; 
-  color: black;
 }
 
 
@@ -119,7 +114,14 @@ tr:hover {
   background-color: #e0e0e0; /* Background color on hover */
 }
 
+/* Documentation Start */
 
+#docs {
+  width: min(800px, var(--safe-width));
+  margin: 0 auto;
+}
+
+/* Documentation End */
 
 body {
   font-family: var(--font-main);
