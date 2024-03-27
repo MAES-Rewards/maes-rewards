@@ -54,7 +54,7 @@
     <%=
         select_tag "recur_activity_id",
         options_for_select(
-            [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] }
+          [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id, { "data-default-pts" => activity.default_points }] }
         ),
         id: "activity_select_box"
     %>
@@ -77,19 +77,22 @@
 
 <script>
 
-    // JavaScript for custom activity selection
+    // JavaScript for custom activity selection & default points
     const actSelect = document.getElementById("activity_select_box");
     const actCustom = document.getElementById("onetime_activity_section");
     const actCustomInput = document.getElementById("onetime_activity_string");
+    const pointsInput = document.getElementById("new_points");
 
     actSelect.addEventListener("change", event => {
-        if (event.target.selectedOptions[0]?.text == "Custom One-Time Activity\u2026") {
+        const selOpt = event.target.selectedOptions[0];
+        if (selOpt.text == "Custom One-Time Activity\u2026") {
             actCustom.classList.remove("hidden");
         }
         else {
             actCustom.classList.add("hidden");
             actCustomInput.value = "";
         }
+        pointsInput.value = selOpt.getAttribute("data-default-pts");
     });
 
     // JavaScript for filtering members based on the search bar
