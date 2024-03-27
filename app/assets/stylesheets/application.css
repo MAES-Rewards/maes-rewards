@@ -16,6 +16,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+/*
+MAES theme color
+rgba(89,187,53,255)
+rgba(16,90,157,255)
+*/
+
 :root {
   --font-main: "Roboto", "Arial", sans-serif;
   --safe-width: calc(100% - 20px);
@@ -26,7 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: maroon;
+  background-color: rgba(89,187,53,255);
   padding: 20px;
   border-radius: 10px 10px 0 0;
 
@@ -72,7 +78,7 @@ h1 {
 .primary_link{
   display: inline-block; 
   padding: 10px 20px; 
-  background-color: maroon; /* Button background color */ 
+  background-color: rgba(89,187,53,255); /* Button background color */ 
   text-decoration: none; /* Remove underline from the link */ 
   border: none; 
   border-radius: 5px; /* Rounded corners */ 
