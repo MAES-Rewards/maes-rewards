@@ -32,6 +32,11 @@ Reward.find_or_create_by!(name: 'MAES Hoodie') do |reward|
   reward.inventory = 20
 end
 
+Activity.find_or_create_by!(name: "Custom One-Time Activity\u2026") do |activity|
+  activity.description = 'This activity exists to give points to members not associated with any specific activity.'
+  activity.default_points = 0
+end
+
 Activity.find_or_create_by!(name: 'Attend MAES Meeting') do |activity|
   activity.description = 'Attend an MAES meeting and record your attendance.'
   activity.default_points = 10

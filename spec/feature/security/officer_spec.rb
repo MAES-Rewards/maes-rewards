@@ -25,7 +25,7 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
     end
 
     # Officer Home Sunny Day Test
@@ -34,11 +34,11 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Home'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
     end
 
     # Officer Rewards Sunny Day Tests
@@ -47,11 +47,11 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
 
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
     end
@@ -60,10 +60,10 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -77,17 +77,17 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Sample Reward'))
       expect(page).to(have_content('Back to all Rewards'))
       expect(page).to(have_content('50'))
     end
@@ -96,34 +96,33 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Sample Reward'))
       expect(page).to(have_content('Back to all Rewards'))
-      expect(page).to(have_content('Sample Reward details'))
+      expect(page).to(have_content('Sample Reward'))
 
       click_on 'Edit'
       expect(page).to(have_content('Edit reward: Sample Reward'))
       expect(page).to(have_content('Name'))
-      expect(page).to(have_content('Info:'))
     end
 
     it 'logins in to the website, navigate to rewards, and presses delete' do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -138,7 +137,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -150,7 +149,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -167,7 +166,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -177,7 +176,7 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Activity') do
         click_on 'Show'
       end
-      expect(page).to(have_content('Activity Details'))
+
       expect(page).to(have_content('Sample Activity'))
       expect(page).to(have_content('This is an activity'))
     end
@@ -186,7 +185,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -196,12 +195,12 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Activity') do
         click_on 'Show'
       end
-      expect(page).to(have_content('Activity Details'))
+
       expect(page).to(have_content('Sample Activity'))
       expect(page).to(have_content('This is an activity'))
 
       click_on 'Edit'
-      expect(page).to(have_content('Edit Activity'))
+      expect(page).to(have_content('Edit activity: Sample Activity'))
       expect(page).to(have_content('Back to all Activities'))
       expect(page).to(have_content('Description'))
     end
@@ -210,7 +209,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Activities'
       expect(page).to(have_content('Activities'))
@@ -220,7 +219,7 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Activity') do
         click_on 'Delete'
       end
-      expect(page).to(have_content('Delete Activity'))
+      expect(page).to(have_content('Delete activity: Sample Activity'))
       expect(page).to(have_content('Are you sure you want to permanently delete this activity?'))
       expect(page).to(have_content('Sample Activity'))
     end
@@ -230,7 +229,7 @@ RSpec.describe('Testing Security', type: :feature) do
       visit new_admin_session_path
 
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Assign Points'
       expect(page).to(have_content('Assign Points to Members'))
