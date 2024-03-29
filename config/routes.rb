@@ -58,5 +58,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reward_confirmations, only: [:index, :update]
+  resources :reward_confirmations, only: %i[index update]
 end

@@ -10,7 +10,8 @@ class SpendTransaction < ApplicationRecord
   after_create :create_reward_confirmation
 
   private
+
   def create_reward_confirmation
-    build_reward_confirmation.save
+    build_reward_confirmation.save!
   end
 end
