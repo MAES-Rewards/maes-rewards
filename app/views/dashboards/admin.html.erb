@@ -16,7 +16,7 @@
             <td><%= user.email %></td>
             <td><%= user.points %></td>
             <td><%= user.is_admin %></td>
-            <td><%= link_to "Edit", edit_user_path(user), class: "primary_link" %> <%= link_to "Delete", delete_user_path(user), class: "primary_link" %></td>
+            <td><%= link_to "Edit", edit_user_path(user), class: "primary_link", aria: {label: "Edit Button"} %> <%= link_to "Delete", delete_user_path(user), class: "primary_link", aria: {label: "Delete Button"} %></td>
 
         </tr>
     <% end %>

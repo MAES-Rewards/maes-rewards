@@ -1,6 +1,6 @@
 <div class="activities delete">
   <h1 aria-label="Delete Activity">Delete Activity</h1>
-  <%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities"}) %>
+  <%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities Button"}) %>
   <br> <br>
   <%= form_for(@activity, method: 'delete') do |f| %>
     <p>Are you sure you want to permanently delete this activity?</p>

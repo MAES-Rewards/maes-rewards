@@ -1,9 +1,9 @@
 
 <div class="activities index">
-  <h1 aria-label="Activities">Activities</h1>
+  <h1 aria-label="Activities">Activities (Admin View)</h1>
+  <p>All of the activities that can be used to earn points are shown below.</p>
 
-
-  <%= link_to("Add New Activity", new_activity_path, class: "primary_link", aria: {label: "Back to all Activities"}) %>
+  <%= link_to("Add New Activity", new_activity_path, class: "primary_link", aria: {label: "Add New Activity Button"}) %>
   <br> <br>
   <table class="listing" style="width: 100%;">
     <tr class="header">
@@ -18,7 +18,7 @@
         <td><%= activity.description %></td>
         <td><%= activity.default_points %></td>
         <td class="actions">
-          <%= link_to('Show', activity_path(activity), class: "primary_link", aria: {label: "Show Activity Button"}) %>
+          <%= link_to('See Details', activity_path(activity), class: "primary_link", aria: {label: "Show Activity Button"}) %>
           <% if session[:is_admin] %>
             <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity Button"} )%>
             <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity Button"}) %>
