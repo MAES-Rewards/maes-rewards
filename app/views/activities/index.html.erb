@@ -1,6 +1,6 @@
 
 <div class="activities index">
-  <h1>Activities</h1>
+  <h1 aria-label="Activities">Activities</h1>
 
 
   <%= link_to("Add New Activity", new_activity_path, class: "primary_link", aria: {label: "Back to all Activities"}) %>
@@ -18,10 +18,10 @@
         <td><%= activity.description %></td>
         <td><%= activity.default_points %></td>
         <td class="actions">
-          <%= link_to('Show', activity_path(activity), class: "primary_link", aria: {label: "Show Activity"}) %>
+          <%= link_to('Show', activity_path(activity), class: "primary_link", aria: {label: "Show Activity Button"}) %>
           <% if session[:is_admin] %>
-            <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity"} )%>
-            <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity"}) %>
+            <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity Button"} )%>
+            <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity Button"}) %>
           <% end %>
         </td>
       </tr>

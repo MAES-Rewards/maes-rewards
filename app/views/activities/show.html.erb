@@ -1,11 +1,11 @@
 <div class="activities show">
-  <h1>Activity Details</h1>
+  <h1 aria-label="Activity Details">Activity Details</h1>
   <%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities"})%>
   <br> <br> <br>
   <% if session[:is_admin] %>
     <div class="actions">
-      <%= link_to('Edit', edit_activity_path(@activity), class: "primary_link", aria: {label: "Edit Activity"})%>
-      <%= link_to('Delete', delete_activity_path(@activity), class: "primary_link", aria: {label: "Delete Activity"})%>
+      <%= link_to('Edit', edit_activity_path(@activity), class: "primary_link", aria: {label: "Edit Activity Button"})%>
+      <%= link_to('Delete', delete_activity_path(@activity), class: "primary_link", aria: {label: "Delete Activity Button"})%>
     </div>
   <% end %>
 
