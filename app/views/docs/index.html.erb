@@ -16,6 +16,27 @@
   <h3>Activities</h3>
 
   <p>Activities are how you earn points to purchase rewards! Each activity has a certain number of points you will earn from it. However, if you made an extra contribution, an officer can award you more points than the default! Activities are listed on the <%= link_to "Activities page", activities_path %>.</p>
-  <h2>Admin Help</h2>
-  <p>TODO</p>
+
+  <h2>Officer Help</h2>
+
+  <h3>Rewards</h3>
+
+  <p>In the <%= link_to "Rewards page", rewards_path %>, officers can see a list of all rewards. Officers can also create new rewards, as well as edit and delete existing rewards. Each reward has four main values associated with it:</p>
+
+  <ul>
+    <li><b>Name</b> &mdash; the name of the reward as it will appear to members.</li>
+    <li><b>Point price</b> &mdash; the point cost of the reward. This is the amount of points members need to spend each time they redeem the reward.</li>
+    <li><b>Current inventory</b> &mdash; the current inventory of the reward. This is the amount of times the reward can be redeemed across all members before it becomes out of stock. At any time, the reward can be restocked by editing the reward and updating the current inventory value.</li>
+    <li><b>Dollar price</b> &mdash; the nominal dollar value of the reward, if any. This is purely for informational purposes.</li>
+  </ul>
+
+  <h3>Activities</h3>
+
+  <p>In the <%= link_to "Activities page", activities_path %>, officers can see a list of all activities. Officers can also create new activities, as well as edit and delete existing activities. Each activity has three main values associated with it:</p>
+
+  <ul>
+    <li><b>Name</b> &mdash; the name of the activity as it will appear to members.</li>
+    <li><b>Description</b> &mdash; the description of the activity as it will appear to members.</li>
+    <li><b>Default points</b> &mdash; The default point value that will appear in the Points field in the Assign Points page (see below) when this activity is selected.</li>
+  </ul>
 </div>
