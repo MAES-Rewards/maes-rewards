@@ -87,7 +87,7 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Reward Details'))
       expect(page).to(have_content('Back to all Rewards'))
       expect(page).to(have_content('50'))
     end
@@ -106,7 +106,7 @@ RSpec.describe('Testing Security', type: :feature) do
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Reward Details'))
       expect(page).to(have_content('Back to all Rewards'))
       expect(page).to(have_content('Sample Reward details'))
 
