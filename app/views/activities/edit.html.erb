@@ -1,7 +1,8 @@
+<h1 aria-label="Edit Activity">Edit Activity: <%= @activity.name %></h1>
+<%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities"})%>
+
 <div class="activities edit">
-  <h1 aria-label="Edit Activity">Edit Activity</h1>
-  <%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities"})%>
-  <br> <br>
+  <h2 aria-label="Activity Info">Info:</h2>
   <%= form_for(@activity) do |f| %>
     <%= render(partial: 'form', locals: {f: f}) %>
 
