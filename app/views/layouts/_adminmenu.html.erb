@@ -3,6 +3,9 @@
 <% end %>
 <div class="navbar">
 <nav>
+  <% if device == "mobile" %>
+    <h1>TESTING HERE</h1>
+  <% end %>
   <ul>
     <li><%= link_to "Home", admin_dashboard_url, aria: {label: "Admin Home Tab"} %></li>
     <li><%= link_to "Rewards", rewards_path, aria: {label: "Reward Tab"}%></li>
