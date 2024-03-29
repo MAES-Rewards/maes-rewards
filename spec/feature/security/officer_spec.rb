@@ -111,7 +111,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Sample Reward details'))
 
       click_on 'Edit'
-      expect(page).to(have_content('Edit reward: Sample Reward'))
+      expect(page).to(have_content('Edit Reward: Sample Reward'))
       expect(page).to(have_content('Name'))
       expect(page).to(have_content('Info:'))
     end
