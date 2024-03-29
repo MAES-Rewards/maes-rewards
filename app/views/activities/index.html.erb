@@ -3,14 +3,14 @@
   <h1>Activities</h1>
 
 
-  <%= link_to("Add New Activity", new_activity_path, class: "primary_link") %>
+  <%= link_to("Add New Activity", new_activity_path, class: "primary_link", aria: {label: "Back to all Activities"}) %>
   <br> <br>
   <table class="listing" style="width: 100%;">
     <tr class="header">
-      <th>Name</th>
-      <th>Description</th>
-      <th>Default Points</th>
-      <th>Actions</th>
+      <th aria-label="Activity Name">Name</th>
+      <th aria-label="Activity Description">Description</th>
+      <th aria-label="Activity Default Points">Default Points</th>
+      <th aria-label="Activity Actions">Actions</th>
     </tr>
     <% @activities.each do |activity| %>
       <tr>
@@ -18,10 +18,10 @@
         <td><%= activity.description %></td>
         <td><%= activity.default_points %></td>
         <td class="actions">
-          <%= link_to('Show', activity_path(activity), class: "primary_link") %>
+          <%= link_to('Show', activity_path(activity), class: "primary_link", aria: {label: "Show Activity"}) %>
           <% if session[:is_admin] %>
-            <%= link_to('Edit', edit_activity_path(activity), class: "primary_link") %>
-            <%= link_to('Delete', delete_activity_path(activity), class: "primary_link") %>
+            <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity"} )%>
+            <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity"}) %>
           <% end %>
         </td>
       </tr>

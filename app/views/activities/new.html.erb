@@ -1,4 +1,4 @@
-<%= link_to('Back to all Activities', activities_path, class: "primary_link") %>
+<%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities"})%>
 
 <div class="activities new">
   <h1>Create Activity</h1>
@@ -6,7 +6,7 @@
   <%= form_for(@activity) do |f| %>
     <%= render(partial: 'form', locals: {f: f}) %>
 
-    <div class="form-buttons">
+    <div class="form-buttons" aria-label="Create Activity">
       <%= f.submit('Create Activity') %>
     </div>
   <% end %>
