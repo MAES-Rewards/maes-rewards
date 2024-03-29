@@ -47,7 +47,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def create_and_sign_in_user(admin)
-    user = User.create_with_default_points(admin: admin)
+    user = User.create_with_default_stats(admin: admin)
     if user.persisted?
       set_admin_session(admin, false, user.id)
       redirect_to(member_dashboard_path(user))
