@@ -1,4 +1,5 @@
 <div class="activities edit">
+
   <h1>Edit activity: <%= @activity.name %></h1>
   <%= link_to('Back to all Activities', activities_path, class: "primary_link") %>
   <br> <br>
@@ -7,6 +8,7 @@
 
     <div class="form-buttons">
       <br />
+
       <%= f.submit('Save Changes') %>
     </div>
   <% end %>

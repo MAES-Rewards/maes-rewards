@@ -1,3 +1,4 @@
+
 <h1> Home </h1>
 
 <h2>All Members</h2>
@@ -12,6 +13,7 @@
   <button id="point_btn">Filter by Points</button>
 <br / >
 
+
 <!-- Filter by points intervals -->
 
 <div id="point_filters" style="display: none;">
@@ -24,11 +26,11 @@
 
 <table id="members_table">
     <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Points</th>
-        <th>Is Admin</th>
-        <th>Actions</th>
+        <th aria-label="Member Name">Name</th>
+        <th aria-label="Member Email">Email</th>
+        <th aria-label="Member Points">Points</th>
+        <th aria-label="Is Admin">Is Admin</th>
+        <th aria-label="Member Actions">Actions</th>
     </tr>
     <% @users.each do |user| %>
         <tr>
@@ -36,7 +38,7 @@
             <td><%= user.email %></td>
             <td><%= user.points %></td>
             <td><%= user.is_admin %></td>
-            <td><%= link_to "Edit", edit_user_path(user), class: "primary_link" %> <%= link_to "Delete", delete_user_path(user), class: "primary_link" %></td>
+            <td><%= link_to "Edit", edit_user_path(user), class: "primary_link", aria: {label: "Edit Button"} %> <%= link_to "Delete", delete_user_path(user), class: "primary_link", aria: {label: "Delete Button"} %></td>
 
         </tr>
     <% end %>

@@ -1,5 +1,5 @@
-<h1>Create New Reward</h1>
-<%= link_to("Back to all Rewards", {controller: 'rewards', action: 'index'}, class: "primary_link") %><br />
+<h1 aria-label="Create New Reward">Create New Reward</h1>
+<%= link_to("Back to all Rewards", {controller: 'rewards', action: 'index'}, class: "primary_link", aria: {label: "Back to All Rewards Button"}) %><br />
 <div class="rewards new">
   <h2>Create Reward</h2>
 
@@ -8,7 +8,7 @@
 
     <%= render(partial: 'form', locals: {r: r})%>
 
-    <div class="form-buttons">
+    <div class="form-buttons" aria-label="Create Reward Button">
       <%= r.submit("Create Reward") %>
     </div>
 
