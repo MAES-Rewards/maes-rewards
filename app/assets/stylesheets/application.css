@@ -19,17 +19,16 @@
 :root {
   --font-main: "Roboto", "Arial", sans-serif;
   --safe-width: calc(100% - 20px);
+  --color-main: rgb(77 131 86);
 }
 
 .header-container {
-
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: maroon;
   padding: 20px;
   border-radius: 10px 10px 0 0;
-
 }
 
 h2 {
