@@ -51,7 +51,6 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Rewards'
 
-
       expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
@@ -64,7 +63,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Home'))
 
       click_on 'Rewards'
-      
+
       expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
