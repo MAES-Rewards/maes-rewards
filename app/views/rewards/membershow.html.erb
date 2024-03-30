@@ -2,7 +2,7 @@
   <h1><%= @reward.name %></h1>
   <br>
   <div class="actions">
-     <%= link_to("Back to all Rewards", memrewards_path_url(@user), class: "primary_link", aria: {label: "Back to All Rewards Button"})) %>
+     <%= link_to("Back to all Rewards", memrewards_path_url(@user), class: "primary_link", aria: {label: "Back to All Rewards Button"}) %>
     <%= link_to('Purchase', purchase_path_url(id: @reward, user_id: @user), class: "primary_link", aria: {label: "Purchase Reward Button"}) %>
 
   </div>
