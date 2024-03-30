@@ -3,16 +3,22 @@
 <% end %>
 <div class="navbar">
 <nav>
+<% if device == "mobile" %>
+  <h1>MOBILE TEST</h1>
+<% end %>
+<% if device == "desktop" %>
+  <h1>DESKTOP TEST</h1>
+<% end %>
   <ul>
-    <li><%= link_to "Home", admin_dashboard_url %></li>
-    <li><%= link_to "Rewards", rewards_path%></li>
-    <li><%= link_to "Activities", activities_path%></li>
-    <li><%= link_to "Assign Points", member_points_url%></li>
-    <li><%= link_to "History", history_path %></li>
+    <li><%= link_to "Home", admin_dashboard_url, aria: {label: "Admin Home Tab"} %></li>
+    <li><%= link_to "Rewards", rewards_path, aria: {label: "Reward Tab"}%></li>
+    <li><%= link_to "Activities", activities_path, aria: {label: "Activity Tab"}%></li>
+    <li><%= link_to "Assign Points", member_points_url, aria: {label: "Points Tab"}%></li>
+    <li><%= link_to "History", history_path, aria: {label: "History Tab"} %></li>
+    <li><%= link_to "Sign Out", destroy_admin_session_path, aria: {label: "Sign Out Button"} %></li>
     <li>
       <div id="google_element"></div>
     </li>
-    <li><%= link_to "Sign Out", destroy_admin_session_path %></li>
   </ul>
 </nav>
 </div>

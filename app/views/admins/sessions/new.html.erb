@@ -2,10 +2,10 @@
   <div class="main-login">
     <%= image_tag("maesmembers.webp", size: '600x450', alt: "MAES Members", class: "members") %>
     <div class="login-text">
-    <h2>Log in to MAES App</h2>
+    <h2 aria-label="Log in to MAES App">Log in to MAES App</h2>
 
     <%= button_to admin_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
-    <i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Sign in via Google</span>
+    <i class="fab fa-google mobile-text"></i><span class = "mobile-font" aria-label="Sign in via Google Button">&nbsp;Sign in via Google</span>
     </div>
     <% end %>
     <br> <br> <br>
