@@ -27,7 +27,7 @@ RSpec.describe('Reward Notifications', type: :feature) do
     it 'can see new reward purchases' do
       visit new_admin_session_path
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Notifications'
       expect(page).to(have_content('Reward Notifications'))
@@ -41,7 +41,7 @@ RSpec.describe('Reward Notifications', type: :feature) do
     it 'can mark a reward purchase as given' do
       visit new_admin_session_path
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Notifications'
       expect(page).to(have_content('Reward Notifications'))
@@ -59,7 +59,7 @@ RSpec.describe('Reward Notifications', type: :feature) do
     it 'can unmark a reward purchase as not given' do
       visit new_admin_session_path
       click_on 'Sign in via Google'
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'Notifications'
       expect(page).to(have_content('Reward Notifications'))
