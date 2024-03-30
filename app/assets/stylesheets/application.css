@@ -18,7 +18,7 @@
 
 /*
 MAES theme color
-  - rgb(77, 131, 86)
+  - rgb(77 131 86)
 */
 
 :root {
@@ -31,7 +31,7 @@ MAES theme color
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(77, 131, 86);
+  background-color: rgb(77 131 86);
   padding: 20px;
   border-radius: 10px 10px 0 0;
 
@@ -77,7 +77,7 @@ h1 {
 .primary_link{
   display: inline-block; 
   padding: 10px 20px; 
-  background-color: rgb(77, 131, 86); /* Button background color */ 
+  background-color: rgb(77 131 86); /* Button background color */
   text-decoration: none; /* Remove underline from the link */ 
   border: none; 
   border-radius: 5px; /* Rounded corners */ 
