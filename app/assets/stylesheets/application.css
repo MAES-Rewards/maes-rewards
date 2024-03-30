@@ -22,6 +22,11 @@
   --color-main: rgb(77 131 86);
 }
 
+main {
+  width: min(1000px, 100%);
+  margin: 0 auto;
+}
+
 .header-container {
   display: flex;
   align-items: center;

@@ -17,12 +17,13 @@
   <%= render_menu %>
 
   <body>
-
-    <!--<% flash.each do |type, message| %>
-      <div class="flash flash-<%= type %>">
-        <%= message %>
-      </div>
-    <% end %>-->
-    <%= yield %>
+    <main>
+      <!--<% flash.each do |type, message| %>
+        <div class="flash flash-<%= type %>">
+          <%= message %>
+        </div>
+      <% end %>-->
+      <%= yield %>
+    </main>
   </body>
 </html>
