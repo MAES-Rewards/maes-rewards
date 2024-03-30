@@ -16,9 +16,19 @@
     <li><%= link_to "Assign Points", member_points_url, aria: {label: "Points Tab"}%></li>
     <li><%= link_to "History", history_path, aria: {label: "History Tab"} %></li>
     <li><%= link_to "Sign Out", destroy_admin_session_path, aria: {label: "Sign Out Button"} %></li>
+    <li>
+      <div id="google_element"></div>
+    </li>
   </ul>
 </nav>
 </div>
+
+<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+<script>
+  function loadGoogleTranslate() {
+    new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es,pt,qu,gn', autoDisplay: false}, "google_element");
+  }
+</script>
 
 <style>
 nav {
