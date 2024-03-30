@@ -3,9 +3,7 @@
 module ApplicationHelper
   def device
     agent = request.user_agent
-    if agent == nil
-        return 'desktop'
-    end
+    return 'desktop' if agent.nil?
     return 'mobile' if agent.include?('Mobile')
 
     'desktop'
