@@ -1,17 +1,17 @@
 
 <% if session[:is_admin] %>
-  <h1>Delete member account</h1>
-  <%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link")%>
+  <h1 aria-label="Delete Member Account">Delete member account</h1>
+  <%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link", aria: {label: "Back to all Users Button"})%>
 <% else %>
-  <h1>Delete your account</h1>
-  <%= link_to("Go back to My Account", user_path(@user), class: "primary_link")%><br>
+  <h1 aria-label="Delete Your Account">Delete your account</h1>
+  <%= link_to("Go back to My Account", user_path(@user), class: "primary_link", aria: {label: "Back to My Account Button"})%><br>
 <%end%>
 
 
 <%= form_for @user, method: :delete do |f| %>
   <p>Are you sure you want to permanently delete this account?</p>
   <p>Name: <%= @user.name %></p>
-  <div class="form-buttons">
+  <div class="form-buttons" aria-label="Delete Account Button">
     <%= f.submit("Delete account") %>
   </div>
 <% end %>

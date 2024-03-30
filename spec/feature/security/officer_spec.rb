@@ -51,7 +51,7 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Rewards'
 
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards (Admin View)'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
     end
@@ -63,7 +63,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Admin Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards (Admin View)'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -80,14 +80,14 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Admin Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards (Admin View)'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Reward Details'))
       expect(page).to(have_content('Back to all Rewards'))
       expect(page).to(have_content('50'))
     end
@@ -99,19 +99,19 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Admin Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards (Admin View)'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Detailed view'))
+      expect(page).to(have_content('Reward Details'))
       expect(page).to(have_content('Back to all Rewards'))
       expect(page).to(have_content('Sample Reward details'))
 
       click_on 'Edit'
-      expect(page).to(have_content('Edit reward: Sample Reward'))
+      expect(page).to(have_content('Edit Reward: Sample Reward'))
       expect(page).to(have_content('Name'))
       expect(page).to(have_content('Info:'))
     end
@@ -123,7 +123,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Admin Home'))
 
       click_on 'Rewards'
-      expect(page).to(have_content('Rewards (admin view)'))
+      expect(page).to(have_content('Rewards (Admin View)'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Add New Reward'))
 
@@ -175,7 +175,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Sample Activity'))
 
       within('tr', text: 'Sample Activity') do
-        click_on 'Show'
+        click_on 'See Details'
       end
       expect(page).to(have_content('Activity Details'))
       expect(page).to(have_content('Sample Activity'))
@@ -194,7 +194,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Sample Activity'))
 
       within('tr', text: 'Sample Activity') do
-        click_on 'Show'
+        click_on 'See Details'
       end
       expect(page).to(have_content('Activity Details'))
       expect(page).to(have_content('Sample Activity'))
