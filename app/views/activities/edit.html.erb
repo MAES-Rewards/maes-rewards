@@ -1,12 +1,14 @@
-<h1 aria-label="Edit Activity">Edit Activity: <%= @activity.name %></h1>
-<%= link_to('Back to all Activities', activities_path, class: "primary_link", aria: {label: "Back to all Activities Button"})%>
-
 <div class="activities edit">
-  <h2 aria-label="Activity Info">Info:</h2>
+
+  <h1>Edit activity: <%= @activity.name %></h1>
+  <%= link_to('Back to all Activities', activities_path, class: "primary_link") %>
+  <br> <br>
   <%= form_for(@activity) do |f| %>
     <%= render(partial: 'form', locals: {f: f}) %>
 
-    <div class="form-buttons" aria-label="Save Changes Button">
+    <div class="form-buttons">
+      <br />
+
       <%= f.submit('Save Changes') %>
     </div>
   <% end %>
