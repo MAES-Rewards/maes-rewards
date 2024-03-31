@@ -48,6 +48,9 @@ h1, h2 {
   padding-right: 50px;
 }
 
+.actions{
+  width: 400px;
+}
 
 .members {
   display: block;

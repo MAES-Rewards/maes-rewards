@@ -6,7 +6,7 @@
   <%= link_to("Delete the account", delete_user_path(@user), class: "primary_link", aria: {label: "Delete Account Button"}) %>
   <br>
 </div>
-<br />
+<br>
 <div class="edit">
 
   <%= form_for(@user) do |u| %>
@@ -14,15 +14,15 @@
 
      <%= render(partial: 'form', locals: {u: u})%>
 
-    <div class="form-buttons">
-      <br />
+    <div class="form-buttons" aria-label="Save Changes Button">
+      <br>
       <%= u.submit("Save changes") %>
     </div>
 
   <% end %>
 </div>
-<br />
-<h2>Account Transactions:</h2>
+<br>
+<h2 aria-label="Account Transactions">Account Transactions:</h2>
 
 <%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>
 

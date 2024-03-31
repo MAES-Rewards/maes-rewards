@@ -1,16 +1,16 @@
-<h1>History</h1>
+<h1 aria-label="History">History</h1>
 
 <!-- search bar & buttons -->
 <div>
 
 
 
-  <%= label_tag "search", "Search:" %>
+  <%= label_tag "search", "Search:", aria: {label: "Search Button"} %>
   <select id="column_selector">
-    <option value="user_name">User Name:</option>
-    <option value="reward_activity_name">Reward/Activity Name:</option>
+    <option value="user_name" aria-label="User Name Option">User Name:</option>
+    <option value="reward_activity_name" aria-label="Reward/Activity Option">Reward/Activity Name:</option>
   </select>
-  <%= text_field_tag "search", nil, id: "search_bar" %>
+  <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
 
 
 </div>
@@ -18,35 +18,35 @@
 
 <!-- Filter preset values -->
 <div>
-  <label for="filter_selector">Filter by type:</label>
+  <label for="filter_selector" aria-label="Filter By Type">Filter by type:</label>
   <select id="filter_selector">
-    <option value="">All</option>
-    <option value="spent">Spent</option>
-    <option value="earned">Earned</option>
+    <option value="" aria-label="All Option">All</option>
+    <option value="spent" aria-label="Spent Option">Spent</option>
+    <option value="earned" aria-label="Earned Option">Earned</option>
   </select>
 
-  <button id="point_trans_btn">Filter by Points</button>
-  <button id="date_btn">Filter by Date</button>
+  <button id="point_trans_btn" aria-label="Filter by Points Button">Filter by Points</button>
+  <button id="date_btn" aria-label="Filter by Date Button">Filter by Date</button>
 
 </div>
 <br>
 
 <!-- Filter by point intervals -->
 <div id="point_trans_filters" style="display: none;">
-  <label for="point_trans_min">Points (Min):</label>
+  <label for="point_trans_min" aria-label="Minimum Points Field">Points (Min):</label>
   <input type="number" id="point_trans_min" min="0">
-  <label for="point_trans_max">Points (Max):</label>
+  <label for="point_trans_max" aria-label="Maximum Points Field">Points (Max):</label>
   <input type="number" id="point_trans_max" min="0">
 </div>
 
 <!-- Filter by date intervals -->
 <div id="date_filters" style="display: none;">
-  <label for="date_min">Date (Min):</label>
+  <label for="date_min" aria-label="Minimum Date Field">Date (Min):</label>
   <input type="date" id="date_min">
-  <label for="date_max">Date (Max):</label>
+  <label for="date_max" aria-label="Maximum Date Field">Date (Max):</label>
   <input type="date" id="date_max">
   <!-- Reset button for date filter -->
-<button id="reset_date_filter">Reset Date Filter</button>
+<button id="reset_date_filter" aria-label="Date Reset Button">Reset Date Filter</button>
 </div>
 
 <br>

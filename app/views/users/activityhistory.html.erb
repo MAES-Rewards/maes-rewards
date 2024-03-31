@@ -3,20 +3,20 @@
 
 <%= form_tag(user_history_activity_path(@user), method: :get) do %>
   <div style="margin-bottom: 10px; margin-top: 10px;">
-    <%= label_tag(:activity_id, "Activity: ") %>
-    <%= select_tag(:activity_id, options_from_collection_for_select(Activity.all, :id, :name, params[:activity_id]), include_blank: true) %>
+    <%= label_tag(:activity_id, "Activity: ", aria: {label: "Activity Selector"}) %>
+    <%= select_tag(:activity_id, options_from_collection_for_select(Activity.all, :id, :name, params[:activity_id]), include_blank: true, aria: {label: "Activity Seletion"}) %>
   </div>
   <div style="margin-bottom: 10px;">
-    <%= label_tag(:start_date, "Start date:") %>
-    <%= date_field_tag(:start_date, params[:start_date]) %>
+    <%= label_tag(:start_date, "Start date:", aria: {label: "Start Date Selector"}) %>
+    <%= date_field_tag(:start_date, params[:start_date], aria: {label: "Start Date Selection"}) %>
   </div>
   <div style="margin-bottom: 10px;">
-    <%= label_tag(:end_date, "End date:") %>
-    <%= date_field_tag(:end_date, params[:end_date]) %>
+    <%= label_tag(:end_date, "End date:", aria: {label: "End Date Selector"}) %>
+    <%= date_field_tag(:end_date, params[:end_date], aria: {label: "End Date Selection"}) %>
   </div>
   <div style="margin-bottom: 10px;">
     <%= submit_tag("Filter") %>
-    <%= button_tag("Reset", type: 'button', onclick: "window.location.href='#{user_history_activity_path(@user)}';") %>
+    <%= button_tag("Reset", type: 'button', onclick: "window.location.href='#{user_history_activity_path(@user)}';", aria: {label: "Reset Button"}) %>
   </div>
 <% end %>
 
@@ -48,20 +48,20 @@
 
 <%= form_tag(user_history_activity_path(@user), method: :get) do %>
   <div style="margin-bottom: 10px; margin-top: 10px;">
-    <%= label_tag(:reward_id, "Reward: ") %>
-    <%= select_tag(:reward_id, options_from_collection_for_select(Reward.all, :id, :name, params[:reward_id]), include_blank: true) %>
+    <%= label_tag(:reward_id, "Reward: ", aria: {label: "Reward Selector"}) %>
+    <%= select_tag(:reward_id, options_from_collection_for_select(Reward.all, :id, :name, params[:reward_id]), include_blank: true, aria: {label: "Reward Selection"}) %>
   </div>
   <div style="margin-bottom: 10px;">
-    <%= label_tag(:reward_start_date, "Start date:") %>
-    <%= date_field_tag(:reward_start_date, params[:reward_start_date]) %>
+    <%= label_tag(:reward_start_date, "Start date:", aria: {label: "Start Date Selector"}) %>
+    <%= date_field_tag(:reward_start_date, params[:reward_start_date], aria: {label: "Start Date Selection"}) %>
   </div>
   <div style="margin-bottom: 10px;">
-    <%= label_tag(:reward_end_date, "End date:") %>
-    <%= date_field_tag(:reward_end_date, params[:reward_end_date]) %>
+    <%= label_tag(:reward_end_date, "End date:", aria: {label: "End Date Selector"}) %>
+    <%= date_field_tag(:reward_end_date, params[:reward_end_date], aria: {label: "End Date Selection"}) %>
   </div>
   <div style="margin-bottom: 10px;">
     <%= submit_tag("Filter") %>
-    <%= button_tag("Reset", type: 'button', onclick: "window.location.href='#{user_history_activity_path(@user)}';") %>
+    <%= button_tag("Reset", type: 'button', onclick: "window.location.href='#{user_history_activity_path(@user)}';", aria: {label: "Reset Button"}) %>
   </div>
 <% end %>
 
