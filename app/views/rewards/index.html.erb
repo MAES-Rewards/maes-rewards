@@ -5,37 +5,37 @@
 
 <!-- search bar & buttons -->
 <div>
-  <%= label_tag "search", "Search:" %>
-  <%= text_field_tag "search", nil, id: "search_bar" %>
+  <%= label_tag "search", "Search:", aria: {label: "Search Button"} %>
+  <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
 </div>
 <br>
 <!-- Filter buttons -->
 <div>
-  <button id="inventory_btn">Filter by Inventory</button>
-  <button id="point_price_btn">Filter by Point Price</button>
-  <button id="dollar_price_btn">Filter by Dollar Price</button>
+  <button id="inventory_btn" aria-label="Filter By Inventory Button">Filter by Inventory</button>
+  <button id="point_price_btn" aria-label="Filter By Point Price Button">Filter by Point Price</button>
+  <button id="dollar_price_btn" aria-label="Filter By Dollar Price Button">Filter by Dollar Price</button>
 </div>
 <br>
 
 <!-- Filter by inventory, dollar price, and point price intervals -->
 <div id="inventory_filters" style="display: none;">
-  <label for="inventory_min">Inventory (Min):</label>
+  <label for="inventory_min" aria-label="Minimum Inventory Field">Inventory (Min):</label>
   <input type="number" id="inventory_min" min="0">
-  <label for="inventory_max">Inventory (Max):</label>
+  <label for="inventory_max" aria-label="Maximum Inventory Field">Inventory (Max):</label>
   <input type="number" id="inventory_max" min="0">
 </div>
 
 <div id="point_price_filters" style="display: none;">
-  <label for="point_price_min">Point Price (Min):</label>
+  <label for="point_price_min" aria-label="Minimum Point Price Field">Point Price (Min):</label>
   <input type="number" id="point_price_min" min="0">
-  <label for="point_price_max">Point Price (Max):</label>
+  <label for="point_price_max" aria-label="Maximum Point Price Field">Point Price (Max):</label>
   <input type="number" id="point_price_max" min="0">
 </div>
 
 <div id="dollar_price_filters" style="display: none;">
-  <label for="dollar_price_min">Dollar Price (Min):</label>
+  <label for="dollar_price_min" aria-label="Minimum Dollar Price Field">Dollar Price (Min):</label>
   <input type="number" id="dollar_price_min" min="0">
-  <label for="dollar_price_max">Dollar Price (Max):</label>
+  <label for="dollar_price_max" aria-label="Maximum Dollar Price Field">Dollar Price (Max):</label>
   <input type="number" id="dollar_price_max" min="0">
 </div>
 <br>
@@ -68,7 +68,7 @@
     <% end %>
   </tbody>
 </table>
-<br />
+<br>
 
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">

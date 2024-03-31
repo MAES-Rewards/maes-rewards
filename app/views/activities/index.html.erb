@@ -14,7 +14,7 @@
     <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
   </div>
   
-  <br> <br>
+  <br>
 
   <table id="activities_table" class="listing" style="width: 100%;">
     <thead>
@@ -43,7 +43,7 @@
     </tbody>
   </table>
 </div>
-
+<br>
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
     <%= message %>
