@@ -22,18 +22,22 @@
 
 
 <table>
-  <tr>
-    <th aria-label="Activity Name">Activity Name</th>
-    <th aria-label="Activity Points">Points</th>
-    <th aria-label="Activity Time">Time</th>
-  </tr>
-  <% @earn_transactions.each do |transaction| %>
+  <thead>
     <tr>
-      <td><%= transaction.activity.name %></td>
-      <td><%= transaction.points %></td>
-      <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+      <th aria-label="Activity Name">Activity Name</th>
+      <th aria-label="Activity Points">Points</th>
+      <th aria-label="Activity Time">Time</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @earn_transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.activity.name %></td>
+        <td><%= transaction.points %></td>
+        <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 
