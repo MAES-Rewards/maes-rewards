@@ -6,26 +6,30 @@
   <%= link_to("Add New Activity", new_activity_path, class: "primary_link", aria: {label: "Add New Activity Button"}) %>
   <br> <br>
   <table class="listing" style="width: 100%;">
-    <tr class="header">
-      <th aria-label="Activity Name">Name</th>
-      <th aria-label="Activity Description">Description</th>
-      <th aria-label="Activity Default Points">Default Points</th>
-      <th aria-label="Activity Actions">Actions</th>
-    </tr>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.name %></td>
-        <td><%= activity.description %></td>
-        <td><%= activity.default_points %></td>
-        <td class="actions">
-          <%= link_to('See Details', activity_path(activity), class: "primary_link", aria: {label: "Show Activity Button"}) %>
-          <% if session[:is_admin] %>
-            <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity Button"} )%>
-            <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity Button"}) %>
-          <% end %>
-        </td>
+    <thead>
+      <tr class="header">
+        <th aria-label="Activity Name">Name</th>
+        <th aria-label="Activity Description">Description</th>
+        <th aria-label="Activity Default Points">Default Points</th>
+        <th aria-label="Activity Actions">Actions</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @activities.each do |activity| %>
+        <tr>
+          <td><%= activity.name %></td>
+          <td><%= activity.description %></td>
+          <td><%= activity.default_points %></td>
+          <td class="actions">
+            <%= link_to('See Details', activity_path(activity), class: "primary_link", aria: {label: "Show Activity Button"}) %>
+            <% if session[:is_admin] %>
+              <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity Button"} )%>
+              <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity Button"}) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
 

@@ -1,25 +1,29 @@
 <h1 aria-label="Rewards">Rewards (member view) </h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
 <table class="listing" summary="Reward list" style="width: 100%;">
-  <tr class="header">
-    <th aria-label="Reward Name">Name</th>
-    <th aria-label="Reward Points">Point price</th>
-    <th aria-label="Reward Dollar Price">Dollar price</th>
-    <th aria-label="Reward Current Inventory">Current inventory</th>
-    <th aria-label="Reward Actions">Actions</th>
-  </tr>
-  <% @rewards.each do |reward| %>
-    <tr>
-      <td><%= reward.name %></td>
-      <td><%= reward.point_value %></td>
-      <td><%= reward.dollar_price  %></td>
-      <td><%= reward.inventory %></td>
-      <td class="actions">
-        <%= link_to("See details", memshow_path_url(id: reward.id, user_id: @user), class: "primary_link", aria: {label: "See Details Button"}) %>
-        <%= link_to("Purchase", purchase_path_url(id: reward.id, user_id: @user), data: { confirm: 'Are you sure you want to purchase this item?' }, class: "primary_link", aria: {label: "Purchase Button"}) %>
-      </td>
+  <thead>
+    <tr class="header">
+      <th aria-label="Reward Name">Name</th>
+      <th aria-label="Reward Points">Point price</th>
+      <th aria-label="Reward Dollar Price">Dollar price</th>
+      <th aria-label="Reward Current Inventory">Current inventory</th>
+      <th aria-label="Reward Actions">Actions</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @rewards.each do |reward| %>
+      <tr>
+        <td><%= reward.name %></td>
+        <td><%= reward.point_value %></td>
+        <td><%= reward.dollar_price  %></td>
+        <td><%= reward.inventory %></td>
+        <td class="actions">
+          <%= link_to("See details", memshow_path_url(id: reward.id, user_id: @user), class: "primary_link", aria: {label: "See Details Button"}) %>
+          <%= link_to("Purchase", purchase_path_url(id: reward.id, user_id: @user), data: { confirm: 'Are you sure you want to purchase this item?' }, class: "primary_link", aria: {label: "Purchase Button"}) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 <br />
 <% flash.each do |type, message| %>

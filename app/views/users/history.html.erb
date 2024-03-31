@@ -1,16 +1,19 @@
 <h1>History </h1>
 
 <table>
-    <tr>
-        <th aria-label="Transaction Type">Type</th>
-        <th aria-label="User Name">User Name</th>
-        <th aria-label="Reward/Activity Name">Reward/Activity Name</th>
-        <th aria-label="Transaction Points+">Points</th>
-        <th aria-label="TIme Created At">Created At</th>
-        <th aria-label="Time Updated At">Updated At</th>
-    </tr>
-    <% @history.each do |h| %>
-        <tr >
+    <thead>
+        <tr>
+            <th aria-label="Transaction Type">Type</th>
+            <th aria-label="User Name">User Name</th>
+            <th aria-label="Reward/Activity Name">Reward/Activity Name</th>
+            <th aria-label="Transaction Points+">Points</th>
+            <th aria-label="TIme Created At">Created At</th>
+            <th aria-label="Time Updated At">Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @history.each do |h| %>
+        <tr>
             <td><%= h[0] %> </td>
             <td><%= h[1] %> </td>
             <td><%= h[2] %> </td>
@@ -18,5 +21,20 @@
             <td><%= h[4] %> </td>
             <td><%= h[5] %> </td>
         </tr>
-    <% end %>
+        <% end %>
+    </tbody>
 </table>
+
+<style>
+    @media screen and (max-width: 600px) {
+        td:nth-child(5)::before { 
+            content: "Created At: "; 
+            font-weight: bold;
+        }
+
+        td:nth-child(6)::before { 
+            content: "Updated At: "; 
+            font-weight: bold;
+        }
+    }
+</style>

@@ -24,15 +24,15 @@
 
 
 <%= form_tag handle_points_path, method: :post do %>
-<table id="member_table">
+<div id="member_table">
     <! -- list of non-admin users with checkbox to select each one -->
     <% @users.each do |user| %>
-        <tr class="member_row">
-            <td><%= user.name %> (<%=user.email %>)</td>
-            <td><%= check_box_tag "selected_users[]", user.id %></td>
-        </tr>
+        <label class="member_row">
+            <div><%= user.name %> (<%=user.email %>)</div>
+            <div><%= check_box_tag "selected_users[]", user.id %></div>
+        </label>
     <% end %>
-</table>
+</div>
 
 
 <br />
@@ -168,3 +168,34 @@
 
 </script>
 <% end %>
+
+<style>
+
+  #member_table{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .member_row{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 1px 10px 2px #aaa;
+  }
+
+  .member_row div:first-child{
+    flex-grow: 1;
+  }
+
+  .member_row:hover{
+      background-color: #ddd;
+  }
+
+  .member_row:active{
+    background-color: #bbb;
+  }
+  
+</style>
