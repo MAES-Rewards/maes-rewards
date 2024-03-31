@@ -8,14 +8,14 @@
   <%= label_tag "search", "Search:" %>
   <%= text_field_tag "search", nil, id: "search_bar" %>
 </div>
-<br />
+<br>
 <!-- Filter buttons -->
 <div>
   <button id="inventory_btn">Filter by Inventory</button>
   <button id="point_price_btn">Filter by Point Price</button>
   <button id="dollar_price_btn">Filter by Dollar Price</button>
 </div>
-<br / >
+<br>
 
 <!-- Filter by inventory, dollar price, and point price intervals -->
 <div id="inventory_filters" style="display: none;">
@@ -38,29 +38,35 @@
   <label for="dollar_price_max">Dollar Price (Max):</label>
   <input type="number" id="dollar_price_max" min="0">
 </div>
-<br />
+<br>
+
+
 
 <table id="rewards_table" class="listing" summary="Reward list" style="width: 100%;">
-  <tr class="header">
-    <th aria-label="Reward Name">Name</th>
-    <th aria-label="Reward Points">Point price</th>
-    <th aria-label="Reward Dollar Price">Dollar price</th>
-    <th aria-label="Reward Current Inventory">Current inventory</th>
-    <th aria-label="Reward Actions">Actions</th>
-  </tr>
-  <% @rewards.each do |reward| %>
-    <tr>
-      <td><%= reward.name %></td>
-      <td><%= reward.point_value %></td>
-      <td><%= reward.dollar_price  %></td>
-      <td><%= reward.inventory %></td>
-      <td class="actions">
-        <%= link_to("See details", reward_path(reward), class: "primary_link", aria: {label: "See Details Button"}) %>
-        <%= link_to("Edit", edit_reward_path(reward), class: "primary_link", aria: {label: "Edit Button"})%>
-        <%= link_to("Delete", delete_reward_path(reward), class: "primary_link", aria: {label: "Delete Button"}) %>
-      </td>
+  <thead>
+    <tr class="header">
+      <th aria-label="Reward Name">Name</th>
+      <th aria-label="Reward Points">Point price</th>
+      <th aria-label="Reward Dollar Price">Dollar price</th>
+      <th aria-label="Reward Current Inventory">Current inventory</th>
+      <th aria-label="Reward Actions">Actions</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @rewards.each do |reward| %>
+      <tr>
+        <td><%= reward.name %></td>
+        <td><%= reward.point_value %></td>
+        <td><%= reward.dollar_price  %></td>
+        <td><%= reward.inventory %></td>
+        <td class="actions">
+          <%= link_to("See details", reward_path(reward), class: "primary_link", aria: {label: "See Details Button"}) %>
+          <%= link_to("Edit", edit_reward_path(reward), class: "primary_link", aria: {label: "Edit Button"})%>
+          <%= link_to("Delete", delete_reward_path(reward), class: "primary_link", aria: {label: "Delete Button"}) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 <br />
 
