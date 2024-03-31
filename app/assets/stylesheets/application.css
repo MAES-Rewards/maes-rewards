@@ -24,17 +24,21 @@ MAES theme color
 :root {
   --font-main: "Roboto", "Arial", sans-serif;
   --safe-width: calc(100% - 20px);
+  --color-main: rgb(77 131 86);
+}
+
+main {
+  width: min(1000px, 100%);
+  margin: 0 auto;
 }
 
 .header-container {
-
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgb(77 131 86);
   padding: 20px;
   border-radius: 10px 10px 0 0;
-
 }
 
 h1, h2 {
