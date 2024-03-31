@@ -1,21 +1,21 @@
 <! -- Page which allows administrators/officers to assign points to several users with an associated point source -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<h1>Assign Points to Members</h1>
+<h1 aria-label="Assign Points to Members">Assign Points to Members</h1>
 <p>Assign points to members by selecting them from the list below, choosing the point amount (positive or negative), and choosing a one-time or recurring activity associated with the points.</p>
-<h3>Member List:</h3>
+<h3 aria-label="Member List">Member List:</h3>
 
 <!-- search bar & buttons -->
 <div>
-  <%= label_tag "search", "Search:" %>
-  <%= text_field_tag "search", nil, id: "search_bar" %>
+  <%= label_tag "search", "Search:", aria: {label: "Search Button"} %>
+  <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
   <!-- Show Selected Users button -->
-  <button type="button" id="showSelectedButton" onclick="showSelectedUsers()">Show Selected Users</button>
+  <button type="button" id="showSelectedButton" onclick="showSelectedUsers()" aria-label="Show Selected Users Button">Show Selected Users</button>
   <!-- Show All Users button -->
-  <button type="button" id="showAllButton" onclick="showAllUsers()" style="display: none;">Show All Users</button>
+  <button type="button" id="showAllButton" onclick="showAllUsers()" style="display: none;" aria-label="Show All Users Button">Show All Users</button>
   <!-- Select All Users button -->
-  <button type="button" id="selectAllButton" onclick="selectAllUsers()">Select All Users</button>
+  <button type="button" id="selectAllButton" onclick="selectAllUsers()" aria-label="Select All Users Button">Select All Users</button>
   <!-- Deselect All Users button -->
-  <button type="button" id="deselectAllButton" onclick="deselectAllUsers()" style="display: none;">Deselect All Users</button>
+  <button type="button" id="deselectAllButton" onclick="deselectAllUsers()" style="display: none;" aria-label="Deselect All Users Button">Deselect All Users</button>
 
 
 
@@ -41,8 +41,8 @@
 <br>
 <! --assigned point amount -->
 <div>
-    <%= label_tag "new_points", "Points:" %>
-    <%= number_field_tag "new_points", nil %>
+    <%= label_tag "new_points", "Points:", aria: {label: "Points"} %>
+    <%= number_field_tag "new_points", nil, aria: {label: "Points Field"} %>
 </div>
 <br>
 
@@ -50,13 +50,14 @@
 <br>
 <! -- associated activity with the point assignment -->
 <div>
-    <%= label_tag "activity", "Associated Recurring Activity:" %>
+    <%= label_tag "activity", "Associated Recurring Activity:", aria: {label: "Assosciated Recurring Activity"} %>
     <%=
         select_tag "recur_activity_id",
         options_for_select(
           [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id, { "data-default-pts" => activity.default_points }] }
         ),
-        id: "activity_select_box"
+        id: "activity_select_box",
+        aria: {label: "Activity Selection"}
     %>
 </div>
 <div id="onetime_activity_section" class="hidden" style="margin-top: 1em;">
@@ -66,7 +67,7 @@
 <br>
 <hr>
 <br>
-<%= submit_tag "Submit" %>
+<%= submit_tag "Submit", aria: {label: "Submit Button"} %>
 
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
