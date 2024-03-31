@@ -1,6 +1,7 @@
 <! -- Page which allows administrators/officers to assign points to several users with an associated point source -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<h2>Assign Points to Members</h2>
+<h1>Assign Points to Members</h1>
+<p>Assign points to members by selecting them from the list below, choosing the point amount (positive or negative), and choosing a one-time or recurring activity associated with the points.</p>
 <h3>Member List:</h3>
 
 <!-- search bar & buttons -->
@@ -19,41 +20,41 @@
 
 
 </div>
-<br />
+<br>
 
 
 
 <%= form_tag handle_points_path, method: :post do %>
-<table id="member_table">
+<div id="member_table">
     <! -- list of non-admin users with checkbox to select each one -->
     <% @users.each do |user| %>
-        <tr class="member_row">
-            <td><%= user.name %> (<%=user.email %>)</td>
-            <td><%= check_box_tag "selected_users[]", user.id %></td>
-        </tr>
+        <label class="member_row">
+            <div><%= user.name %> (<%=user.email %>)</div>
+            <div><%= check_box_tag "selected_users[]", user.id %></div>
+        </label>
     <% end %>
-</table>
+</div>
 
 
-<br />
+<br>
 <hr>
-<br />
+<br>
 <! --assigned point amount -->
 <div>
     <%= label_tag "new_points", "Points:" %>
     <%= number_field_tag "new_points", nil %>
 </div>
-<br />
+<br>
 
 <hr>
-<br />
+<br>
 <! -- associated activity with the point assignment -->
 <div>
     <%= label_tag "activity", "Associated Recurring Activity:" %>
     <%=
         select_tag "recur_activity_id",
         options_for_select(
-            [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id] }
+          [["", nil]] + Activity.order(:name).map { |activity| [activity.name, activity.id, { "data-default-pts" => activity.default_points }] }
         ),
         id: "activity_select_box"
     %>
@@ -62,9 +63,9 @@
     <%= label_tag "activity", "Associated One-Time Activity:" %>
     <%= text_field_tag "onetime_activity_string" %>
 </div>
-<br />
+<br>
 <hr>
-<br />
+<br>
 <%= submit_tag "Submit" %>
 
 <% flash.each do |type, message| %>
@@ -76,19 +77,22 @@
 
 <script>
 
-    // JavaScript for custom activity selection
+    // JavaScript for custom activity selection & default points
     const actSelect = document.getElementById("activity_select_box");
     const actCustom = document.getElementById("onetime_activity_section");
     const actCustomInput = document.getElementById("onetime_activity_string");
+    const pointsInput = document.getElementById("new_points");
 
     actSelect.addEventListener("change", event => {
-        if (event.target.selectedOptions[0]?.text == "Custom One-Time Activity\u2026") {
+        const selOpt = event.target.selectedOptions[0];
+        if (selOpt.text == "Custom One-Time Activity\u2026") {
             actCustom.classList.remove("hidden");
         }
         else {
             actCustom.classList.add("hidden");
             actCustomInput.value = "";
         }
+        pointsInput.value = selOpt.getAttribute("data-default-pts");
     });
 
     // JavaScript for filtering members based on the search bar
@@ -97,12 +101,12 @@
 
     searchInput.addEventListener("input", () => {
       const searchQuery = searchInput.value.toLowerCase();
-      const rows = memberTable.querySelectorAll("tr");
+      const rows = memberTable.querySelectorAll("#member_table label");
 
       rows.forEach(row => {
-        const userName = row.querySelector("td:first-child").textContent.toLowerCase();
+        const userName = row.querySelector("div:first-child").textContent.toLowerCase();
         const isVisible = userName.includes(searchQuery);
-        row.style.display = isVisible ? "table-row" : "none";
+        row.style.display = isVisible ? "flex" : "none";
       });
     });
 
@@ -120,7 +124,7 @@
       rows.forEach(row => {
         const userId = row.querySelector("input").value;
         const isVisible = selectedUserIds.includes(userId);
-        row.style.display = isVisible ? "table-row" : "none";
+        row.style.display = isVisible ? "flex" : "none";
       });
     }
 
@@ -134,7 +138,7 @@
 
       const rows = memberTable.querySelectorAll(".member_row");
       rows.forEach(row => {
-        row.style.display = "table-row";
+        row.style.display = "flex";
       });
     }
 
@@ -168,3 +172,34 @@
 
 </script>
 <% end %>
+
+<style>
+
+  #member_table{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .member_row{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 1px 10px 2px #aaa;
+  }
+
+  .member_row div:first-child{
+    flex-grow: 1;
+  }
+
+  .member_row:hover{
+      background-color: #ddd;
+  }
+
+  .member_row:active{
+    background-color: #bbb;
+  }
+  
+</style>

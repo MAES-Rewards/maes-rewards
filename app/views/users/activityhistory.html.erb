@@ -1,4 +1,4 @@
-<h1>Activity History</h1>
+<h1 aria-label="Activity History">Activity History</h1>
 <p>All of the activites you have participated in are shown below.</p>
 
 <%= form_tag(user_history_activity_path(@user), method: :get) do %>
@@ -22,22 +22,28 @@
 
 
 <table>
-  <tr>
-    <th>Activity Name</th>
-    <th>Points</th>
-    <th>Time</th>
-  </tr>
-  <% @earn_transactions.each do |transaction| %>
+  <thead>
     <tr>
-      <td><%= transaction.activity.name %></td>
-      <td><%= transaction.points %></td>
-      <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+      <th aria-label="Activity Name">Activity Name</th>
+      <th aria-label="Activity Points">Points</th>
+      <th aria-label="Activity Time">Time</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @earn_transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.activity.name %></td>
+        <td><%= transaction.points %></td>
+        <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+<br />
+<hr>
+<br />
 
-
-<h1>Reward History</h1>
+<h1 aria-label="Reward History">Reward History</h1>
 <p>All of the rewards you have purchased are shown below.</p>
 
 <%= form_tag(user_history_activity_path(@user), method: :get) do %>
@@ -61,16 +67,20 @@
 
 
 <table>
-  <tr>
-    <th>Reward Name</th>
-    <th>Points Spent</th>
-    <th>Time</th>
-  </tr>
-  <% @spend_transactions.each do |spend_transaction| %>
+  <thead>
     <tr>
-      <td><%= spend_transaction.reward.name %></td>
-      <td><%= spend_transaction.points %></td>
-      <td><%= spend_transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+      <th aria-label="Reward Name">Reward Name</th>
+      <th aria-label="Points Spent">Points Spent</th>
+      <th aria-label="Time">Time</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @spend_transactions.each do |spend_transaction| %>
+      <tr>
+        <td><%= spend_transaction.reward.name %></td>
+        <td><%= spend_transaction.points %></td>
+        <td><%= spend_transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

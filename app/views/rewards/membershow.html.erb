@@ -1,35 +1,36 @@
 <div class="rewards show">
-  <h1><%= @reward.name %> details</h1>
-  <%= link_to("Back to all Rewards", memrewards_path_url(@user), class: "primary_link") %>
-  <br> <br>
+  <h1><%= @reward.name %></h1>
+  <br>
   <div class="actions">
-    <%= link_to('Purchase', purchase_path_url(id: @reward, user_id: @user), class: "primary_link") %>
+     <%= link_to("Back to all Rewards", memrewards_path_url(@user), class: "primary_link", aria: {label: "Back to All Rewards Button"}) %>
+    <%= link_to('Purchase', purchase_path_url(id: @reward, user_id: @user), class: "primary_link", aria: {label: "Purchase Reward Button"}) %>
+
   </div>
   <br>
 
-  <table summary="reward detail view">
+  <table summary="Reward Detail View">
     <tr>
-      <th>Name</th>
+      <th aria-label="Reward Name">Name</th>
       <td><%= @reward.name %></td>
     </tr>
     <tr>
-      <th>Dollar price</th>
+      <th aria-label="Reward Dollar Price">Dollar price</th>
       <td><%= @reward.dollar_price %></td>
     </tr>
     <tr>
-      <th>Point price</th>
+      <th aria-label="Reward Points">Point price</th>
       <td><%= @reward.point_value %></td>
     </tr>
     <tr>
-      <th>Current inventory</th>
+      <th aria-label="Reward Current Inventory">Current inventory</th>
       <td><%= @reward.inventory %></td>
     </tr>
     <tr>
-      <th>Created</th>
+      <th aria-label="Reward Created at">Created</th>
       <td><%= @reward.created_at %></td>
     </tr>
     <tr>
-      <th>Updated</th>
+      <th aria-label="Reward Updated at">Updated</th>
       <td><%= @reward.updated_at %></td>
     </tr>
   </table>
