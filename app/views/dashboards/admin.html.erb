@@ -5,13 +5,13 @@
 <h2>All Members</h2>
 <!-- search bar & buttons -->
 <div>
-  <%= label_tag "search", "Search:" %>
+  <%= label_tag "search", "Search:", aria: {label: "Search button"} %>
   <%= text_field_tag "search", nil, id: "search_bar" %>
 </div>
 <br />
 <!-- Filter buttons -->
 <div>
-  <button id="point_btn">Filter by Points</button>
+  <button id="point_btn" aria-label="Filter by Points Button">Filter by Points</button>
 
 </div>
 
