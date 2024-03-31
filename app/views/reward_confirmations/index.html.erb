@@ -1,0 +1,36 @@
+<h1>Reward Notifications</h1>
+<p>All reward purchases made in the last 24 hours are listed here.</p>
+<br> <br>
+
+<table class="listing" summary="Reward notification list" style="width: 100%;">
+  <tr class="header">
+    <th>Reward Name</th>
+    <th>User</th>
+    <th>Purchase Time</th>
+    <th>Status</th>
+  </tr>
+  <% @recent_purchases.each do |purchase| %>
+    <tr>
+      <td><%= purchase.reward.name %></td>
+      <td><%= purchase.user.name %></td>
+      <td><%= purchase.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td>
+        <% if purchase.reward_confirmation %>
+          <%= form_with(model: purchase.reward_confirmation, local: true, method: :patch) do |form| %>
+            <%= form.hidden_field :reward_given, value: false %>
+            <%= form.check_box :reward_given, id: dom_id(purchase.reward_confirmation), checked: purchase.reward_confirmation.reward_given, onchange: 'this.form.submit();' %>
+          <% end %>
+        <% else %>
+          Missing
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br />
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>

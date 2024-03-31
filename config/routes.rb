@@ -57,4 +57,6 @@ Rails.application.routes.draw do
       get :delete
     end
   end
+
+  resources :reward_confirmations, only: %i[index update]
 end

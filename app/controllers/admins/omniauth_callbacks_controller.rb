@@ -1,44 +1,18 @@
 # frozen_string_literal: true
 
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # rubocop:disable Metrics/AbcSize
   def google_oauth2
     admin = Admin.from_google(**from_google_params)
 
-    if admin.present?
-      sign_out_all_scopes
-      flash[:notice] = t('devise.omniauth_callbacks.success', kind: 'Google')
-
-      user = User.find_by(email: admin.email)
-      if user&.is_admin?
-        session[:is_admin] = true
-        sign_in(admin, event: :authentication)
-        redirect_to(admin_dashboard_path)
-      elsif user
-        session[:is_admin] = false
-        sign_in(admin, event: :authentication)
-        # or user_id = @user.id
-        session[:user_id] = user.id
-        user_id = User.find_by(email: admin.email)
-        redirect_to(member_dashboard_path(user_id))
-      else
-        session[:is_admin] = false
-        @user = User.create!(name: admin.full_name, email: admin.email, points: 0, is_admin: false)
-        sign_in(admin, event: :authentication)
-        if @user.save!
-          # or user_id = @user.id
-          user_id = User.find_by(email: admin.email)
-          redirect_to(member_dashboard_path(user_id))
-        else
-          redirect_to(new_admin_session_path)
-        end
-      end
-    else
+    if admin.blank?
       flash[:alert] = t('devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized.")
-      redirect_to(new_admin_session_path)
+      redirect_to(new_admin_session_path) and return
     end
+
+    sign_out_all_scopes
+    flash[:notice] = t('devise.omniauth_callbacks.success', kind: 'Google')
+    handle_admin(admin)
   end
-  # rubocop:enable Metrics/AbcSize
 
   protected
 
@@ -51,6 +25,36 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
+
+  def handle_admin(admin)
+    user = User.find_by(email: admin.email)
+
+    if user&.is_admin?
+      set_admin_session(admin, true)
+      redirect_to(admin_dashboard_path)
+    elsif user
+      set_admin_session(admin, false, user.id)
+      redirect_to(member_dashboard_path(user))
+    else
+      create_and_sign_in_user(admin)
+    end
+  end
+
+  def set_admin_session(admin, is_admin, user_id = nil)
+    session[:is_admin] = is_admin
+    sign_in(admin, event: :authentication)
+    session[:user_id] = user_id if user_id
+  end
+
+  def create_and_sign_in_user(admin)
+    user = User.create_with_default_stats(admin: admin)
+    if user.persisted?
+      set_admin_session(admin, false, user.id)
+      redirect_to(member_dashboard_path(user))
+    else
+      redirect_to(new_admin_session_path)
+    end
+  end
 
   def from_google_params
     @from_google_params ||= {

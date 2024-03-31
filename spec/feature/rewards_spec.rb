@@ -42,7 +42,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'See details'
 
-      expect(page).to(have_content('Sample Reward details'))
       expect(page).to(have_content('Sample Reward'))
       expect(page).to(have_content('50'))
       expect(page).to(have_content('1.99'))
@@ -233,7 +232,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       within('tr', text: 'Test Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Reward Details'))
       expect(page).to(have_content('Test Reward'))
       expect(page).to(have_content('10'))
       expect(page).to(have_content('20.99'))

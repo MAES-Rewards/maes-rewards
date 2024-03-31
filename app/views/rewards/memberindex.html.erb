@@ -1,6 +1,46 @@
-<h1 aria-label="Rewards">Rewards (member view) </h1>
+<h1>Rewards</h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
-<table class="listing" summary="Reward list" style="width: 100%;">
+
+<!-- search bar & buttons -->
+<div>
+  <%= label_tag "search", "Search:" %>
+  <%= text_field_tag "search", nil, id: "search_bar" %>
+</div>
+<br>
+<!-- Filter buttons -->
+<div>
+  <button id="inventory_btn">Filter by Inventory</button>
+  <button id="point_price_btn">Filter by Point Price</button>
+  <button id="dollar_price_btn">Filter by Dollar Price</button>
+</div>
+<br>
+
+<!-- Filter by inventory, dollar price, and point price intervals -->
+<div id="inventory_filters" style="display: none;">
+  <label for="inventory_min">Inventory (Min):</label>
+  <input type="number" id="inventory_min" min="0">
+  <label for="inventory_max">Inventory (Max):</label>
+  <input type="number" id="inventory_max" min="0">
+</div>
+
+<div id="point_price_filters" style="display: none;">
+  <label for="point_price_min">Point Price (Min):</label>
+  <input type="number" id="point_price_min" min="0">
+  <label for="point_price_max">Point Price (Max):</label>
+  <input type="number" id="point_price_max" min="0">
+</div>
+
+<div id="dollar_price_filters" style="display: none;">
+  <label for="dollar_price_min">Dollar Price (Min):</label>
+  <input type="number" id="dollar_price_min" min="0">
+  <label for="dollar_price_max">Dollar Price (Max):</label>
+  <input type="number" id="dollar_price_max" min="0">
+</div>
+<br>
+
+
+
+<table id="rewards_table" class="listing" summary="Reward list" style="width: 100%;">
   <thead>
     <tr class="header">
       <th aria-label="Reward Name">Name</th>
@@ -31,3 +71,85 @@
     <%= message %>
   </div>
 <% end %>
+
+<script>
+// JavaScript for filtering rewards based on the search bar and intervals
+const searchInput = document.getElementById("search_bar");
+const inventoryMinInput = document.getElementById("inventory_min");
+const inventoryMaxInput = document.getElementById("inventory_max");
+const dollarPriceMinInput = document.getElementById("dollar_price_min");
+const dollarPriceMaxInput = document.getElementById("dollar_price_max");
+const pointPriceMinInput = document.getElementById("point_price_min");
+const pointPriceMaxInput = document.getElementById("point_price_max");
+const rewardTable = document.getElementById("rewards_table");
+
+const inventoryBtn = document.getElementById("inventory_btn");
+const pointPriceBtn = document.getElementById("point_price_btn");
+const dollarPriceBtn = document.getElementById("dollar_price_btn");
+const inventoryFilters = document.getElementById("inventory_filters");
+const pointPriceFilters = document.getElementById("point_price_filters");
+const dollarPriceFilters = document.getElementById("dollar_price_filters");
+
+
+function toggleFilters(button, filters) {
+  const isHidden = filters.style.display === "none";
+  inventoryFilters.style.display = "none";
+  pointPriceFilters.style.display = "none";
+  dollarPriceFilters.style.display = "none";
+  if (isHidden) {
+    filters.style.display = "block";
+    button.style.fontWeight = "bold"; // Indicate active button
+  } else {
+    button.style.fontWeight = "normal";
+  }
+}
+
+
+inventoryBtn.addEventListener("click", () => {
+  toggleFilters(inventoryBtn, inventoryFilters);
+});
+
+pointPriceBtn.addEventListener("click", () => {
+  toggleFilters(pointPriceBtn, pointPriceFilters);
+});
+
+dollarPriceBtn.addEventListener("click", () => {
+  toggleFilters(dollarPriceBtn, dollarPriceFilters);
+});
+
+
+
+function filterRewards() {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  const inventoryMin = parseInt(inventoryMinInput.value) || 0;
+  const inventoryMax = parseInt(inventoryMaxInput.value) || Infinity;
+  const dollarPriceMin = parseInt(dollarPriceMinInput.value) || 0;
+  const dollarPriceMax = parseInt(dollarPriceMaxInput.value) || Infinity;
+  const pointPriceMin = parseInt(pointPriceMinInput.value) || 0;
+  const pointPriceMax = parseInt(pointPriceMaxInput.value) || Infinity;
+  const rows = rewardTable.querySelectorAll("tr");
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const rewardName = row.cells[0].textContent.trim().toLowerCase();
+    const pointPrice = parseInt(row.cells[1].textContent) || 0;
+    const dollarPrice = parseInt(row.cells[2].textContent) || 0;
+    const inventory = parseInt(row.cells[3].textContent) || 0;
+    const isVisible =
+      rewardName.includes(searchQuery) &&
+      inventory >= inventoryMin && inventory <= inventoryMax &&
+      dollarPrice >= dollarPriceMin && dollarPrice <= dollarPriceMax &&
+      pointPrice >= pointPriceMin && pointPrice <= pointPriceMax;
+    row.style.display = isVisible ? "" : "none";
+  }
+}
+
+searchInput.addEventListener("input", filterRewards);
+inventoryMinInput.addEventListener("input", filterRewards);
+inventoryMaxInput.addEventListener("input", filterRewards);
+dollarPriceMinInput.addEventListener("input", filterRewards);
+dollarPriceMaxInput.addEventListener("input", filterRewards);
+pointPriceMinInput.addEventListener("input", filterRewards);
+pointPriceMaxInput.addEventListener("input", filterRewards);
+</script>
