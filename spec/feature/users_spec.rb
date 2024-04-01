@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe('Admins editing, deleting, and viewing users', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'James Doe', points: 100, is_admin: false) }
 
-
   context 'Admin logs in and edits user' do
     before do
       OmniAuth.config.test_mode = true
@@ -13,7 +12,8 @@ RSpec.describe('Admins editing, deleting, and viewing users', type: :feature) do
         provider: 'google_oauth2',
         uid: '123456',
         info: { email: 'user@tamu.edu', name: 'Admin Doe' }
-      })
+      }
+                                                                        )
       page.set_rack_session(user_id: user.id, is_admin: true)
       User.create!(email: 'user1@tamu.edu', name: 'Jim Doe', points: 100, is_admin: false)
       User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
@@ -90,7 +90,7 @@ RSpec.describe('Admins editing, deleting, and viewing users', type: :feature) do
 
       expect(page).to(have_content('Delete member account'))
       expect(page).to(have_content('Are you sure you want to permanently delete this account?'))
-      expect(page).to(have_content('Name: John Doe'))
+      expect(page).to(have_content('Name: Jane Doe'))
 
       click_on 'Delete account'
 

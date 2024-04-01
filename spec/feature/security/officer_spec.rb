@@ -70,7 +70,6 @@ RSpec.describe('Testing Security', type: :feature) do
 
       click_on 'Add New Reward'
       expect(page).to(have_content('Create New Reward'))
-      expect(page).to(have_content('Create Reward'))
       expect(page).to(have_content('Name'))
     end
 

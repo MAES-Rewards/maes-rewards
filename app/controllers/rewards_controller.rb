@@ -77,7 +77,6 @@ class RewardsController < ApplicationController
       flash[:notice] = 'Reward was successfully created.'
       redirect_to(rewards_path)
     else
-      puts("Errors: #{@reward.errors.full_messages}") # rubocop:disable Rails/Output
       flash[:alert] = 'Reward could not be created. Attribute(s) are invalid.'
       render('new', status: :unprocessable_entity)
     end
