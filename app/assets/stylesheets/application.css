@@ -217,8 +217,7 @@ input[type="checkbox"] {
   display: none;
 }
 
-@media screen and (max-width: 600px) {
-
+@media screen and (max-width: 700px) {
   .logo{
     width: 150px;
     height: 150px;
@@ -302,7 +301,7 @@ nav a:active {
   display: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   nav {
     background: var(--color-main);
     padding: 10px;
