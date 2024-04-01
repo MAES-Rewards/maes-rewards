@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  # Ensure certain actions are for officers and pages for members
   before_action :set_dashboard_path, only: [:activityhistory]
   before_action :set_user, only: [:activityhistory]
   before_action :authorize_user, only: %I[activityhistory show]
@@ -8,6 +9,7 @@ class UsersController < ApplicationController
 
   # def index; end
 
+  # Show information about user based on user ID number, along with transaction history
   def show
     @user = User.find(params[:user_id])
     @txn_hist = build_txn_history(@user.id)
@@ -72,6 +74,7 @@ class UsersController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
+  # Display a user's activity history of both earned and spend transactions
   def activityhistory
     @earn_transactions = @user.earn_transactions.includes(:activity).order(created_at: :desc)
     @earn_transactions = @earn_transactions.where(activity_id: params[:activity_id]) if params[:activity_id].present?
@@ -91,6 +94,7 @@ class UsersController < ApplicationController
     ['created_at <= ?', Date.parse(params[:reward_end_date])] if params[:reward_end_date].present?
   end
 
+  # Logic for building table for earn and spend transactions table
   def history
     earn = EarnTransaction.all
     spend = SpendTransaction.all
@@ -123,6 +127,7 @@ class UsersController < ApplicationController
     @history.sort_by! { |h| h[4] }.reverse!
   end
 
+  # Finds user based on parameter ID number, and redirects if not found
   def set_user
     @user = User.find_by(id: params[:user_id])
     unless @user
@@ -131,17 +136,20 @@ class UsersController < ApplicationController
     end
   end
 
+  # Determines the dashboard path based on the admin session variable
   def set_dashboard_path
     @dashboard_path = session[:is_admin] ? admin_dashboard_path : member_dashboard_path
   end
 
   # def new; end
 
+  # Finds user to edit using user ID number provided
   def edit
     @user = User.find(params[:user_id])
     @txn_hist = build_txn_history(@user.id)
   end
 
+  # Updates user based on user ID number in parameter
   def update
     @user = User.find(params[:user_id])
     @txn_hist = build_txn_history(@user.id)
@@ -158,22 +166,26 @@ class UsersController < ApplicationController
     end
   end
 
+  # Finds user to delete using user ID number in parameter
   def delete
     @user = User.find(params[:user_id])
   end
 
+  # Deletes user based on user ID number
   def destroy
     flash[:notice] = 'User successfully deleted.'
     User.find(params[:user_id]).destroy!
     redirect_to(admin_dashboard_path)
   end
 
+  # Defines user attributes required
   def user_params
     params.require(:user).permit(:name, :email, :points, :is_admin)
   end
 
   private
 
+  # Build transaction history (earn and spend) using user ID number
   def build_txn_history(user_id)
     earn_txns = EarnTransaction.where(user_id: user_id)
     spend_txns = SpendTransaction.where(user_id: user_id)
