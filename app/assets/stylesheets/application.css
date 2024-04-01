@@ -191,6 +191,7 @@ input[type="checkbox"] {
   text-align: center;
   animation: 5s fadeout 1 forwards;
   user-select: none;
+  pointer-events: none;
 }
 
 .flash-notice {
