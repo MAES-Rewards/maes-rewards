@@ -191,6 +191,27 @@ RSpec.describe('Viewing rewards', type: :feature) do
       expect(page).to(have_content('Reward was successfully updated.'))
     end
 
+    it 'user logs in with Google & attempts to edit existing reward with invalid attribute' do
+      visit new_admin_session_path
+      click_on 'Sign in via Google'
+      visit set_admin_session_path
+      visit admin_dashboard_path
+      click_on 'Rewards'
+      expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
+      expect(page).to(have_content('Hoodie'))
+      within('tr', text: 'Hoodie') do
+        click_on 'Edit'
+      end
+
+      expect(page).to(have_content('Edit Reward: Hoodie'))
+      fill_in 'reward[point_value]', with: '-10'
+      fill_in 'reward[inventory]', with: '2000000000000'
+
+      click_on 'Save changes'
+
+      expect(page).to(have_content('Reward could not be updated. Attribute(s) are invalid.'))
+    end
+
     it 'user logs in with Google & deletes existing reward' do
       visit new_admin_session_path
       click_on 'Sign in via Google'
@@ -210,6 +231,27 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       expect(page).not_to(have_content('Hoodie'))
       expect(page).to(have_content('Reward was successfully deleted'))
+    end
+
+    it 'user logs in with Google & attempts to create reward with invalid attributes' do
+      visit new_admin_session_path
+      click_on 'Sign in via Google'
+      visit set_admin_session_path
+      visit admin_dashboard_path
+      click_on 'Rewards'
+      expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
+
+      click_on 'Add New Reward'
+
+      expect(page).to(have_content('Create New Reward'))
+
+      fill_in 'reward[name]', with: 'Sweater'
+      fill_in 'reward[point_value]', with: 10_000_000_000
+      fill_in 'reward[dollar_price]', with: 19.9998
+      fill_in 'reward[inventory]', with: -2
+      click_on 'Create Reward'
+
+      expect(page).to(have_content('Reward could not be created. Attribute(s) are invalid.'))
     end
 
     it 'user logs in with Google as admin & views rewards' do
