@@ -167,8 +167,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       expect(page).to(have_content('Current inventory'))
       expect(page).to(have_content('Created'))
       expect(page).to(have_content('Updated'))
-
-
     end
 
     it 'user logs in with Google & edits existing reward' do
@@ -191,7 +189,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       expect(page).to(have_content('Lil Hoodie'))
       expect(page).to(have_content('Reward was successfully updated.'))
-
     end
 
     it 'user logs in with Google & deletes existing reward' do
@@ -213,7 +210,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       expect(page).not_to(have_content('Hoodie'))
       expect(page).to(have_content('Reward was successfully deleted'))
-
     end
 
     it 'user logs in with Google as admin & views rewards' do
@@ -224,7 +220,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       click_on 'Rewards'
 
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
-
     end
 
     it 'user logs in with Google & creates reward' do
@@ -251,7 +246,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
       expect(page).to(have_content('10'))
       expect(page).to(have_content('20.99'))
       expect(page).to(have_content('50'))
-
     end
 
     it 'admin logs in with Google & creates then deletes reward' do
@@ -297,7 +291,6 @@ RSpec.describe('Viewing rewards', type: :feature) do
 
       click_on 'Add New Reward'
       expect(page).to(have_content('Create New Reward'))
-
 
       fill_in 'reward[name]', with: 'Test Reward'
       fill_in 'reward[point_value]', with: 10
