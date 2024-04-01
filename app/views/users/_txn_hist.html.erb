@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th aria-label="Transaction Type">Type</th>
+      <th aria-label="Activity/Reward">Activity/Reward</th>
+      <th aria-label="Point Change">Point Change</th>
+      <th aria-label="Timestamp">Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% txn_hist.each do |txn_entry| %>
+      <tr class="txn txn-<%= txn_entry[:type_id] %>">
+        <td><%= txn_entry[:type] %></td>
+        <td><%= txn_entry[:item] %></td>
+        <td><%= txn_entry[:points] %></td>
+        <td><%= txn_entry[:timestamp] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

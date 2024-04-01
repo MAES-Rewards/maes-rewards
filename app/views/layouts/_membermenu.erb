@@ -1,0 +1,56 @@
+<% content_for :head do %>
+  <link rel="stylesheet" href="/assets/application.css.scss">
+<% end %>
+
+<div class="navbar">
+
+  <button id="menu_container" onclick="toggleMenu(this)">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </button>
+  <nav>
+    <ul>
+      <li><%= link_to "Home", member_dashboard_url(session[:user_id]), aria: {label: "Home Tab"}%></li>
+      <li><%= link_to "View Rewards", memrewards_path_url(session[:user_id]), aria: {label: "Reward Tab"} %></li>
+      <li><%= link_to "My Account", user_path(session[:user_id]), aria: {label: "My Account Tab"}%></li>
+      <li><%= link_to "View My History", user_history_activity_path(session[:user_id]), aria: {label: "My History Tab"} %></li>
+      <li><%= link_to "Help", docs_path, aria: {label: "Help Tab"} %></li>
+      <li><%= link_to "Sign Out", destroy_admin_session_path, aria: {label: "Sign Out Button"} %></li>
+      <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+      <li>
+        <div id="google_element"></div>
+      </li>
+    </ul>
+  </nav>
+
+
+</div>
+
+
+
+<script>
+  function loadGoogleTranslate() {
+    new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es,pt,qu,gn', autoDisplay: false}, "google_element");
+  }
+</script>
+
+<script>
+  function toggleMenu(x){
+    x.classList.toggle("change");
+    let menu = document.getElementsByTagName("nav")[0];
+    menu.classList.toggle("menu-shown");
+  }
+
+  // Hide menu when user clicks outside
+  window.addEventListener("click", function(event) {
+    const menuBtn = document.getElementById("menu_container");
+    const menuElem = document.getElementsByTagName("nav")[0];
+    if (menuElem.classList.contains("menu-shown") &&
+        !menuElem.contains(event.target) &&
+        !menuBtn.contains(event.target)) {
+      toggleMenu(menuBtn);
+    }
+  });
+</script>
+

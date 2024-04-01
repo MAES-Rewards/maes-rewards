@@ -1,0 +1,73 @@
+Inspecting 77 files
+C...C......C........C..C.C..........C.....C..C........C......................
+
+Offenses:
+
+Gemfile:46:101: C: Layout/LineLength: Line is too long. [111/100]
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+                                                                                                    ^^^^^^^^^^^
+Gemfile:59:101: C: Layout/LineLength: Line is too long. [111/100]
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+                                                                                                    ^^^^^^^^^^^
+app/controllers/admins/omniauth_callbacks_controller.rb:35:101: C: [Correctable] Layout/LineLength: Line is too long. [125/100]
+      flash[:alert] = t('devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized.")
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/users_controller.rb:27:101: C: Layout/LineLength: Line is too long. [114/100]
+      @selected_activity = Activity.find_by(id: params[:recur_activity_id]) if params[:recur_activity_id].present?
+                                                                                                    ^^^^^^^^^^^^^^
+app/controllers/users_controller.rb:46:101: C: [Correctable] Layout/LineLength: Line is too long. [117/100]
+        if (user.points + Integer(new_points, 10)).negative? || user.points + Integer(new_points, 10) > 2_147_483_647
+                                                                                                    ^^^^^^^^^^^^^^^^^
+app/models/admin.rb:8:101: C: [Correctable] Layout/LineLength: Line is too long. [104/100]
+    create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_or_create_by!(email: email)
+                                                                                                    ^^^^
+app/models/reward.rb:6:101: C: [Correctable] Layout/LineLength: Line is too long. [126/100]
+  validates :dollar_price, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/reward.rb:7:101: C: [Correctable] Layout/LineLength: Line is too long. [145/100]
+  validates :point_value, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/reward.rb:8:101: C: [Correctable] Layout/LineLength: Line is too long. [143/100]
+  validates :inventory, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/user.rb:9:101: C: [Correctable] Layout/LineLength: Line is too long. [140/100]
+  validates :points, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2_147_483_647 }
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+config/initializers/devise.rb:17:101: C: Layout/LineLength: Line is too long. [148/100]
+  # config.secret_key = 'f9c7d0c5c06331e3f20f7d8a70c50e288366a8c05dc23d6a2461e113ee30645a5f78d76ce47e55e7848c79000124013f3b5cc488e0e35063e3e8dfc6722
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+config/initializers/devise.rb:131:101: C: Layout/LineLength: Line is too long. [150/100]
+  # config.pepper = '5beef9d2586365352134fbc4d5bfb6c8691b28d760b3fdcb00b3bd3fc57fc8e1e52fe335ead24cb09d06892df4d9a032096f59592b9fbea953e2735edf8edc51'
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/seeds.rb:3:101: C: Layout/LineLength: Line is too long. [103/100]
+# This file should contain all the record creation needed to seed the database with its default values.
+                                                                                                    ^^^
+db/seeds.rb:4:101: C: Layout/LineLength: Line is too long. [115/100]
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+                                                                                                    ^^^^^^^^^^^^^^^
+spec/feature/rewards_spec.rb:29:101: C: Layout/LineLength: Line is too long. [108/100]
+      expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
+                                                                                                    ^^^^^^^^
+spec/feature/rewards_spec.rb:80:101: C: Layout/LineLength: Line is too long. [101/100]
+      it 'user logs in with Google as member & attempts purchase with insufficient point earnings' do
+                                                                                                    ^
+spec/feature/rewards_spec.rb:93:101: C: Layout/LineLength: Line is too long. [104/100]
+        expect(page).to(have_content('Reward is out of stock or user does not have sufficient points.'))
+                                                                                                    ^^^^
+spec/feature/rewards_spec.rb:103:101: C: Layout/LineLength: Line is too long. [106/100]
+      it 'user logs in with Google as member & attempts purchase on reward with insufficient inventory' do
+                                                                                                    ^^^^^^
+spec/feature/rewards_spec.rb:118:101: C: Layout/LineLength: Line is too long. [104/100]
+        expect(page).to(have_content('Reward is out of stock or user does not have sufficient points.'))
+                                                                                                    ^^^^
+spec/feature/rewards_spec.rb:133:101: C: Layout/LineLength: Line is too long. [108/100]
+      expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
+                                                                                                    ^^^^^^^^
+spec/support/chrome_setup.rb:4:101: C: Layout/LineLength: Line is too long. [119/100]
+  # Set chrome download dir and auto confirm all "are you sure you want to download" to test downloading docs and pdfs.
+                                                                                                    ^^^^^^^^^^^^^^^^^^^
+spec/support/chrome_setup.rb:24:101: C: [Correctable] Layout/LineLength: Line is too long. [129/100]
+  chrome_args = %w[window-size=1024,768 disable-gpu no-sandbox disable-translate no-default-browser-check disable-popup-blocking]
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+77 files inspected, 22 offenses detected, 8 offenses autocorrectable

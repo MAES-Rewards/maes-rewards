@@ -1,35 +1,72 @@
+
 <div class="activities index">
-  <h1>Activities</h1>
 
-  <%= link_to("Go back to landing page", admin_dashboard_url)%>
-  <%= link_to("Add New Activity", new_activity_path, class: 'action new') %>
+  <h1 aria-label="Activities">Activities</h1>
+  <p>All of the activities that can be associated with points earnings are shown below.</p>
 
-  <table class="listing" style="width: 100%;">
-    <tr class="header">
-      <th>Name</th>
-      <th>Description</th>
-      <th>Default Points</th>
-      <th>Actions</th>
-    </tr>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.name %></td>
-        <td><%= activity.description %></td>
-        <td><%= activity.default_points %></td>
-        <td class="actions">
-          <%= link_to('Show', activity_path(activity), class: 'action show') %>
-          <% if session[:is_admin] %>
-            <%= link_to('Edit', edit_activity_path(activity), class: 'action edit') %>
-            <%= link_to('Delete', delete_activity_path(activity), class: 'action delete') %>
-          <% end %>
-        </td>
+  <%= link_to("Add New Activity", new_activity_path, class: "primary_link", aria: {label: "Add New Activity"}) %>
+
+
+  <!-- search bar & buttons -->
+  <div>
+    <br>
+    <%= label_tag "search", "Search:", aria: {label: "Search Button"} %>
+    <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
+  </div>
+  
+  <br>
+
+  <table id="activities_table" class="listing" style="width: 100%;">
+    <thead>
+      <tr class="header">
+        <th aria-label="Activity Name">Name</th>
+        <th aria-label="Activity Description">Description</th>
+        <th aria-label="Activity Default Points">Default Points</th>
+        <th aria-label="Activity Actions">Actions</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @activities.each do |activity| %>
+        <tr>
+          <td><%= activity.name %></td>
+          <td><%= activity.description %></td>
+          <td><%= activity.default_points %></td>
+          <td class="actions">
+            <%= link_to('See Details', activity_path(activity), class: "primary_link", aria: {label: "Show Activity Button"}) %>
+            <% if session[:is_admin] %>
+              <%= link_to('Edit', edit_activity_path(activity), class: "primary_link", aria: {label: "Edit Activity Button"} )%>
+              <%= link_to('Delete', delete_activity_path(activity), class: "primary_link", aria: {label: "Delete Activity Button"}) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
-
+<br>
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
     <%= message %>
   </div>
 <% end %>
+
+<script>
+
+// JavaScript for filtering members based on the search bar
+const searchInput = document.getElementById("search_bar");
+const activityTable = document.getElementById("activities_table");
+
+searchInput.addEventListener("input", () => {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  const rows = activityTable.querySelectorAll("tr");
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const activityName = row.querySelector("td:first-child").textContent.trim().toLowerCase();
+    const isVisible = activityName.includes(searchQuery);
+    row.style.display = isVisible ? "table-row" : "none";
+  }
+});
+
+</script>

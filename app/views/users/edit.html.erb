@@ -1,27 +1,30 @@
-<h1>My Account</h1>
+ <h1><%=@user.name%>'s Account</h1>
+ <h2 aria-label="User Info">Account Info:</h2>
 
-<% if session[:is_admin] %>
-  <%= link_to("Go back to landing page", admin_dashboard_url)%>
-<% else %>
-  <%= link_to("Go back to My Account", user_path(@user))%><br>
-<%end%>
-
-<%= link_to("Delete the account", delete_user_path(@user)) %>
-
-<div class="rewards edit">
-  <h2>Info:</h2>
+<div class="actions">
+  <%= link_to("Back to All Users", admin_dashboard_url, class: "primary_link", aria: {label: "Back to all Users Button"}) %>
+  <%= link_to("Delete the account", delete_user_path(@user), class: "primary_link", aria: {label: "Delete Account Button"}) %>
+  <br>
+</div>
+<br>
+<div class="edit">
 
   <%= form_for(@user) do |u| %>
     <% # url: task_path(@task), method: 'patch' %>
 
      <%= render(partial: 'form', locals: {u: u})%>
 
-    <div class="form-buttons">
+    <div class="form-buttons" aria-label="Save Changes Button">
+      <br>
       <%= u.submit("Save changes") %>
     </div>
 
   <% end %>
 </div>
+<br>
+<h2 aria-label="Account Transactions">Account Transactions:</h2>
+
+<%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>
 
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
@@ -29,4 +32,5 @@
   </div>
 <% end %>
 
-
+<br />
+<br />

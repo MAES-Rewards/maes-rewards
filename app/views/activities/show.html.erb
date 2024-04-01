@@ -1,26 +1,26 @@
-<%= link_to('Back to all Activities', activities_path, class: 'back-link') %>
-
 <div class="activities show">
-  <h1>Activity Details</h1>
 
+  <h1><%= @activity.name %></h1>
+  <div class="actions">
+  <%= link_to('Back to all Activities', activities_path, class: "primary_link") %>
   <% if session[:is_admin] %>
-    <div class="actions">
-      <%= link_to('Edit', edit_activity_path(@activity)) %>
-      <%= link_to('Delete', delete_activity_path(@activity)) %>
-    </div>
+      <%= link_to('Edit', edit_activity_path(@activity), class: "primary_link") %>
+      <%= link_to('Delete', delete_activity_path(@activity), class: "primary_link") %>
   <% end %>
+  </div>
+  <br>
 
   <table>
     <tr>
-      <th>Name</th>
+      <th aria-label="Activity Name">Name</th>
       <td><%= @activity.name %></td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th aria-label="Activity Description">Description</th>
       <td><%= @activity.description %></td>
     </tr>
     <tr>
-      <th>Default Points</th>
+      <th aria-label="Activity Default Points">Default Points</th>
       <td><%= @activity.default_points %></td>
     </tr>
   </table>

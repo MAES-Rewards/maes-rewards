@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GoogleOauthDevise</title>
+    <title> MAES Rewards </title>
+    <div class="header-container">
+      <h1 class="main-title">MAES: Latinos in Engineering & Science <br>Rewards System <br> </h1>
+      <%= image_tag("maeslogo.png", size: '150x150', alt: "MAES Logo", class: "logo") %>
+
+    </div>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <%= render_menu %>
+
   <body>
-    <!--<% flash.each do |type, message| %>
-      <div class="flash flash-<%= type %>">
-        <%= message %>
-      </div>
-    <% end %>-->
-    <%= yield %>
+    <main>
+      <!--<% flash.each do |type, message| %>
+        <div class="flash flash-<%= type %>">
+          <%= message %>
+        </div>
+      <% end %>-->
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,13 +1,13 @@
-<h1>Purchase reward: <%=@reward.name%></h1>
-<%= link_to("Back to all Rewards", memrewards_path_url(@user), class: 'back-link') %>
+<h1 aria-label="Purchase Reward">Purchase reward: <%=@reward.name%></h1>
+<%= link_to("Back to all Rewards", memrewards_path_url(@user), class: "primary_link", aria: {label: "Back to All Rewards Button"}) %>
 
 <div class="rewards purchase">
 
   <% # url: task_path(@task), method: 'delete' %>
 
   <p>Are you sure you want to purchase this reward?</p>
-  <p><%= @reward.name %> for <%= @reward.point_value %> point(s).</p>
+  <p><b><%= @reward.name %></b> for <%= @reward.point_value %> point(s).</p>
 
-  <%= link_to("Confirm", handle_purchase_path(id: @reward, user_id: @user))%>
+  <%= link_to("Confirm", handle_purchase_path(id: @reward, user_id: @user), class: "primary_link", aria: {label: "Confirm Purchase Button"})%>
 
 </div>

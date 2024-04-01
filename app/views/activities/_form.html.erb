@@ -1,14 +1,14 @@
 <table>
   <tr>
-    <th>Name</th>
+    <th aria-label="Activity Name">Name</th>
     <td><%= f.text_field(:name) %></td>
   </tr>
   <tr>
-    <th>Description</th>
+    <th aria-label="Activity Descirption">Description</th>
     <td><%= f.text_field(:description) %></td>
   </tr>
   <tr>
-    <th>Default Points</th>
+    <th aria-label="Activity Default Points">Default Points</th>
     <td><%= f.number_field(:default_points, step: 1) %></td>
   </tr>
 </table>

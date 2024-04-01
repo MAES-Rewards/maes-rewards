@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ActivitiesController < ApplicationController
+  before_action :admin_check, only: %I[new edit update delete destroy]
   def index
     @activities = Activity.order(:name)
   end
@@ -10,12 +11,7 @@ class ActivitiesController < ApplicationController
   end
 
   def new
-    if session[:is_admin]
-      @activity = Activity.new
-    else
-      flash[:alert] = 'Access denied. Please log in as an admin.'
-      redirect_to(activities_path)
-    end
+    @activity = Activity.new
   end
 
   def create
@@ -30,47 +26,28 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
-    if session[:is_admin]
-      @activity = Activity.find(params[:id])
-    else
-      flash[:alert] = 'Access denied. Please log in as an admin.'
-      redirect_to(activities_path)
-    end
+    @activity = Activity.find(params[:id])
   end
 
   def update
-    if session[:is_admin]
-      @activity = Activity.find(params[:id])
-      if @activity.update(activity_params)
-        flash[:notice] = 'Activity was successfully updated.'
-        redirect_to(activity_path(@activity))
-      else
-        flash[:alert] = 'Activity could not be updated. Attribute(s) are invalid.'
-        render('edit', status: :unprocessable_entity)
-      end
+    @activity = Activity.find(params[:id])
+    if @activity.update(activity_params)
+      flash[:notice] = 'Activity was successfully updated.'
+      redirect_to(activity_path(@activity))
     else
-      flash[:alert] = 'Access denied. Please log in as an admin.'
-      redirect_to(activities_path)
+      flash[:alert] = 'Activity could not be updated. Attribute(s) are invalid.'
+      render('edit', status: :unprocessable_entity)
     end
   end
 
   def delete
-    if session[:is_admin]
-      @activity = Activity.find(params[:id])
-    else
-      flash[:alert] = 'Access denied. Please log in as an admin.'
-      redirect_to(activities_path)
-    end
+    @activity = Activity.find(params[:id])
   end
 
   def destroy
-    if session[:is_admin]
-      @activity = Activity.find(params[:id])
-      @activity.destroy!
-      flash[:notice] = 'Activity was successfully deleted.'
-    else
-      flash[:alert] = 'Access denied. Please log in as an admin.'
-    end
+    @activity = Activity.find(params[:id])
+    @activity.destroy!
+    flash[:notice] = 'Activity was successfully deleted.'
     redirect_to(activities_path)
   end
 
