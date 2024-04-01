@@ -1,0 +1,47 @@
+<h1 aria-label="Reward Notifications">Reward Notifications</h1>
+<p>All reward purchases made in the last 24 hours are listed here.</p>
+<br> <br>
+
+<table class="listing" summary="Reward notification list" style="width: 100%;">
+  <thead>
+    <tr class="header">
+      <th aria-label="Reward Name">Reward Name</th>
+      <th aria-label="User">User</th>
+      <th aria-label="Purchase Time">Purchase Time</th>
+      <th aria-label="Status">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recent_purchases.each do |purchase| %>
+      <tr>
+        <td><%= purchase.reward.name %></td>
+        <td><%= purchase.user.name %></td>
+        <td><%= purchase.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td>
+          <% if purchase.reward_confirmation %>
+            <%= form_with(model: purchase.reward_confirmation, local: true, method: :patch) do |form| %>
+              <%= form.hidden_field :reward_given, value: false %>
+              <%= form.check_box :reward_given, id: dom_id(purchase.reward_confirmation), checked: purchase.reward_confirmation.reward_given, onchange: 'this.form.submit();' %>
+            <% end %>
+          <% else %>
+            Missing
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<style>
+  tr:has(input[type="checkbox"]:checked) {
+    opacity: 0.6;
+    color: #333;
+  }
+</style>
+
+<% flash.each do |type, message| %>
+  <div class="flash flash-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>

@@ -1,16 +1,72 @@
-<h1>History </h1>
+<h1 aria-label="History">History</h1>
 
-<table>
-    <tr>
-        <th>Type</th>
-        <th>User Name</th>
-        <th>Reward/Activity Name</th>
-        <th>Points</th>
-        <th>Created At</th>
-        <th>Updated At</th>
-    </tr>
-    <% @history.each do |h| %>
-        <tr >
+<!-- search bar & buttons -->
+<div>
+
+
+
+  <%= label_tag "search", "Search:", aria: {label: "Search Button"} %>
+  <select id="column_selector">
+    <option value="user_name" aria-label="User Name Option">User Name:</option>
+    <option value="reward_activity_name" aria-label="Reward/Activity Option">Reward/Activity Name:</option>
+  </select>
+  <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
+
+
+</div>
+<br>
+
+<!-- Filter preset values -->
+<div>
+  <label for="filter_selector" aria-label="Filter By Type">Filter by type:</label>
+  <select id="filter_selector">
+    <option value="" aria-label="All Option">All</option>
+    <option value="spent" aria-label="Spent Option">Spent</option>
+    <option value="earned" aria-label="Earned Option">Earned</option>
+  </select>
+
+  <button id="point_trans_btn" aria-label="Filter by Points Button">Filter by Points</button>
+  <button id="date_btn" aria-label="Filter by Date Button">Filter by Date</button>
+
+</div>
+<br>
+
+<!-- Filter by point intervals -->
+<div id="point_trans_filters" style="display: none;">
+  <label for="point_trans_min" aria-label="Minimum Points Field">Points (Min):</label>
+  <input type="number" id="point_trans_min" min="0">
+  <label for="point_trans_max" aria-label="Maximum Points Field">Points (Max):</label>
+  <input type="number" id="point_trans_max" min="0">
+</div>
+
+<!-- Filter by date intervals -->
+<div id="date_filters" style="display: none;">
+  <label for="date_min" aria-label="Minimum Date Field">Date (Min):</label>
+  <input type="date" id="date_min">
+  <label for="date_max" aria-label="Maximum Date Field">Date (Max):</label>
+  <input type="date" id="date_max">
+  <!-- Reset button for date filter -->
+<button id="reset_date_filter" aria-label="Date Reset Button">Reset Date Filter</button>
+</div>
+
+<br>
+
+
+
+<table id="history_table">
+    <thead>
+      <tr>
+          <th aria-label="Transaction Type">Type</th>
+          <th aria-label="User Name">User Name</th>
+          <th aria-label="Reward/Activity Name">Reward/Activity Name</th>
+          <th aria-label="Transaction Points+">Points</th>
+          <th aria-label="TIme Created At">Created At</th>
+          <th aria-label="Time Updated At">Updated At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @history.each do |h| %>
+        <tr>
             <td><%= h[0] %> </td>
             <td><%= h[1] %> </td>
             <td><%= h[2] %> </td>
@@ -18,5 +74,139 @@
             <td><%= h[4] %> </td>
             <td><%= h[5] %> </td>
         </tr>
-    <% end %>
+        <% end %>
+    </tbody>
 </table>
+
+<style>
+    @media screen and (max-width: 700px) {
+        td:nth-child(5)::before { 
+            content: "Created At: "; 
+            font-weight: bold;
+        }
+
+        td:nth-child(6)::before { 
+            content: "Updated At: "; 
+            font-weight: bold;
+        }
+    }
+</style>
+
+<script>
+// JavaScript for filtering members based on the search bar
+const searchInput = document.getElementById("search_bar");
+const columnSelector = document.getElementById("column_selector");
+const filterSelector = document.getElementById("filter_selector");
+const histTable = document.getElementById("history_table");
+
+
+const pointPriceMinInput = document.getElementById("point_trans_min");
+const pointPriceMaxInput = document.getElementById("point_trans_max");
+const pointPriceBtn = document.getElementById("point_trans_btn");
+const pointPriceFilters = document.getElementById("point_trans_filters");
+
+const dateMinInput = document.getElementById("date_min");
+const dateMaxInput = document.getElementById("date_max");
+const dateBtn = document.getElementById("date_btn");
+const dateFilters = document.getElementById("date_filters");
+
+const resetDateFilterBtn = document.getElementById("reset_date_filter");
+
+resetDateFilterBtn.addEventListener("click", () => {
+  // Clear date filter inputs
+  dateMinInput.value = "";
+  dateMaxInput.value = "";
+
+  // Trigger table filtering
+  filterTable();
+});
+
+
+
+function toggleFilters(button, filters) {
+  const isHidden = filters.style.display === "none";
+  pointPriceFilters.style.display = "none";
+  dateFilters.style.display = "none";
+
+  if (isHidden) {
+    filters.style.display = "block";
+    button.style.fontWeight = "bold"; // Indicate active button
+  } else {
+    filters.style.display = "none";
+    button.style.fontWeight = "normal";
+  }
+}
+
+
+pointPriceBtn.addEventListener("click", () => {
+  toggleFilters(pointPriceBtn, pointPriceFilters);
+});
+
+dateBtn.addEventListener("click", () => {
+  toggleFilters(dateBtn, dateFilters);
+});
+
+
+
+function filterTable() {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  const selectedColumn = columnSelector.value;
+  const selectedFilter = filterSelector.value.toLowerCase(); // Get selected filter value
+  const rows = histTable.querySelectorAll("tr");
+  const pointPriceMin = parseInt(pointPriceMinInput.value);
+  const pointPriceMax = parseInt(pointPriceMaxInput.value) || Infinity;
+  const dateMin = dateMinInput.value; // Get date inputs
+  const dateMax = dateMaxInput.value;
+
+
+  // Determine the cell index based on the selected column
+  let cellIndex;
+  switch (selectedColumn) {
+    case "user_name":
+      cellIndex = 1;
+      break;
+    case "reward_activity_name":
+      cellIndex = 2;
+      break;
+    default:
+      break;
+  }
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const points = parseInt(row.cells[3].textContent.slice(1));
+    const createdAt = new Date(row.cells[4].textContent);
+    const rowType = row.cells[0].textContent.trim().toLowerCase();
+    const searchVisible = row.cells[1].textContent.trim().toLowerCase().includes(searchQuery) ||
+                          row.cells[2].textContent.trim().toLowerCase().includes(searchQuery); // Check if search query matches user name or reward/activity name
+
+    let pointsVisible = true;
+    if (!isNaN(pointPriceMin) && !isNaN(pointPriceMax)) {
+      pointsVisible = points >= pointPriceMin && points <= pointPriceMax;
+    }
+
+    let dateVisible = true;
+    if (dateMin && dateMax) {
+      const rowDate = new Date(createdAt);
+      const minDate = new Date(dateMin);
+      const maxDate = new Date(dateMax);
+      dateVisible = rowDate >= minDate && rowDate <= maxDate;
+    }
+    const isTypeVisible = (selectedFilter === "" || rowType === selectedFilter);
+    const isVisible = searchVisible && pointsVisible && dateVisible && isTypeVisible;
+    row.style.display = isVisible ? "" : "none";
+  }
+}
+
+
+
+searchInput.addEventListener("input", filterTable);
+columnSelector.addEventListener("change", filterTable);
+filterSelector.addEventListener("change", filterTable);
+pointPriceMinInput.addEventListener("input", filterTable);
+pointPriceMaxInput.addEventListener("input", filterTable);
+dateMinInput.addEventListener("input", filterTable);
+dateMaxInput.addEventListener("input", filterTable);
+
+</script>

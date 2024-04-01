@@ -19,20 +19,26 @@
 :root {
   --font-main: "Roboto", "Arial", sans-serif;
   --safe-width: calc(100% - 20px);
+  --color-main: rgb(77 131 86);
+  --color-dark: rgb(47 101 56);
+  --color-darker: rgb(17 71 26);
+}
+
+main {
+  width: min(1000px, 100%);
+  margin: 0 auto;
 }
 
 .header-container {
-
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: maroon;
+  background: var(--color-main);
   padding: 20px;
   border-radius: 10px 10px 0 0;
-
 }
 
-h2 {
+h1, h2 {
   /* Webpage titles */
   color: black;
   text-align: center;
@@ -44,11 +50,9 @@ h2 {
   padding-right: 50px;
 }
 
-h1 {
-  text-align: center; 
-  color: black;
+.actions{
+  width: 400px;
 }
-
 
 .members {
   display: block;
@@ -66,30 +70,43 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-
-}
-
-.primary_link{
-  display: inline-block; 
-  padding: 10px 20px; 
-  background-color: maroon; /* Button background color */ 
-  text-decoration: none; /* Remove underline from the link */ 
-  border: none; 
-  border-radius: 5px; /* Rounded corners */ 
-  cursor: pointer; 
-  font-weight: bold; 
-  transition: background-color 0.3s ease; 
-  color: white;
+  width: min(800px, 100%);
   
 }
 
-/* Styling for links when hovered */
-.primary_link:hover {
-  background-color: black; 
-  text-decoration: underline;
+/* Styling for links & buttons */
+.primary_link,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  display: inline-block; 
+  padding: 10px 20px; 
+  background: var(--color-main); /* Button background color */
+  text-decoration: none; /* Remove underline from the link */ 
+  border: none; 
+  border-radius: 5px; /* Rounded corners */ 
+  cursor: pointer;
+  font: bold 16px var(--font-main);
+  transition: background 300ms ease; 
+  color: white;
 }
 
+.primary_link:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background: var(--color-dark); 
+}
 
+.primary_link:active,
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  background: var(--color-darker); 
+}
 
 table {
   border-collapse: collapse;
@@ -98,14 +115,14 @@ table {
 
 /* Style for table headers (column titles) */
 th {
-  background-color: #f2f2f2; /* Background color for headers */
+  background: #f2f2f2; /* Background color for headers */
   padding: 10px;
   text-align: left; /* Align text to the left within headers */
 }
 
 /* Alternating row colors for better readability */
 tr:nth-child(even) {
-  background-color: #f9f9f9; /* Background color for even rows */
+  background: #f9f9f9; /* Background color for even rows */
 }
 
 /* Style for table cells (contents) */
@@ -116,22 +133,36 @@ td {
 
 /* Add some hover effect for better user interaction */
 tr:hover {
-  background-color: #e0e0e0; /* Background color on hover */
+  background: #e0e0e0; /* Background color on hover */
 }
 
+/* Documentation Start */
 
+#docs {
+  width: min(800px, var(--safe-width));
+  margin: 0 auto;
+}
+
+/* Documentation End */
 
 body {
   font-family: var(--font-main);
 }
 
-button,
 input[type="text"],
 input[type="number"],
-input[type="submit"],
 select {
+  font: 16px var(--font-main);
   padding: 5px 10px;
-  font-family: var(--font-main);
+  border-radius: 5px;
+  border: 1px solid #AAA;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="checkbox"]:focus,
+select:focus {
+  outline: 2px solid var(--color-dark);
 }
 
 input[type="checkbox"] {
@@ -160,6 +191,8 @@ input[type="checkbox"] {
   text-align: center;
   animation: 5s fadeout 1 forwards;
   user-select: none;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .flash-notice {
@@ -182,4 +215,160 @@ input[type="checkbox"] {
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .logo{
+    width: 150px;
+    height: 150px;
+  }
+
+  .main-title{
+    font-size: 24px;
+  }
+
+  table,td,tbody,tr{ 
+      display:block;
+  }   
+  
+  tbody{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  tr{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 1px 10px 2px #AAA;
+  }
+
+  th{
+    background: transparent;
+  }
+
+  thead{
+      display:none;
+  }
+
+  table:not(.table-no-header) tbody tr td:first-child {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+nav {
+  background: var(--color-main);
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+nav li {
+  margin-right: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 300ms ease;
+}
+
+nav a:hover {
+  background: var(--color-dark);
+}
+
+nav a:active {
+  background: var(--color-darker);
+}
+
+#menu_container {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  nav {
+    background: var(--color-main);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    overflow: auto;
+    opacity: 1;
+    transition: left 500ms, opacity 500ms;
+    box-sizing: border-box;
+    width: min(200px, var(--safe-width));
+    z-index: 1;
+  }
+
+  nav:not(.menu-shown) {
+    left: -100%;
+    opacity: 0;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav a {
+    display: block;
+    text-decoration: none;
+    color: white;
+  }
+
+  #menu_container {
+    border-radius: 5px;
+    background: var(--color-main);
+    display: inline-block;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+    z-index: 1;
+  }
+
+  .bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background: white;
+    margin: 6px 0;
+    transition: all 400ms;
+  }
+
+
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+
+
+  .change .bar2 {opacity: 0;}
+
+
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }
 }

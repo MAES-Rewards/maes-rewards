@@ -1,33 +1,160 @@
-<h1>Rewards (admin view) </h1>
+<h1>Rewards</h1>
 <p>All of the rewards that can be purchased with points are shown below.</p>
-<%= link_to("Add New Reward", new_reward_path, class: 'primary_link') %>
+<%= link_to("Add New Reward", new_reward_path, class: 'primary_link', aria: {label: "Add New Reward Button"}) %>
 <br> <br>
 
-<table class="listing" summary="Reward list" style="width: 100%;">
-  <tr class="header">
-    <th>Name</th>
-    <th>Point price</th>
-    <th>Dollar price</th>
-    <th>Current inventory</th>
-    <th>Actions</th>
-  </tr>
-  <% @rewards.each do |reward| %>
-    <tr>
-      <td><%= reward.name %></td>
-      <td><%= reward.point_value %></td>
-      <td><%= reward.dollar_price  %></td>
-      <td><%= reward.inventory %></td>
-      <td class="actions">
-        <%= link_to("See details", reward_path(reward), class: "primary_link") %>
-        <%= link_to("Edit", edit_reward_path(reward), class: "primary_link") %>
-        <%= link_to("Delete", delete_reward_path(reward), class: "primary_link") %>
-      </td>
+<!-- search bar & buttons -->
+<div>
+  <%= label_tag "search", "Search:", aria: {label: "Search Button"} %>
+  <%= text_field_tag "search", nil, id: "search_bar", aria: {label: "Search Bar"} %>
+</div>
+<br>
+<!-- Filter buttons -->
+<div>
+  <button id="inventory_btn" aria-label="Filter By Inventory Button">Filter by Inventory</button>
+  <button id="point_price_btn" aria-label="Filter By Point Price Button">Filter by Point Price</button>
+  <button id="dollar_price_btn" aria-label="Filter By Dollar Price Button">Filter by Dollar Price</button>
+</div>
+<br>
+
+<!-- Filter by inventory, dollar price, and point price intervals -->
+<div id="inventory_filters" style="display: none;">
+  <label for="inventory_min" aria-label="Minimum Inventory Field">Inventory (Min):</label>
+  <input type="number" id="inventory_min" min="0">
+  <label for="inventory_max" aria-label="Maximum Inventory Field">Inventory (Max):</label>
+  <input type="number" id="inventory_max" min="0">
+</div>
+
+<div id="point_price_filters" style="display: none;">
+  <label for="point_price_min" aria-label="Minimum Point Price Field">Point Price (Min):</label>
+  <input type="number" id="point_price_min" min="0">
+  <label for="point_price_max" aria-label="Maximum Point Price Field">Point Price (Max):</label>
+  <input type="number" id="point_price_max" min="0">
+</div>
+
+<div id="dollar_price_filters" style="display: none;">
+  <label for="dollar_price_min" aria-label="Minimum Dollar Price Field">Dollar Price (Min):</label>
+  <input type="number" id="dollar_price_min" min="0">
+  <label for="dollar_price_max" aria-label="Maximum Dollar Price Field">Dollar Price (Max):</label>
+  <input type="number" id="dollar_price_max" min="0">
+</div>
+<br>
+
+
+
+<table id="rewards_table" class="listing" summary="Reward list" style="width: 100%;">
+  <thead>
+    <tr class="header">
+      <th aria-label="Reward Name">Name</th>
+      <th aria-label="Reward Points">Point price</th>
+      <th aria-label="Reward Dollar Price">Dollar price</th>
+      <th aria-label="Reward Current Inventory">Current inventory</th>
+      <th aria-label="Reward Actions">Actions</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @rewards.each do |reward| %>
+      <tr>
+        <td><%= reward.name %></td>
+        <td><%= reward.point_value %></td>
+        <td><%= reward.dollar_price  %></td>
+        <td><%= reward.inventory %></td>
+        <td class="actions">
+          <%= link_to("See details", reward_path(reward), class: "primary_link", aria: {label: "See Details Button"}) %>
+          <%= link_to("Edit", edit_reward_path(reward), class: "primary_link", aria: {label: "Edit Button"})%>
+          <%= link_to("Delete", delete_reward_path(reward), class: "primary_link", aria: {label: "Delete Button"}) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-<br />
+<br>
+
 <% flash.each do |type, message| %>
   <div class="flash flash-<%= type %>">
     <%= message %>
   </div>
 <% end %>
+
+
+<script>
+// JavaScript for filtering rewards based on the search bar and intervals
+const searchInput = document.getElementById("search_bar");
+const inventoryMinInput = document.getElementById("inventory_min");
+const inventoryMaxInput = document.getElementById("inventory_max");
+const dollarPriceMinInput = document.getElementById("dollar_price_min");
+const dollarPriceMaxInput = document.getElementById("dollar_price_max");
+const pointPriceMinInput = document.getElementById("point_price_min");
+const pointPriceMaxInput = document.getElementById("point_price_max");
+const rewardTable = document.getElementById("rewards_table");
+
+const inventoryBtn = document.getElementById("inventory_btn");
+const pointPriceBtn = document.getElementById("point_price_btn");
+const dollarPriceBtn = document.getElementById("dollar_price_btn");
+const inventoryFilters = document.getElementById("inventory_filters");
+const pointPriceFilters = document.getElementById("point_price_filters");
+const dollarPriceFilters = document.getElementById("dollar_price_filters");
+
+
+function toggleFilters(button, filters) {
+  const isHidden = filters.style.display === "none";
+  inventoryFilters.style.display = "none";
+  pointPriceFilters.style.display = "none";
+  dollarPriceFilters.style.display = "none";
+  if (isHidden) {
+    filters.style.display = "block";
+    button.style.fontWeight = "bold"; // Indicate active button
+  } else {
+    button.style.fontWeight = "normal";
+  }
+}
+
+
+inventoryBtn.addEventListener("click", () => {
+  toggleFilters(inventoryBtn, inventoryFilters);
+});
+
+pointPriceBtn.addEventListener("click", () => {
+  toggleFilters(pointPriceBtn, pointPriceFilters);
+});
+
+dollarPriceBtn.addEventListener("click", () => {
+  toggleFilters(dollarPriceBtn, dollarPriceFilters);
+});
+
+
+
+function filterRewards() {
+  const searchQuery = searchInput.value.trim().toLowerCase();
+  const inventoryMin = parseInt(inventoryMinInput.value) || 0;
+  const inventoryMax = parseInt(inventoryMaxInput.value) || Infinity;
+  const dollarPriceMin = parseInt(dollarPriceMinInput.value) || 0;
+  const dollarPriceMax = parseInt(dollarPriceMaxInput.value) || Infinity;
+  const pointPriceMin = parseInt(pointPriceMinInput.value) || 0;
+  const pointPriceMax = parseInt(pointPriceMaxInput.value) || Infinity;
+  const rows = rewardTable.querySelectorAll("tr");
+
+  // Start from the second row (index 1) to skip the header row
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const rewardName = row.cells[0].textContent.trim().toLowerCase();
+    const pointPrice = parseInt(row.cells[1].textContent) || 0;
+    const dollarPrice = parseInt(row.cells[2].textContent) || 0;
+    const inventory = parseInt(row.cells[3].textContent) || 0;
+    const isVisible =
+      rewardName.includes(searchQuery) &&
+      inventory >= inventoryMin && inventory <= inventoryMax &&
+      dollarPrice >= dollarPriceMin && dollarPrice <= dollarPriceMax &&
+      pointPrice >= pointPriceMin && pointPrice <= pointPriceMax;
+    row.style.display = isVisible ? "" : "none";
+  }
+}
+
+searchInput.addEventListener("input", filterRewards);
+inventoryMinInput.addEventListener("input", filterRewards);
+inventoryMaxInput.addEventListener("input", filterRewards);
+dollarPriceMinInput.addEventListener("input", filterRewards);
+dollarPriceMaxInput.addEventListener("input", filterRewards);
+pointPriceMinInput.addEventListener("input", filterRewards);
+pointPriceMaxInput.addEventListener("input", filterRewards);
+</script>

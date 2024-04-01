@@ -1,26 +1,65 @@
-<h2> Admin Home </h2>
 
-<h3>All Members</h3>
+<h1> Home </h1>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Points</th>
-        <th>Is Admin</th>
-        <th>Actions</th>
-    </tr>
-    <% @users.each do |user| %>
-        <tr>
-            <td><%= user.name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.points %></td>
-            <td><%= user.is_admin %></td>
-            <td><%= link_to "Edit", edit_user_path(user), class: "primary_link" %> <%= link_to "Delete", delete_user_path(user), class: "primary_link" %></td>
 
-        </tr>
-    <% end %>
+<h2>All Members</h2>
+<!-- search bar & buttons -->
+<div>
+  <%= label_tag "search", "Search:", aria: {label: "Search button"} %>
+  <%= text_field_tag "search", nil, id: "search_bar" %>
+</div>
+<br />
+<!-- Filter buttons -->
+<div>
+  <button id="point_btn" aria-label="Filter by Points Button">Filter by Points</button>
+
+</div>
+
+
+<!-- Filter by points intervals -->
+
+<div id="point_filters" style="display: none;">
+<br >
+  <label for="point_min" aria-label="Minimum Points Field">Points (Min):</label>
+  <input type="number" id="point_min" min="0">
+  <label for="point_max" aria-label="Maximum Points">Points (Max):</label>
+  <input type="number" id="point_max" min="0">
+</div>
+<br />
+
+<table id="members_table">
+  <thead>
+      <tr>
+          <th aria-label="Member Name">Name</th>
+          <th aria-label="Member Email">Email</th>
+          <th aria-label="Member Points">Points</th>
+          <th aria-label="Is Admin">Is Admin</th>
+          <th aria-label="Member Actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.points %></td>
+              <td><%= user.is_admin %></td>
+              <td><%= link_to "Edit", edit_user_path(user), class: "primary_link", aria: {label: "Edit Button"} %> <%= link_to "Delete", delete_user_path(user), class: "primary_link", aria: {label: "Delete Button"} %></td>
+            </tr>
+        <% end %>
+    </tbody>
 </table>
+
+<style>
+  @media screen and (max-width: 700px) {
+    #members_table tbody tr td:nth-child(3)::before {
+      content: "Points: ";
+    }
+    #members_table tbody tr td:nth-child(4)::before {
+      content: "Is Admin: ";
+    }
+  }
+</style>
 
 
 <% flash.each do |type, message| %>
@@ -28,3 +67,59 @@
       <%= message %>
     </div>
   <% end %>
+
+
+  <script>
+  // JavaScript for filtering rewards based on the search bar and intervals
+  const searchInput = document.getElementById("search_bar");
+
+  const pointPriceMinInput = document.getElementById("point_min");
+  const pointPriceMaxInput = document.getElementById("point_max");
+  const memberTable = document.getElementById("members_table");
+
+  const pointPriceBtn = document.getElementById("point_btn");
+  const pointPriceFilters = document.getElementById("point_filters");
+
+
+  function toggleFilters(button, filters) {
+    const isHidden = filters.style.display === "none";
+    pointPriceFilters.style.display = "none";
+
+    if (isHidden) {
+      filters.style.display = "block";
+      button.style.fontWeight = "bold"; // Indicate active button
+    } else {
+      button.style.fontWeight = "normal";
+    }
+  }
+
+
+  pointPriceBtn.addEventListener("click", () => {
+    toggleFilters(pointPriceBtn, pointPriceFilters);
+  });
+
+
+  function filterTable() {
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    const pointPriceMin = parseInt(pointPriceMinInput.value) || 0;
+    const pointPriceMax = parseInt(pointPriceMaxInput.value) || Infinity;
+    const rows = memberTable.querySelectorAll("tr");
+
+    // Start from the second row (index 1) to skip the header row
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      const memberName = row.cells[0].textContent.trim().toLowerCase();
+      const points = parseInt(row.cells[2].textContent) || 0;
+
+      const isVisible =
+        memberName.includes(searchQuery) &&
+        points >= pointPriceMin && points <= pointPriceMax;
+      row.style.display = isVisible ? "" : "none";
+    }
+  }
+
+  searchInput.addEventListener("input", filterTable);
+  pointPriceMinInput.addEventListener("input", filterTable);
+  pointPriceMaxInput.addEventListener("input", filterTable);
+
+  </script>

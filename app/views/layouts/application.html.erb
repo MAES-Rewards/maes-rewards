@@ -2,26 +2,39 @@
 <html>
   <head>
     <title> MAES Rewards </title>
-    <div class="header-container">
-      <h1 class="main-title">MAES: Latinos in Engineering & Science <br>Rewards System <br> </h1>
-      <%= image_tag("maeslogo.png", size: '150x150', alt: "MAES Logo", class: "logo") %>
-
-    </div>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#4D8356">
   </head>
 
-  <%= render_menu %>
 
   <body>
-
-    <!--<% flash.each do |type, message| %>
-      <div class="flash flash-<%= type %>">
-        <%= message %>
-      </div>
-    <% end %>-->
-    <%= yield %>
+    <div class="header-container">
+      <h1 class="main-title">MAES: Latinos in Engineering & Science <br>Rewards System <br> </h1>
+      <%= image_tag("maeslogo.png", size: '150x150', alt: "MAES Logo", class: "logo") %>
+    </div>
+    <%= render_menu %>
+    <main>
+      <!--<% flash.each do |type, message| %>
+        <div class="flash flash-<%= type %>">
+          <%= message %>
+        </div>
+      <% end %>-->
+      <%= yield %>
+    </main>
+    <script>
+      // Service Worker registration (for PWA)
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js").then(() => console.log("Service Worker registered."));
+      }
+      else {
+        console.warn("Unable to register Service Worker.");
+      }
+    </script>
   </body>
 </html>

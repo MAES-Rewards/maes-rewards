@@ -1,5 +1,5 @@
 <h1>Delete reward: <%=@reward.name%></h1>
-<%= link_to("Back to all Rewards", rewards_path, class: "primary_link") %>
+<%= link_to("Back to all Rewards", rewards_path, class: "primary_link", aria: {label: "Back to All Rewards Button"}) %>
 
 <div class="rewards delete">
 
@@ -7,9 +7,9 @@
     <% # url: task_path(@task), method: 'delete' %>
 
     <p>Are you sure you want to permanently delete this reward?</p>
-    <p><%= @reward.name %></p>
+    <p><b><%= @reward.name %></b></p>
 
-    <div class="form-buttons">
+    <div class="form-buttons" aria-label="Delete Reward Button">
       <%= r.submit("Delete Reward") %>
     </div>
 

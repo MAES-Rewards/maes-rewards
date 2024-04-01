@@ -46,7 +46,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Member Home: Welcome, John Doe!'))
 
       click_on 'View Rewards'
-      expect(page).to(have_content('Rewards (member view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Sample Reward'))
     end
@@ -58,14 +58,14 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Member Home: Welcome, John Doe!'))
 
       click_on 'View Rewards'
-      expect(page).to(have_content('Rewards (member view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Sample Reward'))
 
       within('tr', text: 'Sample Reward') do
         click_on 'See details'
       end
-      expect(page).to(have_content('Sample Reward details'))
+      expect(page).to(have_content('Sample Reward'))
       expect(page).to(have_content('Back to all Rewards'))
       expect(page).to(have_content('50'))
     end
@@ -77,7 +77,7 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Member Home: Welcome, John Doe!'))
 
       click_on 'View Rewards'
-      expect(page).to(have_content('Rewards (member view)'))
+      expect(page).to(have_content('Rewards'))
       expect(page).to(have_content('All of the rewards that can be purchased with points are shown below.'))
       expect(page).to(have_content('Sample Reward'))
 
@@ -113,6 +113,19 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('All of the activites you have participated in are shown below.'))
       expect(page).to(have_content('Activity History'))
       expect(page).to(have_content('Sample Activity'))
+    end
+
+    # Member Help Sunny Day Test
+    it 'presses help' do
+      visit new_admin_session_path
+
+      click_on 'Sign in via Google'
+      expect(page).to(have_content('Member Home: Welcome, John Doe!'))
+
+      click_on 'Help'
+      expect(page).to(have_content('Documentation'))
+      expect(page).to(have_content('Member Help'))
+      expect(page).to(have_content('As a member, you have a point balance. Your points increase whenever you do an MAES activity, and they decrease whenever you spend them on a reward.'))
     end
 
     # Member Sign Out Sunny Day Test
