@@ -50,6 +50,22 @@
     </tbody>
 </table>
 
+<style>
+  :root {--oof: 600px;}
+  @media screen and (max-width: 600px) {
+    #members_table tbody tr td:first-child {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    #members_table tbody tr td:nth-child(3)::before {
+      content: "Points: ";
+    }
+    #members_table tbody tr td:nth-child(4)::before {
+      content: "Is Admin: ";
+    }
+  }
+</style>
+
 
 <% flash.each do |type, message| %>
     <div class="flash flash-<%= type %>">
