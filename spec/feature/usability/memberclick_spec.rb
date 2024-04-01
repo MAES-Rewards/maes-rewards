@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe('Testing Member Usability with Clicks', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
   let!(:other_user) { User.create!(email: 'other_user@tamu.edu', name: 'James James', points: 100, is_admin: false) }
+
   context 'as member' do
     before do
       OmniAuth.config.test_mode = true
