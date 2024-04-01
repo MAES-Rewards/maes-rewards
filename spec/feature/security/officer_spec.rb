@@ -244,6 +244,31 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Associated Recurring Activity:'))
     end
 
+    # Officer Notifications Sunny Day Tests
+    it 'presses notifications' do
+      visit new_admin_session_path
+
+      click_on 'Sign in via Google'
+      expect(page).to(have_content('Home'))
+
+      click_on 'Notifications'
+      expect(page).to(have_content('Reward Notifications'))
+      expect(page).to(have_content('All reward purchases made in the last 24 hours are listed here.'))
+    end
+
+    # Officer Help Sunny Day Tests
+    it 'presses help on officer page' do
+      visit new_admin_session_path
+
+      click_on 'Sign in via Google'
+      expect(page).to(have_content('Home'))
+
+      click_on 'Help'
+      expect(page).to(have_content('Documentation'))
+      expect(page).to(have_content('Officer Help'))
+      expect(page).to(have_content('When an event occurs, points can be awarded in bulk through the Assign Points page. Users can be easily checked off, and officers can search the list as well as only display selected users. When the form is submitted, all users will be given the specified amount of points associated with the specified activity. There is also a Custom One-Time Activity option, where a custom activity can be entered for the transaction records without having to create a new activity.'))
+    end
+
     # Officer Sign Out Sunny Day Test
     it 'log out of website' do
       visit new_admin_session_path

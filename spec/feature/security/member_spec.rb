@@ -115,6 +115,19 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Sample Activity'))
     end
 
+    # Member Help Sunny Day Test
+    it 'presses help' do
+      visit new_admin_session_path
+
+      click_on 'Sign in via Google'
+      expect(page).to(have_content('Member Home: Welcome, John Doe!'))
+
+      click_on 'Help'
+      expect(page).to(have_content('Documentation'))
+      expect(page).to(have_content('Member Help'))
+      expect(page).to(have_content('As a member, you have a point balance. Your points increase whenever you do an MAES activity, and they decrease whenever you spend them on a reward.'))
+    end
+
     # Member Sign Out Sunny Day Test
     it 'log out of website' do
       visit new_admin_session_path
