@@ -1,24 +1,69 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## This is a point/rewards system for MAES
 
-Things you may want to cover:
+This code has been run and tested on:
 
-* Ruby version
+* Ruby version : 3.1.2
+    
+* Rails : 7.0.3
 
-* System dependencies
+* Ruby Gems : Listed in Gemfile
 
-* Configuration
+* PostgreSQL : 15.6
 
-* Database creation
+* Docker : Latest Container
 
-* Database initialization
+Dependences:
 
-* How to run the test suite
+* Docker : Download latest version at https://www.docker.com/products/docker-desktop
 
-* Services (job queues, cache servers, search engines, etc.)
+* Heroku CLI - Download latest version at https://devcenter.heroku.com/articles/heroku-cli
 
-* Deployment instructions
+* Git - Downloat latest version at https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-* ...
+Installation:
+
+* Type into your command line: `git clone https://github.com/MAES-Rewards/maes-rewards`
+
+Tests:
+
+* All tests : In order to run the tests run `rspec .` inside the docker
+
+* Individual tests:
+
+Execution:
+
+* `cd maes-rewards`
+
+* `docker run --rm -it --volume "$(pwd):/rails_app" -e DATABASE_USER=test_app -e DATABASE_PASSWORD=test_password -p 3000:3000 paulinewade/csce431:latest`
+
+* `bundle install && rails db:create && db:migrate`
+
+* `rails s -b 0.0.0.0`
+
+* Navigate to http://localhost:3000
+
+Environment variables
+
+* They are already set up in the .env files on Heroku
+
+Deployment:
+
+* First deploy to staging with changes
+
+* After writing tests, deploy to test and make sure everything works
+
+* If it does deploy to main and Heroku will automatically deploy your changes
+
+CI/CD:
+
+* This has been implemented in the Github actions
+
+Support:
+
+*
+
+Extra Help:
+
+* Please contact Pauline Wade paulinewade@tamu.edu.

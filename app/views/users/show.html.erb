@@ -1,15 +1,15 @@
-<h1>My Account</h1>
-<%# <%= link_to("Edit my account", edit_user_path(@user), class: "primary_link")%>
-<%# <%= link_to("Delete the account", delete_user_path(@user), class: "primary_link") %>
+<h1 aria-label="My Account">My Account</h1>
+<%# <%= link_to("Edit my account", edit_user_path(@user), class: "primary_link", aria: {label: "Edit Account Button"})%>
+<%# <%= link_to("Delete the account", delete_user_path(@user), class: "primary_link", aria: {label: "Delete Account Button"}) %>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Points</th>
-      <th>Admin</th>
-      <th>Created At</th>
-      <th>Last Update</th>
+      <th aria-label="Name">Name</th>
+      <th aria-label="Email">Email</th>
+      <th aria-label="Points">Points</th>
+      <th aria-label="Is Admin">Admin</th>
+      <th aria-label="Created At">Created At</th>
+      <th aria-label="Updated At">Last Update</th>
     </tr>
   </thead>
   <tbody>
@@ -18,10 +18,13 @@
         <td><%= @user.email %></td>
         <td><%= @user.points %></td>
         <td><%= @user.is_admin ? "Yes" : "No" %></td>
-        <td><%= @user.created_at %></td>
-        <td><%= @user.updated_at %></td>
+        <td><%= @user.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= @user.updated_at.strftime("%m/%d/%Y") %></td>
       </tr>
   </tbody>
 </table>
-
+<br />
+<br />
+<h2 aria-label="Transactions">Transactions</h2>
+<p>All of your account transactions are shown below.</p>
 <%= render(partial: 'txn_hist', locals: {txn_hist: @txn_hist}) %>

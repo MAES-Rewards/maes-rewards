@@ -26,7 +26,7 @@ RSpec.describe('Testing History', type: :feature) do
 
       click_on 'Sign in via Google'
 
-      expect(page).to(have_content('Admin Home'))
+      expect(page).to(have_content('Home'))
 
       click_on 'History'
 

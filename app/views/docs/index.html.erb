@@ -1,0 +1,59 @@
+<div id="docs">
+  <h1>Documentation</h1>
+
+  <p>With the MAES Rewards app, MAES members can complete activities, earn points, and spend them on rewards!</p>
+
+  <h2>Member Help</h2>
+
+  <h3>Points</h3>
+
+  <p>As a member, you have a point balance. Your points increase whenever you do an MAES activity, and they decrease whenever you spend them on a reward.</p>
+
+  <h3>Rewards</h3>
+
+  <p>Rewards are what you can get by participating in MAES activities! Each reward costs a certain number of points. If you have enough points, you can purchase the reward. Purchasing a reward will deduct the cost from your point balance and notify an officer that you purchased that reward. Rewards are listed on the <%= link_to 'Rewards page', rewards_path %>.</p>
+
+  <h3>Activities</h3>
+
+  <p>Activities are how you earn points to purchase rewards! Each activity has a certain number of points you will earn from it. However, if you made an extra contribution, an officer can award you more points than the default! Activities are listed on the <%= link_to 'Activities page', activities_path %>.</p>
+
+  <h2>Officer Help</h2>
+
+  <h3>Rewards</h3>
+
+  <p>In the <%= link_to 'Rewards page', rewards_path %>, officers can see a list of all rewards. Officers can also create, edit, and delete existing rewards. Each reward has four main values associated with it:</p>
+
+  <ul>
+    <li><b>Name</b> &mdash; the name of the reward as it will appear to members.</li>
+    <li><b>Point price</b> &mdash; the point cost of the reward. This is the amount of points members need to spend each time they redeem the reward.</li>
+    <li><b>Current inventory</b> &mdash; the current inventory of the reward. This is the amount of times the reward can be redeemed across all members before it becomes out of stock. At any time, the reward can be restocked by editing the reward and updating the current inventory value.</li>
+    <li><b>Dollar price</b> &mdash; the nominal dollar value of the reward, if any. This is purely for informational purposes.</li>
+  </ul>
+
+  <h3>Activities</h3>
+
+  <p>In the <%= link_to 'Activities page', activities_path %>, officers can see a list of all activities. Officers can also create, edit, and delete existing activities. Each activity has three main values associated with it:</p>
+
+  <ul>
+    <li><b>Name</b> &mdash; the name of the activity as it will appear to members.</li>
+    <li><b>Description</b> &mdash; the description of the activity as it will appear to members.</li>
+    <li><b>Default points</b> &mdash; The default point value that will appear in the Points field in the Assign Points page (see below) when this activity is selected.</li>
+  </ul>
+
+  <h3>Assigning Points</h3>
+
+  <p>When an event occurs, points can be awarded in bulk through the <%= link_to 'Assign Points page', member_points_url %>. Users can be easily checked off, and officers can search the list as well as only display selected users. When the form is submitted, all users will be given the specified amount of points associated with the specified activity. There is also a Custom One-Time Activity option, where a custom activity can be entered for the transaction records without having to create a new activity.</p>
+
+  <h3>User Management</h3>
+
+  <p>On the homepage, officers can see a list of member user accounts. Clicking Edit will show a form to edit that user's details as well as view their transaction history. Accounts shown here can also be deleted from the system. If a member logs in via Google after their account is deleted, a new user account will be created. There are two things to keep in mind:</p>
+
+  <ul>
+    <li>Officers can change a user's point balance on their Edit page; however, this is <strong>not recommended</strong> as it will cause their transaction history to no longer add up to their current point balance. Instead, use the Assign Points page to apply a one-time point adjustment &mdash; the reason can be given in the Custom One-Time Activity field.</li>
+    <li>Making a member user account an admin/officer account via the Edit page (by checking the Admin checkbox and clicking Save) will make them an officer. <strong>This is an irreversible action</strong> and will remove them from the member list on the officer homepage.</li>
+  </ul>
+
+  <h2>Support</h2>
+
+  <p>If you have any issues with the system, you may contact the system administrators via <%= link_to 'this form', 'https://docs.google.com/forms/d/e/1FAIpQLScD6xQ0YJCZ7Si_OE6gpB2YDMbm-5IWx6G_VXLoZUo8L6wiTg/viewform?usp=sf_link', target: '_blank' %>.</p>
+</div>
