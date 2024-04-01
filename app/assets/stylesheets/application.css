@@ -192,6 +192,7 @@ input[type="checkbox"] {
   animation: 5s fadeout 1 forwards;
   user-select: none;
   pointer-events: none;
+  z-index: 2;
 }
 
 .flash-notice {
@@ -253,6 +254,11 @@ input[type="checkbox"] {
   thead{
       display:none;
   }
+
+  table:not(.table-no-header) tbody tr td:first-child {
+    font-size: 24px;
+    font-weight: bold;
+  }
 }
 
 nav {
@@ -310,6 +316,7 @@ nav a:active {
     transition: left 500ms, opacity 500ms;
     box-sizing: border-box;
     width: min(200px, var(--safe-width));
+    z-index: 1;
   }
 
   nav:not(.menu-shown) {
@@ -342,6 +349,7 @@ nav a:active {
     left: 10px;
     padding: 5px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+    z-index: 1;
   }
 
   .bar1, .bar2, .bar3 {
