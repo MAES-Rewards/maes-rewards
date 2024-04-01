@@ -4,11 +4,11 @@
 
 <div class="navbar">
 
-  <div class="menu-container" onclick="myFunction(this)">
+  <button id="menu_container" onclick="toggleMenu(this)">
     <div class="bar1"></div>
     <div class="bar2"></div>
     <div class="bar3"></div>
-  </div>
+  </button>
   <nav>
     <ul>
       <li><%= link_to "Home", admin_dashboard_url, aria: {label: "Admin Home Tab"} %></li>
@@ -36,9 +36,20 @@
 </script>
 
 <script>
-  function myFunction(x){
+  function toggleMenu(x) {
     x.classList.toggle("change");
     let menu = document.getElementsByTagName("nav")[0];
     menu.classList.toggle("menu-shown");
   }
+
+  // Hide menu when user clicks outside
+  window.addEventListener("click", function(event) {
+    const menuBtn = document.getElementById("menu_container");
+    const menuElem = document.getElementsByTagName("nav")[0];
+    if (menuElem.classList.contains("menu-shown") &&
+        !menuElem.contains(event.target) &&
+        !menuBtn.contains(event.target)) {
+      toggleMenu(menuBtn);
+    }
+  });
 </script>
