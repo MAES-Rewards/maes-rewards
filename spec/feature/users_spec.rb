@@ -1,6 +1,5 @@
 frozen_string_literal: true
 
-require 'rails_helper'
 
 RSpec.describe('Admins editing, deleting, and viewing users', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'James Doe', points: 100, is_admin: false) }
