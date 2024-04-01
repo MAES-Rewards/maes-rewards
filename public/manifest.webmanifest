@@ -1,0 +1,23 @@
+{
+  "name": "MAES Rewards",
+  "short_name": "MAES",
+  "icons": [
+    {
+      "src": "maeslogo-green_logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "maeslogo-green_mask.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "display": "standalone",
+  "background_color": "#4D8356",
+  "theme_color": "#4D8356",
+  "orientation": "any",
+  "start_url": "/"
+}
