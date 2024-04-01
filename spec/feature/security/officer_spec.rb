@@ -244,6 +244,19 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Associated Recurring Activity:'))
     end
 
+    # Officer History Sunny Day Tests
+    it 'presses history' do
+      visit new_admin_session_path
+
+      click_on 'Sign in via Google'
+      expect(page).to(have_content('Home'))
+
+      click_on 'History'
+      expect(page).to(have_content('History'))
+      expect(page).to(have_content('Search:'))
+      expect(page).to(have_content('Filter by type:'))
+    end
+
     # Officer Notifications Sunny Day Tests
     it 'presses notifications' do
       visit new_admin_session_path

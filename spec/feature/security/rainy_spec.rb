@@ -230,6 +230,17 @@ RSpec.describe('Testing Security', type: :feature) do
       visit reward_confirmations_path
       expect(page).to(have_content('Log in to MAES App'))
     end
+
+    # attempt to access admin history
+    it 'access admin history' do
+      visit new_admin_session_path
+
+      visit admin_dashboard_path
+      expect(page).to(have_content('Log in to MAES App'))
+
+      visit history_path
+      expect(page).to(have_content('Log in to MAES App'))
+    end
   end
 
   context 'as unauthorized user' do
@@ -354,6 +365,17 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Log in to MAES App'))
 
       visit docs_path
+      expect(page).to(have_content('Log in to MAES App'))
+    end
+
+    # attempt to access officer history
+    it 'access officer history page' do
+      visit new_admin_session_path
+
+      visit admin_dashboard_path
+      expect(page).to(have_content('Log in to MAES App'))
+
+      visit history_path
       expect(page).to(have_content('Log in to MAES App'))
     end
   end
@@ -503,6 +525,17 @@ RSpec.describe('Testing Security', type: :feature) do
       expect(page).to(have_content('Log in to MAES App'))
 
       visit docs_path
+      expect(page).to(have_content('Log in to MAES App'))
+    end
+
+    # attempt to access admin history without logging in
+    it 'not logging in, trying to access officer help page' do
+      visit new_admin_session_path
+
+      visit admin_dashboard_path
+      expect(page).to(have_content('Log in to MAES App'))
+
+      visit history_path
       expect(page).to(have_content('Log in to MAES App'))
     end
   end
