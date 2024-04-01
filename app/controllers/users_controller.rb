@@ -144,6 +144,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
+    @txn_hist = build_txn_history(@user.id)
     if @user.update(user_params)
       flash[:notice] = 'User was successfully updated.'
       if session[:is_admin]
