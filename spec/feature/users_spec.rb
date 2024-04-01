@@ -1,10 +1,8 @@
-frozen_string_literal: true
-
+# frozen_string_literal: true
+require 'rails_helper'
 
 RSpec.describe('Admins editing, deleting, and viewing users', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'James Doe', points: 100, is_admin: false) }
-
-
   context 'Admin logs in and edits user' do
     before do
       OmniAuth.config.test_mode = true
@@ -13,6 +11,7 @@ RSpec.describe('Admins editing, deleting, and viewing users', type: :feature) do
         uid: '123456',
         info: { email: 'user@tamu.edu', name: 'Admin Doe' }
       })
+
       page.set_rack_session(user_id: user.id, is_admin: true)
       User.create!(email: 'user1@tamu.edu', name: 'Jim Doe', points: 100, is_admin: false)
       User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false)
