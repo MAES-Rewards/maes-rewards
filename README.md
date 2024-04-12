@@ -4,23 +4,24 @@
 
 This code has been run and tested on:
 
-* Ruby version : 3.1.2
+Program
+*   Ruby version : 3.1.2
     
-* Rails : 7.0.3
+*   Rails : 7.0.3
 
-* Ruby Gems : Listed in Gemfile
+*   Ruby Gems : Listed in Gemfile
 
-* PostgreSQL : 15.6
+*   PostgreSQL : 15.6
 
-* Docker : Latest Container
+*   Docker : Latest Container
 
-Dependences:
+External Dependences:
 
-* Docker : Download latest version at https://www.docker.com/products/docker-desktop
+*   Docker : Download latest version at https://www.docker.com/products/docker-desktop
 
-* Heroku CLI - Download latest version at https://devcenter.heroku.com/articles/heroku-cli
+*   Heroku CLI - Download latest version at https://devcenter.heroku.com/articles/heroku-cli
 
-* Git - Downloat latest version at https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+*   Git - Downloat latest version at https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 Installation:
 
