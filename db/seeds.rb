@@ -14,18 +14,6 @@ User.find_or_create_by!(email: 'smithj@mail.example.com') do |user|
   user.is_admin = false
 end
 
-User.find_or_create_by!(email: 'admin@mail.example.com') do |user|
-  user.name = 'Admin User'
-  user.points = 0
-  user.is_admin = true
-end
-
-User.find_or_create_by!(email: 'jaejin0109@tamu.edu') do |user|
-  user.name = 'Jaejin Cha'
-  user.points = 30
-  user.is_admin = false
-end
-
 Reward.find_or_create_by!(name: 'MAES Hoodie') do |reward|
   reward.point_value = 100
   reward.dollar_price = 19.99
@@ -43,7 +31,9 @@ Activity.find_or_create_by!(name: 'Attend MAES Meeting') do |activity|
 end
 
 EarnTransaction.find_or_create_by!(user_id: 1, activity_id: 1) do |transaction|
-  transaction.points = 10
+  transaction.points = 200
 end
 
-SpendTransaction.find_or_create_by!(user_id: 1, reward_id: 1)
+SpendTransaction.find_or_create_by!(user_id: 1, reward_id: 1) do |transaction|
+  transaction.points = 100
+end
