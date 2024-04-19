@@ -7,6 +7,11 @@ RSpec.describe('Bulk Points', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
   let!(:user2) { User.create!(email: 'user2@tamu.edu', name: 'Jane Doe', points: 10, is_admin: false) }
 
+  Activity.find_or_create_by!(name: 'Custom One-Time Activity') do |activity|
+    activity.description = 'This activity exists to give points to members not associated with any specific activity.'
+    activity.default_points = 0
+  end
+
   context 'Failed Attempts' do
     before do
       OmniAuth.config.test_mode = true
@@ -100,7 +105,7 @@ RSpec.describe('Bulk Points', type: :feature) do
       # Submit the form
       click_button 'Submit'
 
-      expect(page).to(have_content('Please select or enter an activity.'))
+      expect(page).to(have_content('Please select an activity.'))
     end
   end
 
