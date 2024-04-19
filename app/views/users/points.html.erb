@@ -60,10 +60,6 @@
         aria: {label: "Activity Selection"}
     %>
 </div>
-<div id="onetime_activity_section" class="hidden" style="margin-top: 1em;">
-    <%= label_tag "activity", "Associated One-Time Activity:" %>
-    <%= text_field_tag "onetime_activity_string" %>
-</div>
 <br>
 <hr>
 <br>
@@ -80,19 +76,10 @@
 
     // JavaScript for custom activity selection & default points
     const actSelect = document.getElementById("activity_select_box");
-    const actCustom = document.getElementById("onetime_activity_section");
-    const actCustomInput = document.getElementById("onetime_activity_string");
     const pointsInput = document.getElementById("new_points");
 
     actSelect.addEventListener("change", event => {
         const selOpt = event.target.selectedOptions[0];
-        if (selOpt.text == "Custom One-Time Activity\u2026") {
-            actCustom.classList.remove("hidden");
-        }
-        else {
-            actCustom.classList.add("hidden");
-            actCustomInput.value = "";
-        }
         pointsInput.value = selOpt.getAttribute("data-default-pts");
     });
 

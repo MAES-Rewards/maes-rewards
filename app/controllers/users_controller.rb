@@ -29,11 +29,10 @@ class UsersController < ApplicationController
     selected_user_ids = params[:selected_users]
     new_points = params[:new_points]
     recur_activity_id = params[:recur_activity_id]
-    onetime_activity_string = params[:onetime_activity_string]
 
-    # check if for activity associated one-time & recurring, both are blank or both are selected
-    if recur_activity_id.blank? && onetime_activity_string.blank?
-      flash[:alert] = 'Please select or enter an activity.'
+    # check if selected activity is blank
+    if recur_activity_id.blank?
+      flash[:alert] = 'Please select an activity.'
       redirect_to(member_points_url) and return
     end
 
@@ -101,7 +100,7 @@ class UsersController < ApplicationController
       user = User.find_by(id: e.user_id)
 
       #            Type,   user name,   activity name,     points,            created at,      updated at
-      @history << ['Earned', user ? user.name : '<i>Deleted User</i>'.html_safe, activity ? activity.name : '<i>Deleted Activity</i>'.html_safe, "+#{e.points}", e.created_at, e.updated_at]
+      @history << ['Earned', user ? user.name : '<i>Deleted User</i>'.html_safe, activity ? activity.name : '<i>Deleted Activity</i>'.html_safe, "#{e.points < 0 ? "\u2212" : "+"}#{e.points.abs}", e.created_at, e.updated_at]
     end
 
     spend.each do |s|
@@ -174,10 +173,10 @@ class UsersController < ApplicationController
       activity = Activity.find_by(id: earn_txn.activity_id)
       txn_hist << {
         user_id: earn_txn.user_id,
-        item: activity ? activity.name : '<i>Deleted Activity</i>'.html_safe,
+        item: activity ? (activity.name) : '<i>Deleted Activity</i>'.html_safe,
         type_id: 'earn',
         type: 'Earned',
-        points: "+#{earn_txn.points}",
+        points: "#{earn_txn.points < 0 ? "\u2212" : "+"}#{earn_txn.points.abs}",
         timestamp: earn_txn.created_at
       }
     end

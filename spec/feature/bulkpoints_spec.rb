@@ -7,8 +7,6 @@ RSpec.describe('Bulk Points', type: :feature) do
   let!(:user) { User.create!(email: 'user@tamu.edu', name: 'John Doe', points: 100, is_admin: false) }
   let!(:user2) { User.create!(email: 'user2@tamu.edu', name: 'Jane Doe', points: 10, is_admin: false) }
 
-  Activity.create!(name: 'Custom One-Time Activity', description: 'Single-use activities', default_points: 0)
-
   context 'Failed Attempts' do
     before do
       OmniAuth.config.test_mode = true
@@ -44,9 +42,6 @@ RSpec.describe('Bulk Points', type: :feature) do
       # Select associated recurring activity
       select 'Custom One-Time Activity', from: 'recur_activity_id'
 
-      # Fill in associated one-time activity (optional)
-      fill_in 'onetime_activity_string', with: 'Example Activity'
-
       # Submit the form
       click_button 'Submit'
 
@@ -75,9 +70,6 @@ RSpec.describe('Bulk Points', type: :feature) do
 
       # Select associated recurring activity
       select 'Custom One-Time Activity', from: 'recur_activity_id'
-
-      # Fill in associated one-time activity (optional)
-      fill_in 'onetime_activity_string', with: 'Example Activity'
 
       # Submit the form
       click_button 'Submit'
@@ -150,9 +142,6 @@ RSpec.describe('Bulk Points', type: :feature) do
       # Select associated recurring activity
       select 'Custom One-Time Activity', from: 'recur_activity_id'
 
-      # Fill in associated one-time activity (optional)
-      fill_in 'onetime_activity_string', with: 'Example Activity'
-
       # Submit the form
       click_button 'Submit'
 
@@ -186,9 +175,6 @@ RSpec.describe('Bulk Points', type: :feature) do
 
       # Select associated recurring activity
       select 'Custom One-Time Activity', from: 'recur_activity_id'
-
-      # Fill in associated one-time activity (optional)
-      fill_in 'onetime_activity_string', with: 'Example Activity'
 
       # Submit the form
       click_button 'Submit'

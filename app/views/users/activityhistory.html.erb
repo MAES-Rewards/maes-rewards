@@ -33,7 +33,7 @@
     <% @earn_transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.activity ? transaction.activity.name : '<i>Deleted Activity</i>'.html_safe %></td>
-        <td><%= transaction.points %></td>
+        <td><%= "#{transaction.points < 0 ? "\u2212" : ""}#{transaction.points.abs}" %></td>
         <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
       </tr>
     <% end %>
