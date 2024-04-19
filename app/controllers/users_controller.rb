@@ -100,24 +100,16 @@ class UsersController < ApplicationController
       activity = Activity.find_by(id: e.activity_id)
       user = User.find_by(id: e.user_id)
 
-      if activity && user
-        #            Type,   user name,   activity name,     points,            created at,      updated at
-        @history << ['Earned', user.name, activity.name, "+#{e.points}", e.created_at, e.updated_at]
-      else
-        break
-      end
+      #            Type,   user name,   activity name,     points,            created at,      updated at
+      @history << ['Earned', user ? user.name : '<i>Deleted User</i>'.html_safe, activity ? activity.name : '<i>Deleted Activity</i>'.html_safe, "+#{e.points}", e.created_at, e.updated_at]
     end
 
     spend.each do |s|
       reward = Reward.find_by(id: s.reward_id)
       user = User.find_by(id: s.user_id)
 
-      if reward && user
-        #             Type     user name, reward name,         points,     created at,   updated at
-        @history << ['Spent', user.name, reward.name, "\u2212#{reward.point_value}", s.created_at, s.updated_at]
-      else
-        break
-      end
+      #             Type     user name, reward name,         points,     created at,   updated at
+      @history << ['Spent', user ? user.name : '<i>Deleted User</i>'.html_safe, reward ? reward.name : '<i>Deleted Reward</i>'.html_safe, "\u2212#{s.points}", s.created_at, s.updated_at]
     end
 
     @history.sort_by! { |h| h[4] }.reverse!
@@ -179,27 +171,26 @@ class UsersController < ApplicationController
     txn_hist = []
 
     earn_txns.each do |earn_txn|
-      activity = Activity.find(earn_txn.activity_id)
+      activity = Activity.find_by(id: earn_txn.activity_id)
       txn_hist << {
         user_id: earn_txn.user_id,
-        item: activity.name,
+        item: activity ? activity.name : '<i>Deleted Activity</i>'.html_safe,
         type_id: 'earn',
         type: 'Earned',
         points: "+#{earn_txn.points}",
-        timestamp: activity[:created_at]
+        timestamp: earn_txn.created_at
       }
     end
 
     spend_txns.each do |spend_txn|
-      reward = Reward.find(spend_txn.reward_id)
+      reward = Reward.find_by(id: spend_txn.reward_id)
       txn_hist << {
         user_id: spend_txn.user_id,
-        item: reward.name,
-        # TODO: Add points here when added to EarnTransaction
+        item: reward ? reward.name : '<i>Deleted Reward</i>'.html_safe,
         type_id: 'spend',
         type: 'Spent',
         points: "\u2212#{spend_txn.points}",
-        timestamp: reward[:created_at]
+        timestamp: spend_txn.created_at
       }
     end
 

@@ -32,7 +32,7 @@
   <tbody>
     <% @earn_transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.activity.name %></td>
+        <td><%= transaction.activity ? transaction.activity.name : '<i>Deleted Activity</i>'.html_safe %></td>
         <td><%= transaction.points %></td>
         <td><%= transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
       </tr>
@@ -77,7 +77,7 @@
   <tbody>
     <% @spend_transactions.each do |spend_transaction| %>
       <tr>
-        <td><%= spend_transaction.reward.name %></td>
+        <td><%= spend_transaction.reward ? spend_transaction.reward.name : '<i>Deleted Reward</i>'.html_safe %></td>
         <td><%= spend_transaction.points %></td>
         <td><%= spend_transaction.created_at.strftime("%B %e, %Y %H:%M") %></td>
       </tr>
