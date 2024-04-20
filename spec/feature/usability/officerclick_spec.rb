@@ -113,7 +113,7 @@ RSpec.describe('Testing Officer Usability with Clicks', type: :feature) do
       click_on 'Help'
       counter += 1
       expect(page).to(have_content('Documentation'))
-      expect(page).to(have_content('When an event occurs, points can be awarded in bulk through the Assign Points page. Users can be easily checked off, and officers can search the list as well as only display selected users. When the form is submitted, all users will be given the specified amount of points associated with the specified activity. There is also a Custom One-Time Activity option, where a custom activity can be entered for the transaction records without having to create a new activity.'))
+      expect(page).to(have_content('When an event occurs, points can be awarded in bulk through the Assign Points page. Users can be easily checked off, and officers can search the list as well as only display selected users. When the form is submitted, all users will be given the specified amount of points associated with the specified activity. There is also a Custom One-Time Activity option, where a custom point adjustment can be made for the transaction records without having to create a new activity.'))
 
       expect(counter).to(be <= 2)
     end
