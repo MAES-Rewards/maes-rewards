@@ -42,9 +42,6 @@ RSpec.describe('Transaction History', type: :feature) do
       # Select associated recurring activity
       select activity1.name, from: 'recur_activity_id'
 
-      # Fill in associated one-time activity (optional)
-      fill_in 'onetime_activity_string', with: ''
-
       # Submit the form
       click_button 'Submit'
 
