@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  # Ensure that the user has been authenticated for proceeding
   before_action :authenticate_admin!
   helper_method :render_menu
 
+  # Render navigation menu based on if user is officer or member
   def render_menu
     if session[:is_admin]
       render(partial: 'layouts/adminmenu')
@@ -14,6 +16,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Checks if the admin session variable is true. If not, redirect to login page
   def admin_check
     unless session[:is_admin]
       flash[:alert] = 'Access denied. Please log in as an admin.'
@@ -21,6 +24,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Checks if user ID in parameter matches current user ID. If not, redirect them back to their dashboard
   def authorize_user
     # return if Rails.env.test?
 
