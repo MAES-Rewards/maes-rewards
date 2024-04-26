@@ -31,7 +31,7 @@ Tests:
 
 * All tests : In order to run the tests run `rspec .` inside the docker
 
-* Individual tests:
+* Individual tests: In order to run the tests run `rspec spec/{test file}` inside the docker
 
 Execution:
 
@@ -59,11 +59,17 @@ Deployment:
 
 CI/CD:
 
-* This has been implemented in the Github actions
+* This has been implemented in the Github actions repo here -> https://github.com/MAES-Rewards/maes-rewards
+
+Documentation:
+
+* Our product and sprint backlog can be found in jira -> https://maes.atlassian.net/jira/software/projects/SCRUM/boards/1
+
+Document: Data Design v3, Deployment documentation
 
 Support:
 
-*
+* Please reach out to Gopal cerebraldatabank@tamu.edu
 
 Extra Help:
 
